@@ -1,5 +1,19 @@
 {
+  "name": "moonbit-leetcode",
+  "version": "1.0.0",
+  "description": "add support of moonbit language to leetcode",
+  "author": "A23187 <a23187.1979421048@gmail.com> (a23187.cn)",
+  "main": "index.js",
   "dependencies": {
     "@moonbit/moonpad-monaco": "^0.1.202504172"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A-23187/moonbit-leetcode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/A-23187/moonbit-leetcode/issues"
+  },
+  "homepage": "https://github.com/A-23187/moonbit-leetcode#readme"
 }
