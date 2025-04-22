@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@moonbit/moonpad-monaco": "^0.1.202504172"
+  }
+}
