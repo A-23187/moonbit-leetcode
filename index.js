@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MoonBit ❤️ LeetCode
 // @namespace    a23187.cn
-// @version      1.0.1
+// @version      1.0.2
 // @description  add support of moonbit language to leetcode
 // @author       A23187
 // @homepage     https://github.com/A-23187/moonbit-leetcode
@@ -58,20 +58,41 @@
     function getCurrentLanguageId() {
         return globalThis.monaco.editor.getEditors()[0].getModel().getLanguageId();
     }
-    function getQuestion() {
-        const nextData = JSON.parse(document.getElementById('__NEXT_DATA__').innerText);
-        const queries = nextData.props.pageProps.dehydratedState.queries;
-        for (const q of queries) {
-            for (const k of q.queryKey) {
-                if (k === 'questionDetail') {
-                    return q.state.data.question;
-                }
-            }
-        }
-        return null;
+    async function getUser() {
+        return (await fetch('https://leetcode.cn/graphql/', {
+            method: 'POST',
+            body: JSON.stringify({
+                operationName: 'globalData',
+                query: `query globalData {
+                    userStatus {
+                        realName userSlug username
+                    }
+                }`,
+                variables: {},
+            }),
+        }).then((resp) => resp.json())).data.userStatus;
     }
-    function getQuestionMetaData() {
-        return JSON.parse(getQuestion().metaData);
+    function getQuestionTitleSlug() {
+        return document.location.pathname.split('/')[2];
+    }
+    async function getQuestion() {
+        return (await fetch('https://leetcode.cn/graphql/', {
+            method: 'POST',
+            body: JSON.stringify({
+                operationName: 'questionDetail',
+                query: `query questionDetail($titleSlug: String!) {
+                    question(titleSlug: $titleSlug) {
+                        titleSlug questionId questionFrontendId metaData
+                    }
+                }`,
+                variables: {
+                    titleSlug: getQuestionTitleSlug(),
+                },
+            }),
+        }).then((resp) => resp.json())).data.question;
+    }
+    async function getQuestionMetaData() {
+        return JSON.parse((await getQuestion()).metaData);
     }
     const parseType = (function() {
         const typeMap = new Map([
@@ -93,15 +114,15 @@
         };
         return (type) => dfs(type, 0, type.length);
     })();
-    function generateMoonCodeTemplate() {
-        const { name, params, return: { type: returnType } } = getQuestionMetaData();
+    async function generateMoonCodeTemplate() {
+        const { name, params, return: { type: returnType } } = await getQuestionMetaData();
         return `pub fn ${name}(${params.map((p) => `${p.name}: ${parseType(p.type)}`).join(', ')}) -> ${parseType(returnType)} {\n}\n`;
     }
     const switchLanguage = (function() {
         const monaco = globalThis.monaco;
         let moonModel = null;
         let nonMoonModel = null;
-        return (languageName) => {
+        return async (languageName) => {
             const currLanguageId = getCurrentLanguageId();
             const languageId = toLanguageId(languageName);
             if (currLanguageId === languageId) {
@@ -109,10 +130,21 @@
             }
             if (languageId === 'moonbit') {
                 initMoon();
-                moonModel = moonModel ?? monaco.editor.createModel(generateMoonCodeTemplate(), languageId);
+                if (moonModel === null) {
+                    const questionTitleSlug = getQuestionTitleSlug();
+                    moonModel = monaco.editor.createModel(localStorage.getItem(questionTitleSlug) ??
+                                                          await generateMoonCodeTemplate(), languageId);
+                    moonModel.onDidChangeContent(() => localStorage.setItem(questionTitleSlug, moonModel.getValue()));
+                }
                 monaco.editor.getEditors()[0].setModel(moonModel);
             } else if (currLanguageId === 'moonbit') {
-                nonMoonModel = nonMoonModel ?? monaco.editor.createModel('', languageId);
+                if (nonMoonModel === null) {
+                    const userSlug = (await getUser()).userSlug;
+                    const questionId = (await getQuestion()).questionId;
+                    const ugcKey = `ugc_${userSlug}_${questionId}_${languageId}_code`;
+                    nonMoonModel = monaco.editor
+                        .createModel(JSON.parse(localStorage.getItem(ugcKey))?.code ?? '', languageId);
+                }
                 monaco.editor.getEditors()[0].setModel(nonMoonModel);
             }
         };
@@ -138,8 +170,8 @@
                         svg.classList.add('invisible');
                         svg.classList.remove('visible');
                     }
-                    itemDiv.onclick = () => {
-                        switchLanguage(itemDiv.innerText);
+                    itemDiv.onclick = async () => {
+                        await switchLanguage(itemDiv.innerText);
                         switchLanguageBtn.firstChild.data = itemDiv.innerText;
                     };
                 }
@@ -151,7 +183,7 @@
     // compile
     async function compile(commentSource = false) {
         const editor = globalThis.monaco.editor.getEditors()[0];
-        const { name } = getQuestionMetaData();
+        const { name } = await getQuestionMetaData();
         const result = await globalThis.moon.compile({
             libInputs: [[`${name}.mbt`, editor.getValue()]],
             isMain: false,
