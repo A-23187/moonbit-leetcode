@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         MoonBit ❤️ LeetCode
 // @namespace    a23187.cn
-// @version      1.0.0
+// @version      1.0.1
 // @description  add support of moonbit language to leetcode
 // @author       A23187
 // @homepage     https://github.com/A-23187/moonbit-leetcode
 // @match        https://leetcode.cn/problems/*
 // @match        https://leetcode.com/problems/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=leetcode.cn
+// @grant        none
 // @license      MIT
 // ==/UserScript==
 
@@ -148,7 +149,7 @@
     });
     mutationObserver.observe(document.body, { childList: true });
     // compile
-    async function compile() {
+    async function compile(commentSource = false) {
         const editor = globalThis.monaco.editor.getEditors()[0];
         const { name } = getQuestionMetaData();
         const result = await globalThis.moon.compile({
@@ -157,8 +158,9 @@
             exportedFunctions: [name],
         });
         if (result.kind === 'success') {
-            return new TextDecoder().decode(result.js)
-                .replace(/export\s*\{\s*([^\s]+)\s+as\s+([^\s]+)\s*\}/g, 'const $2 = $1;');
+            return `${commentSource && editor.getValue().trim().replace(/^/gm, '// ') || ''}\n${
+                new TextDecoder().decode(result.js)
+                    .replace(/export\s*\{\s*([^\s]+)\s+as\s+([^\s]+)\s*\}/g, 'const $2 = $1;')}`;
         } else if (result.kind === 'error') {
             throw new Error(result.diagnostics.map((d) => `${name}.mbt:${d.loc.start.line} ${d.message}\n    ${
                 editor.getModel().getValueInRange({
@@ -178,7 +180,7 @@
              resource === `${document.location.pathname}submit/`) && getCurrentLanguageId() === 'moonbit') {
             const body = JSON.parse(options.body);
             body.lang = 'javascript';
-            body.typed_code = await compile()
+            body.typed_code = await compile(true)
                 .catch((e) => `throw'MOON_ERR_BEGIN\\n'+${JSON.stringify(e.message)}+'\\nMOON_ERR_END'`);
             options.body = JSON.stringify(body);
         }
@@ -197,4 +199,3 @@
         return r;
     };
 })();
-
