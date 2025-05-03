@@ -5,7 +5,7 @@
   "author": "A23187 <a23187.1979421048@gmail.com> (a23187.cn)",
   "main": "index.js",
   "dependencies": {
-    "@moonbit/moonpad-monaco": "^0.1.202504172"
+    "@moonbit/moonpad-monaco": "^0.1.202504302"
   },
   "license": "MIT",
   "repository": {
