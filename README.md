@@ -1,6 +1,6 @@
 # MoonBit ❤️ LeetCode
 
-A tampermonkey script to add support of moonbit language to leetcode, allowing you to solve leetcode problems using moonbit
+A browser extension to add support of moonbit language to leetcode, allowing you to solve leetcode problems using moonbit
 
 ![MoonBit ❤️ LeetCode](https://github.com/user-attachments/assets/99d4b03b-3257-4cfd-94c6-8a6e87db53ed)
 
@@ -11,12 +11,26 @@ A tampermonkey script to add support of moonbit language to leetcode, allowing y
 
 ## How to use
 
+### Tampermonkey script
+
 1. Install [tampermonkey](https://www.tampermonkey.net) extension in your browser
 2. Install [moonbit-leetcode.js](https://greasyfork.org/en/scripts/533641-moonbit-leetcode)
+
+### Microsoft Edge extension
+
+Install from https://microsoftedge.microsoft.com/addons/detail/jbjbplbebmpbbepanapebfigkgjedgjl. Or clone this repository to load manually, see more [here](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/extension-sideloading)
+
+### Google Chrome extension
+
+Clone this repository to load manually, see more [here](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
 
 ## Change logs
 
 <details>
+
+### 1.1.0
+
+1. Support installation as Microsoft Edge or Google Chrome extension
 
 ### 1.0.2
 

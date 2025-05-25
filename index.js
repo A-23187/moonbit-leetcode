@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MoonBit ❤️ LeetCode
 // @namespace    a23187.cn
-// @version      1.0.2
+// @version      1.1.0
 // @description  add support of moonbit language to leetcode
 // @author       A23187
 // @homepage     https://github.com/A-23187/moonbit-leetcode
@@ -24,24 +24,44 @@
             }, 1000);
         });
     }
-    async function createObjectUrlFromCORSUrl(url) {
-        return await fetch(url)
-            .then((resp) => resp.text())
-            .then((cnt) => URL.createObjectURL(new Blob([cnt], { type: 'application/javascript' })));
-    }
-    async function createWorkerFromCORSUrl(url) {
-        return new Worker(await createObjectUrlFromCORSUrl(url));
-    }
     // wait until the `globalThis.monaco` is presented
     await waitUntil(() => globalThis.monaco !== undefined);
     // init `moonpad`, `moon`
-    const baseUrl = 'https://cdn.jsdelivr.net/gh/A-23187/moonbit-leetcode/moonpad-monaco';
-    const moonpad = await import(`${baseUrl}/moonpad-monaco.js`);
-    const lspWorker = await createWorkerFromCORSUrl(`${baseUrl}/lsp-server.js`);
-    const mooncWorkerUrl = await createObjectUrlFromCORSUrl(`${baseUrl}/moonc-worker.js`);
+    let moonpad;
+    let lspWorker;
+    let mooncWorkerUrl;
+    let onigWasmUrl;
+    if (document.getElementById('moonbit-leetcode-crx-loader')) {
+        const fetchCrxResource = (path) => new Promise((resolve) => {
+            const f = (e) => {
+                if (e.data && e.data.type === 'FETCH_CRX_RESOURCE_RESPONSE' && e.data.blob) {
+                    window.removeEventListener('message', f);
+                    resolve(e.data.blob);
+                }
+            };
+            window.addEventListener('message', f);
+            window.postMessage({ type: 'FETCH_CRX_RESOURCE', path }, '*');
+        });
+        const createObjectUrlFromCrxResource = async (path) => URL.createObjectURL(await fetchCrxResource(path));
+        const createWorkerFromCrxResource = async (path) => new Worker(await createObjectUrlFromCrxResource(path));
+        const basePath = 'moonpad-monaco';
+        moonpad = await import(await createObjectUrlFromCrxResource(`${basePath}/moonpad-monaco.js`));
+        lspWorker = await createWorkerFromCrxResource(`${basePath}/lsp-server.js`);
+        mooncWorkerUrl = await createObjectUrlFromCrxResource(`${basePath}/moonc-worker.js`);
+        onigWasmUrl = await createObjectUrlFromCrxResource(`${basePath}/onig.wasm`);
+    } else {
+        const createObjectUrlFromCORSUrl = async (url) => await fetch(url).then((resp) => resp.text())
+            .then((cnt) => URL.createObjectURL(new Blob([cnt], { type: 'application/javascript' })));
+        const createWorkerFromCORSUrl = async (url) => new Worker(await createObjectUrlFromCORSUrl(url));
+        const baseUrl = 'https://cdn.jsdelivr.net/gh/A-23187/moonbit-leetcode/moonpad-monaco';
+        moonpad = await import(`${baseUrl}/moonpad-monaco.js`);
+        lspWorker = await createWorkerFromCORSUrl(`${baseUrl}/lsp-server.js`);
+        mooncWorkerUrl = await createObjectUrlFromCORSUrl(`${baseUrl}/moonc-worker.js`);
+        onigWasmUrl = `${baseUrl}/onig.wasm`;
+    }
     function initMoon() {
         globalThis.moon = globalThis.moon ?? moonpad.init({
-            onigWasmUrl: `${baseUrl}/onig.wasm`,
+            onigWasmUrl,
             lspWorker,
             mooncWorkerFactory: () => new Worker(mooncWorkerUrl),
             codeLensFilter: () => false,
@@ -97,7 +117,7 @@
     const parseType = (function() {
         const typeMap = new Map([
             ['void', 'Unit'], ['boolean', 'Bool'], ['integer', 'Int'], ['long', 'Int64'],
-            ['float', 'Float'], ['double', 'Double'], ['char', 'Char'], ['string', 'String'],
+            ['float', 'Float'], ['double', 'Double'], ['char', 'Char'], ['character', 'Char'], ['string', 'String'],
         ]);
         const dfs = (type, begin, end) => {
             if (begin >= end) {
