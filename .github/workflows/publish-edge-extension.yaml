@@ -1,0 +1,19 @@
+name: publish-edge-extension
+run-name: Publish to Microsoft Edge extension store by @${{ github.actor }}
+on: push
+jobs:
+  main:
+    name: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Pack extension
+        run: zip -r moonbit-leetcode.zip {icons,index.js,loader.js,manifest.json,moonpad-monaco}
+      - name: Publish extension
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: 6dfbe089-a4e8-4ca5-ac59-e7ad1757612e
+          client-id: ${{ secrets.MS_EDGE_EXTENSION_API_CLIENT_ID }}
+          api-key: ${{ secrets.MS_EDGE_EXTENSION_API_KEY }}
+          zip-path: moonbit-leetcode.zip
