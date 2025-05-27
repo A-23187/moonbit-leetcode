@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MoonBit ❤️ LeetCode
 // @namespace    a23187.cn
-// @version      1.1.0
+// @version      1.1.1
 // @description  add support of moonbit language to leetcode
 // @author       A23187
 // @homepage     https://github.com/A-23187/moonbit-leetcode
@@ -174,7 +174,7 @@
             if (m.type !== 'childList' || !m.addedNodes?.item(0)?.innerText?.startsWith('C++\nJava\nPython\nPython3')) {
                 continue;
             }
-            const switchLanguageBtn = document.querySelector('#editor > div:nth-child(1) button:nth-child(1) > button');
+            const switchLanguageBtn = document.querySelector('#editor > div:nth-child(1) button:nth-child(1)');
             const languageSelectionDiv = m.addedNodes[0].querySelector('div > div > div');
             const lastColDiv = languageSelectionDiv.lastElementChild;
             const moonDiv = lastColDiv.lastElementChild.cloneNode(true);
@@ -193,6 +193,7 @@
                     itemDiv.onclick = async () => {
                         await switchLanguage(itemDiv.innerText);
                         switchLanguageBtn.firstChild.data = itemDiv.innerText;
+                        languageSelectionDiv.parentElement.hidden = true;
                     };
                 }
             }
