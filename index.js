@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MoonBit ❤️ LeetCode
 // @namespace    a23187.cn
-// @version      1.1.1
+// @version      1.1.2
 // @description  add support of moonbit language to leetcode
 // @author       A23187
 // @homepage     https://github.com/A-23187/moonbit-leetcode
@@ -169,6 +169,7 @@
             }
         };
     })();
+    // observe document.body for the language selection dropdown to be added
     const mutationObserver = new MutationObserver((mutations) => {
         for (const m of mutations) {
             if (m.type !== 'childList' || !m.addedNodes?.item(0)?.innerText?.startsWith('C++\nJava\nPython\nPython3')) {
@@ -201,6 +202,31 @@
         }
     });
     mutationObserver.observe(document.body, { childList: true });
+    // observe for the "Reset to default code" dialog to be added
+    waitUntil(() => {
+        const topRightBtnsDiv = document.querySelector('#editor > div:nth-child(1) > div:last-child');
+        if (topRightBtnsDiv === null) {
+            return false;
+        }
+        const mutationObserver = new MutationObserver((mutations) => {
+            if (getCurrentLanguageId() !== 'moonbit') {
+                return;
+            }
+            for (const m of mutations) {
+                const p = /您将放弃所有更改并初始化代码！|Your current code will be discarded and reset to the default code!/;
+                if (m.type !== 'childList' || !m.addedNodes?.item(0)?.innerText?.match(p)) {
+                    continue;
+                }
+                const confirmBtn = m.addedNodes[0].querySelectorAll('button')[1];
+                confirmBtn.onclick = async () => {
+                    globalThis.monaco.editor.getEditors()[0].getModel().setValue(await generateMoonCodeTemplate());
+                };
+                break;
+            }
+        });
+        mutationObserver.observe(topRightBtnsDiv, { childList: true });
+        return true;
+    });
     // compile
     async function compile(commentSource = false) {
         const editor = globalThis.monaco.editor.getEditors()[0];

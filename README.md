@@ -28,6 +28,14 @@ Clone this repository to load manually, see more [here](https://developer.chrome
 
 <details>
 
+### 1.1.2
+
+1. For moonbit, support reset to default code
+
+### 1.1.1
+
+1. Fix
+
 ### 1.1.0
 
 1. Support installation as Microsoft Edge or Google Chrome extension

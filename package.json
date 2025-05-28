@@ -1,6 +1,6 @@
 {
   "name": "moonbit-leetcode",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "add support of moonbit language to leetcode",
   "author": "A23187 <a23187.1979421048@gmail.com> (a23187.cn)",
   "main": "index.js",
