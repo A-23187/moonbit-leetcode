@@ -1,7 +1,7 @@
 var bo = Object.defineProperty;
 var oo = (I, g, A) => g in I ? bo(I, g, { enumerable: !0, configurable: !0, writable: !0, value: A }) : I[g] = A;
 var XB = (I, g, A) => oo(I, typeof g != "symbol" ? g + "" : g, A);
-import * as vI from "monaco-editor-core";
+const vI = globalThis.monaco;
 const ql = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   get BigIntStatsFs() {
@@ -19609,7 +19609,9 @@ async function Zo(I) {
     libInputs: A,
     testInputs: C = [],
     debugMain: l = !1,
-    enableValueTracing: B = !1
+    enableValueTracing: B = !1,
+    isMain: isMain = !0,
+    exportedFunctions: exportedFunctions = [],
   } = I, i = C.length > 0, G = PL();
   let c;
   if (i) {
@@ -19639,7 +19641,7 @@ async function Zo(I) {
       target: "js",
       pkg: "moonpad/lib",
       pkgSources: ["moonpad/lib:moonpad:/"],
-      isMain: !i,
+      isMain: isMain,
       enableValueTracing: B,
       errorFormat: "json",
       noOpt: l
@@ -19661,7 +19663,7 @@ async function Zo(I) {
   }
   const { result: s, sourceMap: V } = await rL({
     coreFiles: a,
-    exportedFunctions: [],
+    exportedFunctions: exportedFunctions,
     main: i ? "moonpad/lib_blackbox_test" : "moonpad/lib",
     outputFormat: "wasm",
     pkgSources: [
