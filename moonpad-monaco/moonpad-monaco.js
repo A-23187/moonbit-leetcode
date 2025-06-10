@@ -1,7 +1,7 @@
 var bo = Object.defineProperty;
 var oo = (I, g, A) => g in I ? bo(I, g, { enumerable: !0, configurable: !0, writable: !0, value: A }) : I[g] = A;
 var VB = (I, g, A) => oo(I, typeof g != "symbol" ? g + "" : g, A);
-const vI = globalThis.monaco;
+import * as vI from "monaco-editor-core";
 const ql = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   get BigIntStatsFs() {
@@ -478,12 +478,12 @@ function jc() {
     }
   }
   EI.RequestType6 = W;
-  class K extends l {
+  class Y extends l {
     constructor(y) {
       super(y, 7);
     }
   }
-  EI.RequestType7 = K;
+  EI.RequestType7 = Y;
   class a extends l {
     constructor(y) {
       super(y, 8);
@@ -520,18 +520,18 @@ function jc() {
     }
   }
   EI.NotificationType1 = M;
-  class Y extends l {
+  class K extends l {
     constructor(y) {
       super(y, 2);
     }
   }
-  EI.NotificationType2 = Y;
-  class p extends l {
+  EI.NotificationType2 = K;
+  class u extends l {
     constructor(y) {
       super(y, 3);
     }
   }
-  EI.NotificationType3 = p;
+  EI.NotificationType3 = u;
   class N extends l {
     constructor(y) {
       super(y, 4);
@@ -562,13 +562,13 @@ function jc() {
     }
   }
   EI.NotificationType8 = w;
-  class S extends l {
+  class p extends l {
     constructor(y) {
       super(y, 9);
     }
   }
-  EI.NotificationType9 = S;
-  var u;
+  EI.NotificationType9 = p;
+  var S;
   return function(R) {
     function y(x) {
       const iI = x;
@@ -585,7 +585,7 @@ function jc() {
       return iI && (iI.result !== void 0 || !!iI.error) && (I.string(iI.id) || I.number(iI.id) || iI.id === null);
     }
     R.isResponse = j;
-  }(u || (EI.Message = u = {})), EI;
+  }(S || (EI.Message = S = {})), EI;
 }
 var lA = {}, Ei;
 function xc() {
@@ -1164,20 +1164,20 @@ function Xo() {
   (function(c) {
     function Z(b) {
       let d, W;
-      const K = /* @__PURE__ */ new Map();
+      const Y = /* @__PURE__ */ new Map();
       let a;
       const z = /* @__PURE__ */ new Map();
       if (b === void 0 || typeof b == "string")
         d = b ?? "utf-8";
       else {
-        if (d = b.charset ?? "utf-8", b.contentDecoder !== void 0 && (W = b.contentDecoder, K.set(W.name, W)), b.contentDecoders !== void 0)
+        if (d = b.charset ?? "utf-8", b.contentDecoder !== void 0 && (W = b.contentDecoder, Y.set(W.name, W)), b.contentDecoders !== void 0)
           for (const s of b.contentDecoders)
-            K.set(s.name, s);
+            Y.set(s.name, s);
         if (b.contentTypeDecoder !== void 0 && (a = b.contentTypeDecoder, z.set(a.name, a)), b.contentTypeDecoders !== void 0)
           for (const s of b.contentTypeDecoders)
             z.set(s.name, s);
       }
-      return a === void 0 && (a = (0, I.default)().applicationJson.decoder, z.set(a.name, a)), { charset: d, contentDecoder: W, contentDecoders: K, contentTypeDecoder: a, contentTypeDecoders: z };
+      return a === void 0 && (a = (0, I.default)().applicationJson.decoder, z.set(a.name, a)), { charset: d, contentDecoder: W, contentDecoders: Y, contentTypeDecoder: a, contentTypeDecoders: z };
     }
     c.fromOptions = Z;
   })(i || (i = {}));
@@ -1211,12 +1211,12 @@ function Xo() {
 ${JSON.stringify(Object.fromEntries(d))}`));
               return;
             }
-            const K = parseInt(W);
-            if (isNaN(K)) {
+            const Y = parseInt(W);
+            if (isNaN(Y)) {
               this.fireError(new Error(`Content-Length value must be a number. Got ${W}`));
               return;
             }
-            this.nextMessageLength = K;
+            this.nextMessageLength = Y;
           }
           const b = this.buffer.tryReadBody(this.nextMessageLength);
           if (b === void 0) {
@@ -1254,8 +1254,8 @@ function No() {
   var i;
   (function(b) {
     function d(W) {
-      let K = W;
-      return K && g.func(K.dispose) && g.func(K.onClose) && g.func(K.onError) && g.func(K.write);
+      let Y = W;
+      return Y && g.func(Y.dispose) && g.func(Y.onClose) && g.func(Y.onError) && g.func(Y.write);
     }
     b.is = d;
   })(i || (iA.MessageWriter = i = {}));
@@ -1269,8 +1269,8 @@ function No() {
     get onError() {
       return this.errorEmitter.event;
     }
-    fireError(d, W, K) {
-      this.errorEmitter.fire([this.asError(d), W, K]);
+    fireError(d, W, Y) {
+      this.errorEmitter.fire([this.asError(d), W, Y]);
     }
     get onClose() {
       return this.closeEmitter.event;
@@ -1292,19 +1292,19 @@ function No() {
   })(c || (c = {}));
   class Z extends G {
     constructor(d, W) {
-      super(), this.writable = d, this.options = c.fromOptions(W), this.errorCount = 0, this.writeSemaphore = new A.Semaphore(1), this.writable.onError((K) => this.fireError(K)), this.writable.onClose(() => this.fireClose());
+      super(), this.writable = d, this.options = c.fromOptions(W), this.errorCount = 0, this.writeSemaphore = new A.Semaphore(1), this.writable.onError((Y) => this.fireError(Y)), this.writable.onClose(() => this.fireClose());
     }
     async write(d) {
-      return this.writeSemaphore.lock(async () => this.options.contentTypeEncoder.encode(d, this.options).then((K) => this.options.contentEncoder !== void 0 ? this.options.contentEncoder.encode(K) : K).then((K) => {
+      return this.writeSemaphore.lock(async () => this.options.contentTypeEncoder.encode(d, this.options).then((Y) => this.options.contentEncoder !== void 0 ? this.options.contentEncoder.encode(Y) : Y).then((Y) => {
         const a = [];
-        return a.push(l, K.byteLength.toString(), B), a.push(B), this.doWrite(d, a, K);
-      }, (K) => {
-        throw this.fireError(K), K;
+        return a.push(l, Y.byteLength.toString(), B), a.push(B), this.doWrite(d, a, Y);
+      }, (Y) => {
+        throw this.fireError(Y), Y;
       }));
     }
-    async doWrite(d, W, K) {
+    async doWrite(d, W, Y) {
       try {
-        return await this.writable.write(W.join(""), "ascii"), this.writable.write(K);
+        return await this.writable.write(W.join(""), "ascii"), this.writable.write(Y);
       } catch (a) {
         return this.handleError(a, d), Promise.reject(a);
       }
@@ -1340,9 +1340,9 @@ function Yo() {
         return;
       let i = 0, G = 0, c = 0, Z = 0;
       I: for (; G < this._chunks.length; ) {
-        const K = this._chunks[G];
-        for (c = 0; c < K.length; ) {
-          switch (K[c]) {
+        const Y = this._chunks[G];
+        for (c = 0; c < Y.length; ) {
+          switch (Y[c]) {
             case I:
               switch (i) {
                 case 0:
@@ -1372,15 +1372,15 @@ function Yo() {
           }
           c++;
         }
-        Z += K.byteLength, G++;
+        Z += Y.byteLength, G++;
       }
       if (i !== 4)
         return;
       const b = this._read(Z + c), d = /* @__PURE__ */ new Map(), W = this.toString(b, "ascii").split(A);
       if (W.length < 2)
         return d;
-      for (let K = 0; K < W.length - 2; K++) {
-        const a = W[K], z = a.indexOf(":");
+      for (let Y = 0; Y < W.length - 2; Y++) {
+        const a = W[Y], z = a.indexOf(":");
         if (z === -1)
           throw new Error(`Message header must separate key and value using ':'
 ${a}`);
@@ -1469,10 +1469,10 @@ function Ko() {
     (function(y) {
       y[y.Off = 0] = "Off", y[y.Messages = 1] = "Messages", y[y.Compact = 2] = "Compact", y[y.Verbose = 3] = "Verbose";
     })(W || (I.Trace = W = {}));
-    var K;
+    var Y;
     (function(y) {
       y.Off = "off", y.Messages = "messages", y.Compact = "compact", y.Verbose = "verbose";
-    })(K || (I.TraceValues = K = {})), function(y) {
+    })(Y || (I.TraceValues = Y = {})), function(y) {
       function E(x) {
         if (!A.string(x))
           return y.Off;
@@ -1533,22 +1533,22 @@ function Ko() {
       }
     }
     I.ConnectionError = M;
-    var Y;
+    var K;
     (function(y) {
       function E(j) {
         const x = j;
         return x && A.func(x.cancelUndispatched);
       }
       y.is = E;
-    })(Y || (I.ConnectionStrategy = Y = {}));
-    var p;
+    })(K || (I.ConnectionStrategy = K = {}));
+    var u;
     (function(y) {
       function E(j) {
         const x = j;
         return x && (x.kind === void 0 || x.kind === "id") && A.func(x.createCancellationTokenSource) && (x.dispose === void 0 || A.func(x.dispose));
       }
       y.is = E;
-    })(p || (I.IdCancellationReceiverStrategy = p = {}));
+    })(u || (I.IdCancellationReceiverStrategy = u = {}));
     var N;
     (function(y) {
       function E(j) {
@@ -1565,7 +1565,7 @@ function Ko() {
         }
       });
       function E(j) {
-        return p.is(j) || N.is(j);
+        return u.is(j) || N.is(j);
       }
       y.is = E;
     })(Q || (I.CancellationReceiverStrategy = Q = {}));
@@ -1604,18 +1604,18 @@ function Ko() {
       }
       y.is = E;
     })(w || (I.MessageStrategy = w = {}));
-    var S;
+    var p;
     (function(y) {
       function E(j) {
         const x = j;
-        return x && (v.is(x.cancellationStrategy) || Y.is(x.connectionStrategy) || w.is(x.messageStrategy));
+        return x && (v.is(x.cancellationStrategy) || K.is(x.connectionStrategy) || w.is(x.messageStrategy));
       }
       y.is = E;
-    })(S || (I.ConnectionOptions = S = {}));
-    var u;
+    })(p || (I.ConnectionOptions = p = {}));
+    var S;
     (function(y) {
       y[y.New = 1] = "New", y[y.Listening = 2] = "Listening", y[y.Closed = 3] = "Closed", y[y.Disposed = 4] = "Disposed";
-    })(u || (u = {}));
+    })(S || (S = {}));
     function R(y, E, j, x) {
       const iI = j !== void 0 ? j : I.NullLogger;
       let lI = 0, nI = 0, U = 0;
@@ -1624,7 +1624,7 @@ function Ko() {
       const _ = /* @__PURE__ */ new Map();
       let NI;
       const MI = /* @__PURE__ */ new Map(), zI = /* @__PURE__ */ new Map();
-      let CI, P = new l.LinkedMap(), II = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), SI = /* @__PURE__ */ new Map(), VI = W.Off, k = a.Text, D, O = u.New;
+      let CI, P = new l.LinkedMap(), II = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), SI = /* @__PURE__ */ new Map(), VI = W.Off, k = a.Text, D, O = S.New;
       const LI = new B.Emitter(), mI = new B.Emitter(), sI = new B.Emitter(), f = new B.Emitter(), dI = new B.Emitter(), XI = x && x.cancellationStrategy ? x.cancellationStrategy : v.Message;
       function cI(m) {
         if (m === null)
@@ -1643,16 +1643,16 @@ function Ko() {
       function og(m) {
       }
       function h() {
-        return O === u.Listening;
+        return O === S.Listening;
       }
       function o() {
-        return O === u.Closed;
+        return O === S.Closed;
       }
       function V() {
-        return O === u.Disposed;
+        return O === S.Disposed;
       }
       function t() {
-        (O === u.New || O === u.Listening) && (O = u.Closed, mI.fire(void 0));
+        (O === S.New || O === S.Listening) && (O = S.Closed, mI.fire(void 0));
       }
       function r(m) {
         LI.fire([m, void 0, void 0]);
@@ -1736,7 +1736,7 @@ function Ko() {
         UI && (eI = UI.type, DI = UI.handler);
         const TI = Date.now();
         if (DI || yI) {
-          const RI = m.id ?? String(Date.now()), qI = p.is(XI.receiver) ? XI.receiver.createCancellationTokenSource(RI) : XI.receiver.createCancellationTokenSource(m);
+          const RI = m.id ?? String(Date.now()), qI = u.is(XI.receiver) ? XI.receiver.createCancellationTokenSource(RI) : XI.receiver.createCancellationTokenSource(m);
           m.id !== null && wI.has(m.id) && qI.cancel(), m.id !== null && SI.set(RI, qI);
           try {
             let tI;
@@ -2133,14 +2133,14 @@ ${JSON.stringify(m, null, 4)}`);
         dispose: () => {
           if (V())
             return;
-          O = u.Disposed, dI.fire(void 0);
+          O = S.Disposed, dI.fire(void 0);
           const m = new C.ResponseError(C.ErrorCodes.PendingResponseRejected, "Pending response rejected since connection got disposed");
           for (const T of II.values())
             T.reject(m);
           II = /* @__PURE__ */ new Map(), SI = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), P = new l.LinkedMap(), A.func(E.dispose) && E.dispose(), A.func(y.dispose) && y.dispose();
         },
         listen: () => {
-          oI(), KI(), O = u.Listening, y.listen(PI);
+          oI(), KI(), O = S.Listening, y.listen(PI);
         },
         inspect: () => {
           (0, g.default)().console.log("inspect");
@@ -3416,9 +3416,9 @@ var _G;
       return W === 0 ? b.range.start.character - d.range.start.character : W;
     }), Z = G.length;
     for (let b = c.length - 1; b >= 0; b--) {
-      let d = c[b], W = B.offsetAt(d.range.start), K = B.offsetAt(d.range.end);
-      if (K <= Z)
-        G = G.substring(0, W) + d.newText + G.substring(K, G.length);
+      let d = c[b], W = B.offsetAt(d.range.start), Y = B.offsetAt(d.range.end);
+      if (Y <= Z)
+        G = G.substring(0, W) + d.newText + G.substring(Y, G.length);
       else
         throw new Error("Overlapping edit");
       Z = W;
@@ -3506,48 +3506,48 @@ class so {
 var BI;
 (function(I) {
   const g = Object.prototype.toString;
-  function A(K) {
-    return typeof K < "u";
+  function A(Y) {
+    return typeof Y < "u";
   }
   I.defined = A;
-  function C(K) {
-    return typeof K > "u";
+  function C(Y) {
+    return typeof Y > "u";
   }
   I.undefined = C;
-  function l(K) {
-    return K === !0 || K === !1;
+  function l(Y) {
+    return Y === !0 || Y === !1;
   }
   I.boolean = l;
-  function B(K) {
-    return g.call(K) === "[object String]";
+  function B(Y) {
+    return g.call(Y) === "[object String]";
   }
   I.string = B;
-  function i(K) {
-    return g.call(K) === "[object Number]";
+  function i(Y) {
+    return g.call(Y) === "[object Number]";
   }
   I.number = i;
-  function G(K, a, z) {
-    return g.call(K) === "[object Number]" && a <= K && K <= z;
+  function G(Y, a, z) {
+    return g.call(Y) === "[object Number]" && a <= Y && Y <= z;
   }
   I.numberRange = G;
-  function c(K) {
-    return g.call(K) === "[object Number]" && -2147483648 <= K && K <= 2147483647;
+  function c(Y) {
+    return g.call(Y) === "[object Number]" && -2147483648 <= Y && Y <= 2147483647;
   }
   I.integer = c;
-  function Z(K) {
-    return g.call(K) === "[object Number]" && 0 <= K && K <= 2147483647;
+  function Z(Y) {
+    return g.call(Y) === "[object Number]" && 0 <= Y && Y <= 2147483647;
   }
   I.uinteger = Z;
-  function b(K) {
-    return g.call(K) === "[object Function]";
+  function b(Y) {
+    return g.call(Y) === "[object Function]";
   }
   I.func = b;
-  function d(K) {
-    return K !== null && typeof K == "object";
+  function d(Y) {
+    return Y !== null && typeof Y == "object";
   }
   I.objectLiteral = d;
-  function W(K, a) {
-    return Array.isArray(K) && K.every(a);
+  function W(Y, a) {
+    return Array.isArray(Y) && Y.every(a);
   }
   I.typedArray = W;
 })(BI || (BI = {}));
@@ -4194,68 +4194,68 @@ function xo() {
   aZ = 1, Object.defineProperty(Wg, "__esModule", { value: !0 }), Wg.DidCloseNotebookDocumentNotification = Wg.DidSaveNotebookDocumentNotification = Wg.DidChangeNotebookDocumentNotification = Wg.NotebookCellArrayChange = Wg.DidOpenNotebookDocumentNotification = Wg.NotebookDocumentSyncRegistrationType = Wg.NotebookDocument = Wg.NotebookCell = Wg.ExecutionSummary = Wg.NotebookCellKind = void 0;
   const I = Zi, g = ci(), A = Vg();
   var C;
-  (function(K) {
-    K.Markup = 1, K.Code = 2;
+  (function(Y) {
+    Y.Markup = 1, Y.Code = 2;
     function a(z) {
       return z === 1 || z === 2;
     }
-    K.is = a;
+    Y.is = a;
   })(C || (Wg.NotebookCellKind = C = {}));
   var l;
-  (function(K) {
+  (function(Y) {
     function a(X, M) {
-      const Y = { executionOrder: X };
-      return (M === !0 || M === !1) && (Y.success = M), Y;
+      const K = { executionOrder: X };
+      return (M === !0 || M === !1) && (K.success = M), K;
     }
-    K.create = a;
+    Y.create = a;
     function z(X) {
       const M = X;
       return g.objectLiteral(M) && I.uinteger.is(M.executionOrder) && (M.success === void 0 || g.boolean(M.success));
     }
-    K.is = z;
+    Y.is = z;
     function s(X, M) {
       return X === M ? !0 : X == null || M === null || M === void 0 ? !1 : X.executionOrder === M.executionOrder && X.success === M.success;
     }
-    K.equals = s;
+    Y.equals = s;
   })(l || (Wg.ExecutionSummary = l = {}));
   var B;
-  (function(K) {
-    function a(M, Y) {
-      return { kind: M, document: Y };
+  (function(Y) {
+    function a(M, K) {
+      return { kind: M, document: K };
     }
-    K.create = a;
+    Y.create = a;
     function z(M) {
-      const Y = M;
-      return g.objectLiteral(Y) && C.is(Y.kind) && I.DocumentUri.is(Y.document) && (Y.metadata === void 0 || g.objectLiteral(Y.metadata));
+      const K = M;
+      return g.objectLiteral(K) && C.is(K.kind) && I.DocumentUri.is(K.document) && (K.metadata === void 0 || g.objectLiteral(K.metadata));
     }
-    K.is = z;
-    function s(M, Y) {
-      const p = /* @__PURE__ */ new Set();
-      return M.document !== Y.document && p.add("document"), M.kind !== Y.kind && p.add("kind"), M.executionSummary !== Y.executionSummary && p.add("executionSummary"), (M.metadata !== void 0 || Y.metadata !== void 0) && !X(M.metadata, Y.metadata) && p.add("metadata"), (M.executionSummary !== void 0 || Y.executionSummary !== void 0) && !l.equals(M.executionSummary, Y.executionSummary) && p.add("executionSummary"), p;
+    Y.is = z;
+    function s(M, K) {
+      const u = /* @__PURE__ */ new Set();
+      return M.document !== K.document && u.add("document"), M.kind !== K.kind && u.add("kind"), M.executionSummary !== K.executionSummary && u.add("executionSummary"), (M.metadata !== void 0 || K.metadata !== void 0) && !X(M.metadata, K.metadata) && u.add("metadata"), (M.executionSummary !== void 0 || K.executionSummary !== void 0) && !l.equals(M.executionSummary, K.executionSummary) && u.add("executionSummary"), u;
     }
-    K.diff = s;
-    function X(M, Y) {
-      if (M === Y)
+    Y.diff = s;
+    function X(M, K) {
+      if (M === K)
         return !0;
-      if (M == null || Y === null || Y === void 0 || typeof M != typeof Y || typeof M != "object")
+      if (M == null || K === null || K === void 0 || typeof M != typeof K || typeof M != "object")
         return !1;
-      const p = Array.isArray(M), N = Array.isArray(Y);
-      if (p !== N)
+      const u = Array.isArray(M), N = Array.isArray(K);
+      if (u !== N)
         return !1;
-      if (p && N) {
-        if (M.length !== Y.length)
+      if (u && N) {
+        if (M.length !== K.length)
           return !1;
         for (let Q = 0; Q < M.length; Q++)
-          if (!X(M[Q], Y[Q]))
+          if (!X(M[Q], K[Q]))
             return !1;
       }
-      if (g.objectLiteral(M) && g.objectLiteral(Y)) {
-        const Q = Object.keys(M), F = Object.keys(Y);
+      if (g.objectLiteral(M) && g.objectLiteral(K)) {
+        const Q = Object.keys(M), F = Object.keys(K);
         if (Q.length !== F.length || (Q.sort(), F.sort(), !X(Q, F)))
           return !1;
         for (let v = 0; v < Q.length; v++) {
           const w = Q[v];
-          if (!X(M[w], Y[w]))
+          if (!X(M[w], K[w]))
             return !1;
         }
       }
@@ -4263,49 +4263,49 @@ function xo() {
     }
   })(B || (Wg.NotebookCell = B = {}));
   var i;
-  (function(K) {
-    function a(s, X, M, Y) {
-      return { uri: s, notebookType: X, version: M, cells: Y };
+  (function(Y) {
+    function a(s, X, M, K) {
+      return { uri: s, notebookType: X, version: M, cells: K };
     }
-    K.create = a;
+    Y.create = a;
     function z(s) {
       const X = s;
       return g.objectLiteral(X) && g.string(X.uri) && I.integer.is(X.version) && g.typedArray(X.cells, B.is);
     }
-    K.is = z;
+    Y.is = z;
   })(i || (Wg.NotebookDocument = i = {}));
   var G;
-  (function(K) {
-    K.method = "notebookDocument/sync", K.messageDirection = A.MessageDirection.clientToServer, K.type = new A.RegistrationType(K.method);
+  (function(Y) {
+    Y.method = "notebookDocument/sync", Y.messageDirection = A.MessageDirection.clientToServer, Y.type = new A.RegistrationType(Y.method);
   })(G || (Wg.NotebookDocumentSyncRegistrationType = G = {}));
   var c;
-  (function(K) {
-    K.method = "notebookDocument/didOpen", K.messageDirection = A.MessageDirection.clientToServer, K.type = new A.ProtocolNotificationType(K.method), K.registrationMethod = G.method;
+  (function(Y) {
+    Y.method = "notebookDocument/didOpen", Y.messageDirection = A.MessageDirection.clientToServer, Y.type = new A.ProtocolNotificationType(Y.method), Y.registrationMethod = G.method;
   })(c || (Wg.DidOpenNotebookDocumentNotification = c = {}));
   var Z;
-  (function(K) {
+  (function(Y) {
     function a(s) {
       const X = s;
       return g.objectLiteral(X) && I.uinteger.is(X.start) && I.uinteger.is(X.deleteCount) && (X.cells === void 0 || g.typedArray(X.cells, B.is));
     }
-    K.is = a;
+    Y.is = a;
     function z(s, X, M) {
-      const Y = { start: s, deleteCount: X };
-      return M !== void 0 && (Y.cells = M), Y;
+      const K = { start: s, deleteCount: X };
+      return M !== void 0 && (K.cells = M), K;
     }
-    K.create = z;
+    Y.create = z;
   })(Z || (Wg.NotebookCellArrayChange = Z = {}));
   var b;
-  (function(K) {
-    K.method = "notebookDocument/didChange", K.messageDirection = A.MessageDirection.clientToServer, K.type = new A.ProtocolNotificationType(K.method), K.registrationMethod = G.method;
+  (function(Y) {
+    Y.method = "notebookDocument/didChange", Y.messageDirection = A.MessageDirection.clientToServer, Y.type = new A.ProtocolNotificationType(Y.method), Y.registrationMethod = G.method;
   })(b || (Wg.DidChangeNotebookDocumentNotification = b = {}));
   var d;
-  (function(K) {
-    K.method = "notebookDocument/didSave", K.messageDirection = A.MessageDirection.clientToServer, K.type = new A.ProtocolNotificationType(K.method), K.registrationMethod = G.method;
+  (function(Y) {
+    Y.method = "notebookDocument/didSave", Y.messageDirection = A.MessageDirection.clientToServer, Y.type = new A.ProtocolNotificationType(Y.method), Y.registrationMethod = G.method;
   })(d || (Wg.DidSaveNotebookDocumentNotification = d = {}));
   var W;
-  return function(K) {
-    K.method = "notebookDocument/didClose", K.messageDirection = A.MessageDirection.clientToServer, K.type = new A.ProtocolNotificationType(K.method), K.registrationMethod = G.method;
+  return function(Y) {
+    Y.method = "notebookDocument/didClose", Y.messageDirection = A.MessageDirection.clientToServer, Y.type = new A.ProtocolNotificationType(Y.method), Y.registrationMethod = G.method;
   }(W || (Wg.DidCloseNotebookDocumentNotification = W = {})), Wg;
 }
 var zC = {}, MZ;
@@ -4368,13 +4368,13 @@ function fo() {
     } }), Object.defineProperty(I, "WorkDoneProgressCancelNotification", { enumerable: !0, get: function() {
       return W.WorkDoneProgressCancelNotification;
     } });
-    const K = zo();
+    const Y = zo();
     Object.defineProperty(I, "CallHierarchyIncomingCallsRequest", { enumerable: !0, get: function() {
-      return K.CallHierarchyIncomingCallsRequest;
+      return Y.CallHierarchyIncomingCallsRequest;
     } }), Object.defineProperty(I, "CallHierarchyOutgoingCallsRequest", { enumerable: !0, get: function() {
-      return K.CallHierarchyOutgoingCallsRequest;
+      return Y.CallHierarchyOutgoingCallsRequest;
     } }), Object.defineProperty(I, "CallHierarchyPrepareRequest", { enumerable: !0, get: function() {
-      return K.CallHierarchyPrepareRequest;
+      return Y.CallHierarchyPrepareRequest;
     } });
     const a = eo();
     Object.defineProperty(I, "TokenFormat", { enumerable: !0, get: function() {
@@ -4422,19 +4422,19 @@ function fo() {
     } }), Object.defineProperty(I, "MonikerRequest", { enumerable: !0, get: function() {
       return M.MonikerRequest;
     } });
-    const Y = Eo();
+    const K = Eo();
     Object.defineProperty(I, "TypeHierarchyPrepareRequest", { enumerable: !0, get: function() {
-      return Y.TypeHierarchyPrepareRequest;
+      return K.TypeHierarchyPrepareRequest;
     } }), Object.defineProperty(I, "TypeHierarchySubtypesRequest", { enumerable: !0, get: function() {
-      return Y.TypeHierarchySubtypesRequest;
+      return K.TypeHierarchySubtypesRequest;
     } }), Object.defineProperty(I, "TypeHierarchySupertypesRequest", { enumerable: !0, get: function() {
-      return Y.TypeHierarchySupertypesRequest;
+      return K.TypeHierarchySupertypesRequest;
     } });
-    const p = ko();
+    const u = ko();
     Object.defineProperty(I, "InlineValueRequest", { enumerable: !0, get: function() {
-      return p.InlineValueRequest;
+      return u.InlineValueRequest;
     } }), Object.defineProperty(I, "InlineValueRefreshRequest", { enumerable: !0, get: function() {
-      return p.InlineValueRefreshRequest;
+      return u.InlineValueRefreshRequest;
     } });
     const N = Uo();
     Object.defineProperty(I, "InlayHintRequest", { enumerable: !0, get: function() {
@@ -4490,29 +4490,29 @@ function fo() {
       }
       H.is = Ag;
     })(w || (I.TextDocumentFilter = w = {}));
-    var S;
+    var p;
     (function(H) {
       function Ag(lg) {
         const JI = lg;
         return C.objectLiteral(JI) && (C.string(JI.notebookType) || C.string(JI.scheme) || C.string(JI.pattern));
       }
       H.is = Ag;
-    })(S || (I.NotebookDocumentFilter = S = {}));
-    var u;
+    })(p || (I.NotebookDocumentFilter = p = {}));
+    var S;
     (function(H) {
       function Ag(lg) {
         const JI = lg;
-        return C.objectLiteral(JI) && (C.string(JI.notebook) || S.is(JI.notebook)) && (JI.language === void 0 || C.string(JI.language));
+        return C.objectLiteral(JI) && (C.string(JI.notebook) || p.is(JI.notebook)) && (JI.language === void 0 || C.string(JI.language));
       }
       H.is = Ag;
-    })(u || (I.NotebookCellTextDocumentFilter = u = {}));
+    })(S || (I.NotebookCellTextDocumentFilter = S = {}));
     var R;
     (function(H) {
       function Ag(lg) {
         if (!Array.isArray(lg))
           return !1;
         for (let JI of lg)
-          if (!C.string(JI) && !w.is(JI) && !u.is(JI))
+          if (!C.string(JI) && !w.is(JI) && !S.is(JI))
             return !1;
         return !0;
       }
@@ -4868,34 +4868,34 @@ function _o() {
         class d {
           static _utf8ByteLength(X) {
             let M = 0;
-            for (let Y = 0, p = X.length; Y < p; Y++) {
-              const N = X.charCodeAt(Y);
+            for (let K = 0, u = X.length; K < u; K++) {
+              const N = X.charCodeAt(K);
               let Q = N, F = !1;
-              if (N >= 55296 && N <= 56319 && Y + 1 < p) {
-                const v = X.charCodeAt(Y + 1);
+              if (N >= 55296 && N <= 56319 && K + 1 < u) {
+                const v = X.charCodeAt(K + 1);
                 v >= 56320 && v <= 57343 && (Q = 65536 + (N - 55296 << 10) | v - 56320, F = !0);
               }
-              M += Q <= 127 ? 1 : Q <= 2047 ? 2 : Q <= 65535 ? 3 : 4, F && Y++;
+              M += Q <= 127 ? 1 : Q <= 2047 ? 2 : Q <= 65535 ? 3 : 4, F && K++;
             }
             return M;
           }
           constructor(X) {
-            const M = X.length, Y = d._utf8ByteLength(X), p = Y !== M, N = p ? new Uint32Array(M + 1) : null;
-            p && (N[M] = Y);
-            const Q = p ? new Uint32Array(Y + 1) : null;
-            p && (Q[Y] = M);
-            const F = new Uint8Array(Y);
+            const M = X.length, K = d._utf8ByteLength(X), u = K !== M, N = u ? new Uint32Array(M + 1) : null;
+            u && (N[M] = K);
+            const Q = u ? new Uint32Array(K + 1) : null;
+            u && (Q[K] = M);
+            const F = new Uint8Array(K);
             let v = 0;
             for (let w = 0; w < M; w++) {
-              const S = X.charCodeAt(w);
-              let u = S, R = !1;
-              if (S >= 55296 && S <= 56319 && w + 1 < M) {
+              const p = X.charCodeAt(w);
+              let S = p, R = !1;
+              if (p >= 55296 && p <= 56319 && w + 1 < M) {
                 const y = X.charCodeAt(w + 1);
-                y >= 56320 && y <= 57343 && (u = 65536 + (S - 55296 << 10) | y - 56320, R = !0);
+                y >= 56320 && y <= 57343 && (S = 65536 + (p - 55296 << 10) | y - 56320, R = !0);
               }
-              p && (N[w] = v, R && (N[w + 1] = v), u <= 127 ? Q[v + 0] = w : u <= 2047 ? (Q[v + 0] = w, Q[v + 1] = w) : u <= 65535 ? (Q[v + 0] = w, Q[v + 1] = w, Q[v + 2] = w) : (Q[v + 0] = w, Q[v + 1] = w, Q[v + 2] = w, Q[v + 3] = w)), u <= 127 ? F[v++] = u : u <= 2047 ? (F[v++] = 192 | (1984 & u) >>> 6, F[v++] = 128 | (63 & u) >>> 0) : u <= 65535 ? (F[v++] = 224 | (61440 & u) >>> 12, F[v++] = 128 | (4032 & u) >>> 6, F[v++] = 128 | (63 & u) >>> 0) : (F[v++] = 240 | (1835008 & u) >>> 18, F[v++] = 128 | (258048 & u) >>> 12, F[v++] = 128 | (4032 & u) >>> 6, F[v++] = 128 | (63 & u) >>> 0), R && w++;
+              u && (N[w] = v, R && (N[w + 1] = v), S <= 127 ? Q[v + 0] = w : S <= 2047 ? (Q[v + 0] = w, Q[v + 1] = w) : S <= 65535 ? (Q[v + 0] = w, Q[v + 1] = w, Q[v + 2] = w) : (Q[v + 0] = w, Q[v + 1] = w, Q[v + 2] = w, Q[v + 3] = w)), S <= 127 ? F[v++] = S : S <= 2047 ? (F[v++] = 192 | (1984 & S) >>> 6, F[v++] = 128 | (63 & S) >>> 0) : S <= 65535 ? (F[v++] = 224 | (61440 & S) >>> 12, F[v++] = 128 | (4032 & S) >>> 6, F[v++] = 128 | (63 & S) >>> 0) : (F[v++] = 240 | (1835008 & S) >>> 18, F[v++] = 128 | (258048 & S) >>> 12, F[v++] = 128 | (4032 & S) >>> 6, F[v++] = 128 | (63 & S) >>> 0), R && w++;
             }
-            this.utf16Length = M, this.utf8Length = Y, this.utf16Value = X, this.utf8Value = F, this.utf16OffsetToUtf8 = N, this.utf8OffsetToUtf16 = Q;
+            this.utf16Length = M, this.utf8Length = K, this.utf16Value = X, this.utf8Value = F, this.utf16OffsetToUtf8 = N, this.utf8OffsetToUtf16 = Q;
           }
           createString(X) {
             const M = X._omalloc(this.utf8Length);
@@ -4920,9 +4920,9 @@ function _o() {
           }
         }
         B.OnigString = W, W.LAST_ID = 0, W._sharedPtr = 0, W._sharedPtrInUse = !1;
-        class K {
+        class Y {
           constructor(X, M) {
-            var Y, p;
+            var K, u;
             if (!Z) throw new Error("Must invoke loadWASM first.");
             const N = [], Q = [];
             for (let R = 0, y = X.length; R < y; R++) {
@@ -4932,42 +4932,42 @@ function _o() {
             const F = Z._omalloc(4 * X.length);
             Z.HEAPU32.set(N, F / 4);
             const v = Z._omalloc(4 * X.length);
-            Z.HEAPU32.set(Q, v / 4), this._onigBinding = Z, this._options = (Y = M == null ? void 0 : M.options) !== null && Y !== void 0 ? Y : [10];
-            const w = this.onigOptions(this._options), S = this.onigSyntax((p = M == null ? void 0 : M.syntax) !== null && p !== void 0 ? p : 0), u = Z._createOnigScanner(F, v, X.length, w, S);
-            this._ptr = u;
+            Z.HEAPU32.set(Q, v / 4), this._onigBinding = Z, this._options = (K = M == null ? void 0 : M.options) !== null && K !== void 0 ? K : [10];
+            const w = this.onigOptions(this._options), p = this.onigSyntax((u = M == null ? void 0 : M.syntax) !== null && u !== void 0 ? u : 0), S = Z._createOnigScanner(F, v, X.length, w, p);
+            this._ptr = S;
             for (let R = 0, y = X.length; R < y; R++) Z._ofree(N[R]);
-            Z._ofree(v), Z._ofree(F), u === 0 && function(R) {
+            Z._ofree(v), Z._ofree(F), S === 0 && function(R) {
               throw new Error(R.UTF8ToString(R._getLastOnigError()));
             }(Z);
           }
           dispose() {
             this._onigBinding._freeOnigScanner(this._ptr);
           }
-          findNextMatchSync(X, M, Y) {
-            let p = b, N = this._options;
-            if (Array.isArray(Y) ? (Y.includes(25) && (p = !0), N = N.concat(Y)) : typeof Y == "boolean" && (p = Y), typeof X == "string") {
+          findNextMatchSync(X, M, K) {
+            let u = b, N = this._options;
+            if (Array.isArray(K) ? (K.includes(25) && (u = !0), N = N.concat(K)) : typeof K == "boolean" && (u = K), typeof X == "string") {
               X = new W(X);
-              const Q = this._findNextMatchSync(X, M, p, N);
+              const Q = this._findNextMatchSync(X, M, u, N);
               return X.dispose(), Q;
             }
-            return this._findNextMatchSync(X, M, p, N);
+            return this._findNextMatchSync(X, M, u, N);
           }
-          _findNextMatchSync(X, M, Y, p) {
-            const N = this._onigBinding, Q = this.onigOptions(p);
+          _findNextMatchSync(X, M, K, u) {
+            const N = this._onigBinding, Q = this.onigOptions(u);
             let F;
-            if (F = Y ? N._findNextOnigScannerMatchDbg(this._ptr, X.id, X.ptr, X.utf8Length, X.convertUtf16OffsetToUtf8(M), Q) : N._findNextOnigScannerMatch(this._ptr, X.id, X.ptr, X.utf8Length, X.convertUtf16OffsetToUtf8(M), Q), F === 0) return null;
+            if (F = K ? N._findNextOnigScannerMatchDbg(this._ptr, X.id, X.ptr, X.utf8Length, X.convertUtf16OffsetToUtf8(M), Q) : N._findNextOnigScannerMatch(this._ptr, X.id, X.ptr, X.utf8Length, X.convertUtf16OffsetToUtf8(M), Q), F === 0) return null;
             const v = N.HEAPU32;
             let w = F / 4;
-            const S = v[w++], u = v[w++];
+            const p = v[w++], S = v[w++];
             let R = [];
-            for (let y = 0; y < u; y++) {
+            for (let y = 0; y < S; y++) {
               const E = X.convertUtf8OffsetToUtf16(v[w++]), j = X.convertUtf8OffsetToUtf16(v[w++]);
               R[y] = { start: E, end: j, length: j - E };
             }
-            return { index: S, captureIndices: R };
+            return { index: p, captureIndices: R };
           }
           onigOptions(X) {
-            return X.map((M) => this.onigOption(M)).reduce((M, Y) => M | Y, this._onigBinding.ONIG_OPTION_NONE);
+            return X.map((M) => this.onigOption(M)).reduce((M, K) => M | K, this._onigBinding.ONIG_OPTION_NONE);
           }
           onigSyntax(X) {
             switch (X) {
@@ -5055,11 +5055,11 @@ function _o() {
             }
           }
         }
-        B.OnigScanner = K;
+        B.OnigScanner = Y;
         let a = !1, z = null;
         B.loadWASM = function(s) {
           if (a) return z;
-          let X, M, Y, p;
+          let X, M, K, u;
           if (a = !0, function(N) {
             return typeof N.instantiator == "function";
           }(s)) X = s.instantiator, M = s.print;
@@ -5081,22 +5081,22 @@ function _o() {
             }(N);
           }
           return z = new Promise((N, Q) => {
-            Y = N, p = Q;
+            K = N, u = Q;
           }), function(N, Q, F, v) {
-            (0, c.default)({ print: Q, instantiateWasm: (w, S) => {
+            (0, c.default)({ print: Q, instantiateWasm: (w, p) => {
               if (typeof performance > "u") {
-                const u = () => Date.now();
-                w.env.emscripten_get_now = u, w.wasi_snapshot_preview1.emscripten_get_now = u;
+                const S = () => Date.now();
+                w.env.emscripten_get_now = S, w.wasi_snapshot_preview1.emscripten_get_now = S;
               }
-              return N(w).then((u) => S(u.instance), v), {};
+              return N(w).then((S) => p(S.instance), v), {};
             } }).then((w) => {
               Z = w, F();
             });
-          }(X, M, Y, p), z;
+          }(X, M, K, u), z;
         }, B.createOnigString = function(s) {
           return new W(s);
         }, B.createOnigScanner = function(s) {
-          return new K(s);
+          return new Y(s);
         }, B.setDefaultDebugCall = function(s) {
           b = s;
         };
@@ -5114,14 +5114,14 @@ function _o() {
             var aI;
           }, typeof clearTimeout > "u" && (globalThis.clearTimeout = (q) => {
           }), typeof setTimeout > "u" && (globalThis.setTimeout = (q) => typeof q == "function" ? q() : j()), typeof scriptArgs < "u" && scriptArgs, typeof onig_print < "u" && (typeof console > "u" && (console = {}), console.log = onig_print, console.warn = console.error = typeof printErr < "u" ? printErr : onig_print);
-          var W, K, a = Z.print || console.log.bind(console), z = Z.printErr || console.error.bind(console);
+          var W, Y, a = Z.print || console.log.bind(console), z = Z.printErr || console.error.bind(console);
           Object.assign(Z, d), d = null, Z.arguments && Z.arguments, Z.thisProgram && Z.thisProgram, Z.quit && Z.quit, Z.wasmBinary && (W = Z.wasmBinary), Z.noExitRuntime, typeof WebAssembly != "object" && j("no native wasm support detected");
-          var s, X, M, Y, p, N, Q, F, v = !1;
+          var s, X, M, K, u, N, Q, F, v = !1;
           function w() {
-            var q = K.buffer;
-            Z.HEAP8 = s = new Int8Array(q), Z.HEAP16 = M = new Int16Array(q), Z.HEAPU8 = X = new Uint8Array(q), Z.HEAPU16 = Y = new Uint16Array(q), Z.HEAP32 = p = new Int32Array(q), Z.HEAPU32 = N = new Uint32Array(q), Z.HEAPF32 = Q = new Float32Array(q), Z.HEAPF64 = F = new Float64Array(q);
+            var q = Y.buffer;
+            Z.HEAP8 = s = new Int8Array(q), Z.HEAP16 = M = new Int16Array(q), Z.HEAPU8 = X = new Uint8Array(q), Z.HEAPU16 = K = new Uint16Array(q), Z.HEAP32 = u = new Int32Array(q), Z.HEAPU32 = N = new Uint32Array(q), Z.HEAPF32 = Q = new Float32Array(q), Z.HEAPF64 = F = new Float64Array(q);
           }
-          var S = [], u = [], R = [], y = 0, E = null;
+          var p = [], S = [], R = [], y = 0, E = null;
           function j(q) {
             Z.onAbort && Z.onAbort(q), z(q = "Aborted(" + q + ")"), v = !0, q += ". Build with -sASSERTIONS for more info.";
             var AI = new WebAssembly.RuntimeError(q);
@@ -5204,7 +5204,7 @@ function _o() {
             }
           };
           function mI(q) {
-            return this.fromWireType(p[q >> 2]);
+            return this.fromWireType(u[q >> 2]);
           }
           var sI = (q, AI) => {
             switch (AI) {
@@ -5224,9 +5224,9 @@ function _o() {
               case 1:
                 return aI ? (YI) => s[YI >> 0] : (YI) => X[YI >> 0];
               case 2:
-                return aI ? (YI) => M[YI >> 1] : (YI) => Y[YI >> 1];
+                return aI ? (YI) => M[YI >> 1] : (YI) => K[YI >> 1];
               case 4:
-                return aI ? (YI) => p[YI >> 2] : (YI) => N[YI >> 2];
+                return aI ? (YI) => u[YI >> 2] : (YI) => N[YI >> 2];
               default:
                 throw new TypeError(`invalid integer width (${AI}): ${q}`);
             }
@@ -5253,7 +5253,7 @@ function _o() {
             }
             return FI;
           }, Gg = (q, AI) => q ? OI(X, q, AI) : "", fI = typeof TextDecoder < "u" ? new TextDecoder("utf-16le") : void 0, og = (q, AI) => {
-            for (var aI = q, YI = aI >> 1, pI = YI + AI / 2; !(YI >= pI) && Y[YI]; ) ++YI;
+            for (var aI = q, YI = aI >> 1, pI = YI + AI / 2; !(YI >= pI) && K[YI]; ) ++YI;
             if ((aI = YI << 1) - q > 32 && fI) return fI.decode(X.subarray(q, aI));
             for (var FI = "", hI = 0; !(hI >= AI / 2); ++hI) {
               var e = M[q + 2 * hI >> 1];
@@ -5270,7 +5270,7 @@ function _o() {
             return M[AI >> 1] = 0, AI - YI;
           }, o = (q) => 2 * q.length, V = (q, AI) => {
             for (var aI = 0, YI = ""; !(aI >= AI / 4); ) {
-              var pI = p[q + 4 * aI >> 2];
+              var pI = u[q + 4 * aI >> 2];
               if (pI == 0) break;
               if (++aI, pI >= 65536) {
                 var FI = pI - 65536;
@@ -5282,9 +5282,9 @@ function _o() {
             if (aI === void 0 && (aI = 2147483647), aI < 4) return 0;
             for (var YI = AI, pI = YI + aI - 4, FI = 0; FI < q.length; ++FI) {
               var hI = q.charCodeAt(FI);
-              if (hI >= 55296 && hI <= 57343 && (hI = 65536 + ((1023 & hI) << 10) | 1023 & q.charCodeAt(++FI)), p[AI >> 2] = hI, (AI += 4) + 4 > pI) break;
+              if (hI >= 55296 && hI <= 57343 && (hI = 65536 + ((1023 & hI) << 10) | 1023 & q.charCodeAt(++FI)), u[AI >> 2] = hI, (AI += 4) + 4 > pI) break;
             }
-            return p[AI >> 2] = 0, AI - YI;
+            return u[AI >> 2] = 0, AI - YI;
           }, r = (q) => {
             for (var AI = 0, aI = 0; aI < q.length; ++aI) {
               var YI = q.charCodeAt(aI);
@@ -5294,9 +5294,9 @@ function _o() {
           };
           XI = () => performance.now();
           var GI = (q) => {
-            var AI = (q - K.buffer.byteLength + 65535) / 65536;
+            var AI = (q - Y.buffer.byteLength + 65535) / 65536;
             try {
-              return K.grow(AI), w(), 1;
+              return Y.grow(AI), w(), 1;
             } catch {
             }
           }, WI = [null, [], []];
@@ -5421,7 +5421,7 @@ function _o() {
             }, argPackAdvance: 8, readValueFromPointer: dI, destructorFunction: (YI) => _I(YI) });
           }, _embind_register_std_wstring: (q, AI, aI) => {
             var YI, pI, FI, hI, e;
-            aI = _(aI), AI === 2 ? (YI = og, pI = h, hI = o, FI = () => Y, e = 1) : AI === 4 && (YI = V, pI = t, hI = r, FI = () => N, e = 2), SI(q, { name: aI, fromWireType: (J) => {
+            aI = _(aI), AI === 2 ? (YI = og, pI = h, hI = o, FI = () => K, e = 1) : AI === 4 && (YI = V, pI = t, hI = r, FI = () => N, e = 2), SI(q, { name: aI, fromWireType: (J) => {
               for (var oI, KI = N[J >> 2], uI = FI(), xI = J + 4, rI = 0; rI <= KI; ++rI) {
                 var H = J + 4 + rI * AI;
                 if (rI == KI || uI[H >> e] == 0) {
@@ -5462,7 +5462,7 @@ function _o() {
             var q, AI, aI, YI, pI = { env: Bg, wasi_snapshot_preview1: Bg };
             function FI(hI, e) {
               var J, oI = hI.exports;
-              return K = (PI = oI).memory, w(), PI.__indirect_function_table, J = PI.__wasm_call_ctors, u.unshift(J), function(KI) {
+              return Y = (PI = oI).memory, w(), PI.__indirect_function_table, J = PI.__wasm_call_ctors, S.unshift(J), function(KI) {
                 if (y--, Z.monitorRunDependencies && Z.monitorRunDependencies(y), y == 0 && E) {
                   var uI = E;
                   E = null, uI();
@@ -5482,16 +5482,16 @@ function _o() {
           }(), Cg = (q) => (Cg = PI.malloc)(q), _I = (q) => (_I = PI.free)(q);
           function kg() {
             function q() {
-              jI || (jI = !0, Z.calledRun = !0, v || ($(u), G(Z), Z.onRuntimeInitialized && Z.onRuntimeInitialized(), function() {
+              jI || (jI = !0, Z.calledRun = !0, v || ($(S), G(Z), Z.onRuntimeInitialized && Z.onRuntimeInitialized(), function() {
                 if (Z.postRun) for (typeof Z.postRun == "function" && (Z.postRun = [Z.postRun]); Z.postRun.length; ) AI = Z.postRun.shift(), R.unshift(AI);
                 var AI;
                 $(R);
               }()));
             }
             y > 0 || (function() {
-              if (Z.preRun) for (typeof Z.preRun == "function" && (Z.preRun = [Z.preRun]); Z.preRun.length; ) AI = Z.preRun.shift(), S.unshift(AI);
+              if (Z.preRun) for (typeof Z.preRun == "function" && (Z.preRun = [Z.preRun]); Z.preRun.length; ) AI = Z.preRun.shift(), p.unshift(AI);
               var AI;
-              $(S);
+              $(p);
             }(), y > 0 || (Z.setStatus ? (Z.setStatus("Running..."), setTimeout(function() {
               setTimeout(function() {
                 Z.setStatus("");
@@ -5528,8 +5528,8 @@ function Id() {
         B.diffStateStacksRefEq = function(c, Z) {
           let b = 0;
           const d = [];
-          let W = c, K = Z;
-          for (; W !== K; ) W && (!K || W.depth >= K.depth) ? (b++, W = W.parent) : (d.push(K.toStateStackFrame()), K = K.parent);
+          let W = c, Y = Z;
+          for (; W !== Y; ) W && (!Y || W.depth >= Y.depth) ? (b++, W = W.parent) : (d.push(Y.toStateStackFrame()), Y = Y.parent);
           return { pops: b, newFrames: d.reverse() };
         }, B.applyStateStackDiff = function(c, Z) {
           let b = c;
@@ -5556,9 +5556,9 @@ function Id() {
           return (16744448 & G) >>> 15;
         }, i.getBackground = function(G) {
           return (4278190080 & G) >>> 24;
-        }, i.set = function(G, c, Z, b, d, W, K) {
-          let a = i.getLanguageId(G), z = i.getTokenType(G), s = i.containsBalancedBrackets(G) ? 1 : 0, X = i.getFontStyle(G), M = i.getForeground(G), Y = i.getBackground(G);
-          return c !== 0 && (a = c), Z !== 8 && (z = Z), b !== null && (s = b ? 1 : 0), d !== -1 && (X = d), W !== 0 && (M = W), K !== 0 && (Y = K), (a | z << 8 | s << 10 | X << 11 | M << 15 | Y << 24) >>> 0;
+        }, i.set = function(G, c, Z, b, d, W, Y) {
+          let a = i.getLanguageId(G), z = i.getTokenType(G), s = i.containsBalancedBrackets(G) ? 1 : 0, X = i.getFontStyle(G), M = i.getForeground(G), K = i.getBackground(G);
+          return c !== 0 && (a = c), Z !== 8 && (z = Z), b !== null && (s = b ? 1 : 0), d !== -1 && (X = d), W !== 0 && (M = W), Y !== 0 && (K = Y), (a | z << 8 | s << 10 | X << 11 | M << 15 | K << 24) >>> 0;
         }, B.toOptionalTokenType = function(G) {
           return G;
         };
@@ -5566,17 +5566,17 @@ function Id() {
         Object.defineProperty(B, "__esModule", { value: !0 }), B.BasicScopeAttributesProvider = B.BasicScopeAttributes = void 0;
         const G = i(807);
         class c {
-          constructor(W, K) {
-            this.languageId = W, this.tokenType = K;
+          constructor(W, Y) {
+            this.languageId = W, this.tokenType = Y;
           }
         }
         B.BasicScopeAttributes = c;
         class Z {
-          constructor(W, K) {
+          constructor(W, Y) {
             this._getBasicScopeAttributes = new G.CachedFn((a) => {
               const z = this._scopeToLanguage(a), s = this._toStandardTokenType(a);
               return new c(z, s);
-            }), this._defaultAttributes = new c(W, 8), this._embeddedLanguagesMatcher = new b(Object.entries(K || {}));
+            }), this._defaultAttributes = new c(W, 8), this._embeddedLanguagesMatcher = new b(Object.entries(Y || {}));
           }
           getDefaultAttributes() {
             return this._defaultAttributes;
@@ -5588,9 +5588,9 @@ function Id() {
             return this._embeddedLanguagesMatcher.match(W) || 0;
           }
           _toStandardTokenType(W) {
-            const K = W.match(Z.STANDARD_TOKEN_TYPE_REGEXP);
-            if (!K) return 8;
-            switch (K[1]) {
+            const Y = W.match(Z.STANDARD_TOKEN_TYPE_REGEXP);
+            if (!Y) return 8;
+            switch (Y[1]) {
               case "comment":
                 return 1;
               case "string":
@@ -5609,43 +5609,43 @@ function Id() {
             if (W.length === 0) this.values = null, this.scopesRegExp = null;
             else {
               this.values = new Map(W);
-              const K = W.map(([a, z]) => G.escapeRegExpCharacters(a));
-              K.sort(), K.reverse(), this.scopesRegExp = new RegExp(`^((${K.join(")|(")}))($|\\.)`, "");
+              const Y = W.map(([a, z]) => G.escapeRegExpCharacters(a));
+              Y.sort(), Y.reverse(), this.scopesRegExp = new RegExp(`^((${Y.join(")|(")}))($|\\.)`, "");
             }
           }
           match(W) {
             if (!this.scopesRegExp) return;
-            const K = W.match(this.scopesRegExp);
-            return K ? this.values.get(K[1]) : void 0;
+            const Y = W.match(this.scopesRegExp);
+            return Y ? this.values.get(Y[1]) : void 0;
           }
         }
       }, 929: (l, B, i) => {
         Object.defineProperty(B, "__esModule", { value: !0 }), B.LineTokens = B.BalancedBracketSelectors = B.StateStackImpl = B.AttributedScopeStack = B.Grammar = B.createGrammar = void 0;
-        const G = i(185), c = i(490), Z = i(916), b = i(810), d = i(666), W = i(63), K = i(807), a = i(214), z = i(398);
-        function s(v, w, S, u, R) {
-          const y = Z.createMatchers(w, X), E = d.RuleFactory.getCompiledRuleId(S, u, R.repository);
+        const G = i(185), c = i(490), Z = i(916), b = i(810), d = i(666), W = i(63), Y = i(807), a = i(214), z = i(398);
+        function s(v, w, p, S, R) {
+          const y = Z.createMatchers(w, X), E = d.RuleFactory.getCompiledRuleId(p, S, R.repository);
           for (const j of y) v.push({ debugSelector: w, matcher: j.matcher, ruleId: E, grammar: R, priority: j.priority });
         }
         function X(v, w) {
           if (w.length < v.length) return !1;
-          let S = 0;
-          return v.every((u) => {
-            for (let R = S; R < w.length; R++) if (M(w[R], u)) return S = R + 1, !0;
+          let p = 0;
+          return v.every((S) => {
+            for (let R = p; R < w.length; R++) if (M(w[R], S)) return p = R + 1, !0;
             return !1;
           });
         }
         function M(v, w) {
           if (!v) return !1;
           if (v === w) return !0;
-          const S = w.length;
-          return v.length > S && v.substr(0, S) === w && v[S] === ".";
+          const p = w.length;
+          return v.length > p && v.substr(0, p) === w && v[p] === ".";
         }
-        B.createGrammar = function(v, w, S, u, R, y, E, j) {
-          return new Y(v, w, S, u, R, y, E, j);
+        B.createGrammar = function(v, w, p, S, R, y, E, j) {
+          return new K(v, w, p, S, R, y, E, j);
         };
-        class Y {
-          constructor(w, S, u, R, y, E, j, x) {
-            if (this._rootScopeName = w, this.balancedBracketSelectors = E, this._onigLib = x, this._basicScopeAttributesProvider = new a.BasicScopeAttributesProvider(u, R), this._rootId = -1, this._lastRuleId = 0, this._ruleId2desc = [null], this._includedGrammars = {}, this._grammarRepository = j, this._grammar = p(S, null), this._injections = null, this._tokenTypeMatchers = [], y) for (const iI of Object.keys(y)) {
+        class K {
+          constructor(w, p, S, R, y, E, j, x) {
+            if (this._rootScopeName = w, this.balancedBracketSelectors = E, this._onigLib = x, this._basicScopeAttributesProvider = new a.BasicScopeAttributesProvider(S, R), this._rootId = -1, this._lastRuleId = 0, this._ruleId2desc = [null], this._includedGrammars = {}, this._grammarRepository = j, this._grammar = u(p, null), this._injections = null, this._tokenTypeMatchers = [], y) for (const iI of Object.keys(y)) {
               const lI = Z.createMatchers(iI, X);
               for (const nI of lI) this._tokenTypeMatchers.push({ matcher: nI.matcher, type: y[iI] });
             }
@@ -5666,11 +5666,11 @@ function Id() {
             return this._basicScopeAttributesProvider.getBasicScopeAttributes(w);
           }
           _collectInjections() {
-            const w = [], S = this._rootScopeName, u = ((R) => R === this._rootScopeName ? this._grammar : this.getExternalGrammar(R))(S);
-            if (u) {
-              const R = u.injections;
-              if (R) for (let E in R) s(w, E, R[E], this, u);
-              const y = this._grammarRepository.injections(S);
+            const w = [], p = this._rootScopeName, S = ((R) => R === this._rootScopeName ? this._grammar : this.getExternalGrammar(R))(p);
+            if (S) {
+              const R = S.injections;
+              if (R) for (let E in R) s(w, E, R[E], this, S);
+              const y = this._grammarRepository.injections(p);
               y && y.forEach((E) => {
                 const j = this.getExternalGrammar(E);
                 if (j) {
@@ -5689,60 +5689,60 @@ function Id() {
             return this._injections;
           }
           registerRule(w) {
-            const S = ++this._lastRuleId, u = w(d.ruleIdFromNumber(S));
-            return this._ruleId2desc[S] = u, u;
+            const p = ++this._lastRuleId, S = w(d.ruleIdFromNumber(p));
+            return this._ruleId2desc[p] = S, S;
           }
           getRule(w) {
             return this._ruleId2desc[d.ruleIdToNumber(w)];
           }
-          getExternalGrammar(w, S) {
+          getExternalGrammar(w, p) {
             if (this._includedGrammars[w]) return this._includedGrammars[w];
             if (this._grammarRepository) {
-              const u = this._grammarRepository.lookup(w);
-              if (u) return this._includedGrammars[w] = p(u, S && S.$base), this._includedGrammars[w];
+              const S = this._grammarRepository.lookup(w);
+              if (S) return this._includedGrammars[w] = u(S, p && p.$base), this._includedGrammars[w];
             }
           }
-          tokenizeLine(w, S, u = 0) {
-            const R = this._tokenize(w, S, !1, u);
+          tokenizeLine(w, p, S = 0) {
+            const R = this._tokenize(w, p, !1, S);
             return { tokens: R.lineTokens.getResult(R.ruleStack, R.lineLength), ruleStack: R.ruleStack, stoppedEarly: R.stoppedEarly };
           }
-          tokenizeLine2(w, S, u = 0) {
-            const R = this._tokenize(w, S, !0, u);
+          tokenizeLine2(w, p, S = 0) {
+            const R = this._tokenize(w, p, !0, S);
             return { tokens: R.lineTokens.getBinaryResult(R.ruleStack, R.lineLength), ruleStack: R.ruleStack, stoppedEarly: R.stoppedEarly };
           }
-          _tokenize(w, S, u, R) {
+          _tokenize(w, p, S, R) {
             let y;
-            if (this._rootId === -1 && (this._rootId = d.RuleFactory.getCompiledRuleId(this._grammar.repository.$self, this, this._grammar.repository), this.getInjections()), S && S !== Q.NULL) y = !1, S.reset();
+            if (this._rootId === -1 && (this._rootId = d.RuleFactory.getCompiledRuleId(this._grammar.repository.$self, this, this._grammar.repository), this.getInjections()), p && p !== Q.NULL) y = !1, p.reset();
             else {
               y = !0;
               const lI = this._basicScopeAttributesProvider.getDefaultAttributes(), nI = this.themeProvider.getDefaults(), U = c.EncodedTokenAttributes.set(0, lI.languageId, lI.tokenType, null, nI.fontStyle, nI.foregroundId, nI.backgroundId), $ = this.getRule(this._rootId).getName(null, null);
               let yI;
-              yI = $ ? N.createRootAndLookUpScopeName($, U, this) : N.createRoot("unknown", U), S = new Q(null, this._rootId, -1, -1, !1, null, yI, yI);
+              yI = $ ? N.createRootAndLookUpScopeName($, U, this) : N.createRoot("unknown", U), p = new Q(null, this._rootId, -1, -1, !1, null, yI, yI);
             }
             w += `
 `;
-            const E = this.createOnigString(w), j = E.content.length, x = new F(u, w, this._tokenTypeMatchers, this.balancedBracketSelectors), iI = z._tokenizeString(this, E, y, 0, S, x, !0, R);
+            const E = this.createOnigString(w), j = E.content.length, x = new F(S, w, this._tokenTypeMatchers, this.balancedBracketSelectors), iI = z._tokenizeString(this, E, y, 0, p, x, !0, R);
             return b.disposeOnigString(E), { lineLength: j, lineTokens: x, ruleStack: iI.stack, stoppedEarly: iI.stoppedEarly };
           }
         }
-        function p(v, w) {
-          return (v = K.clone(v)).repository = v.repository || {}, v.repository.$self = { $vscodeTextmateLocation: v.$vscodeTextmateLocation, patterns: v.patterns, name: v.scopeName }, v.repository.$base = w || v.repository.$self, v;
+        function u(v, w) {
+          return (v = Y.clone(v)).repository = v.repository || {}, v.repository.$self = { $vscodeTextmateLocation: v.$vscodeTextmateLocation, patterns: v.patterns, name: v.scopeName }, v.repository.$base = w || v.repository.$self, v;
         }
-        B.Grammar = Y;
+        B.Grammar = K;
         class N {
-          constructor(w, S, u) {
-            this.parent = w, this.scopePath = S, this.tokenAttributes = u;
+          constructor(w, p, S) {
+            this.parent = w, this.scopePath = p, this.tokenAttributes = S;
           }
-          static fromExtension(w, S) {
-            let u = w, R = (w == null ? void 0 : w.scopePath) ?? null;
-            for (const y of S) R = W.ScopeStack.push(R, y.scopeNames), u = new N(u, R, y.encodedTokenAttributes);
-            return u;
+          static fromExtension(w, p) {
+            let S = w, R = (w == null ? void 0 : w.scopePath) ?? null;
+            for (const y of p) R = W.ScopeStack.push(R, y.scopeNames), S = new N(S, R, y.encodedTokenAttributes);
+            return S;
           }
-          static createRoot(w, S) {
-            return new N(null, new W.ScopeStack(null, w), S);
+          static createRoot(w, p) {
+            return new N(null, new W.ScopeStack(null, w), p);
           }
-          static createRootAndLookUpScopeName(w, S, u) {
-            const R = u.getMetadataForScope(w), y = new W.ScopeStack(null, w), E = u.themeProvider.themeMatch(y), j = N.mergeAttributes(S, R, E);
+          static createRootAndLookUpScopeName(w, p, S) {
+            const R = S.getMetadataForScope(w), y = new W.ScopeStack(null, w), E = S.themeProvider.themeMatch(y), j = N.mergeAttributes(p, R, E);
             return new N(null, y, j);
           }
           get scopeName() {
@@ -5754,27 +5754,27 @@ function Id() {
           equals(w) {
             return N.equals(this, w);
           }
-          static equals(w, S) {
+          static equals(w, p) {
             for (; ; ) {
-              if (w === S || !w && !S) return !0;
-              if (!w || !S || w.scopeName !== S.scopeName || w.tokenAttributes !== S.tokenAttributes) return !1;
-              w = w.parent, S = S.parent;
+              if (w === p || !w && !p) return !0;
+              if (!w || !p || w.scopeName !== p.scopeName || w.tokenAttributes !== p.tokenAttributes) return !1;
+              w = w.parent, p = p.parent;
             }
           }
-          static mergeAttributes(w, S, u) {
+          static mergeAttributes(w, p, S) {
             let R = -1, y = 0, E = 0;
-            return u !== null && (R = u.fontStyle, y = u.foregroundId, E = u.backgroundId), c.EncodedTokenAttributes.set(w, S.languageId, S.tokenType, null, R, y, E);
+            return S !== null && (R = S.fontStyle, y = S.foregroundId, E = S.backgroundId), c.EncodedTokenAttributes.set(w, p.languageId, p.tokenType, null, R, y, E);
           }
-          pushAttributed(w, S) {
+          pushAttributed(w, p) {
             if (w === null) return this;
-            if (w.indexOf(" ") === -1) return N._pushAttributed(this, w, S);
-            const u = w.split(/ /g);
+            if (w.indexOf(" ") === -1) return N._pushAttributed(this, w, p);
+            const S = w.split(/ /g);
             let R = this;
-            for (const y of u) R = N._pushAttributed(R, y, S);
+            for (const y of S) R = N._pushAttributed(R, y, p);
             return R;
           }
-          static _pushAttributed(w, S, u) {
-            const R = u.getMetadataForScope(S), y = w.scopePath.push(S), E = u.themeProvider.themeMatch(y), j = N.mergeAttributes(w.tokenAttributes, R, E);
+          static _pushAttributed(w, p, S) {
+            const R = S.getMetadataForScope(p), y = w.scopePath.push(p), E = S.themeProvider.themeMatch(y), j = N.mergeAttributes(w.tokenAttributes, R, E);
             return new N(w, y, j);
           }
           getScopeNames() {
@@ -5782,28 +5782,28 @@ function Id() {
           }
           getExtensionIfDefined(w) {
             var R;
-            const S = [];
-            let u = this;
-            for (; u && u !== w; ) S.push({ encodedTokenAttributes: u.tokenAttributes, scopeNames: u.scopePath.getExtensionIfDefined(((R = u.parent) == null ? void 0 : R.scopePath) ?? null) }), u = u.parent;
-            return u === w ? S.reverse() : void 0;
+            const p = [];
+            let S = this;
+            for (; S && S !== w; ) p.push({ encodedTokenAttributes: S.tokenAttributes, scopeNames: S.scopePath.getExtensionIfDefined(((R = S.parent) == null ? void 0 : R.scopePath) ?? null) }), S = S.parent;
+            return S === w ? p.reverse() : void 0;
           }
         }
         B.AttributedScopeStack = N;
         class Q {
-          constructor(w, S, u, R, y, E, j, x) {
-            this.parent = w, this.ruleId = S, this.beginRuleCapturedEOL = y, this.endRule = E, this.nameScopesList = j, this.contentNameScopesList = x, this._stackElementBrand = void 0, this.depth = this.parent ? this.parent.depth + 1 : 1, this._enterPos = u, this._anchorPos = R;
+          constructor(w, p, S, R, y, E, j, x) {
+            this.parent = w, this.ruleId = p, this.beginRuleCapturedEOL = y, this.endRule = E, this.nameScopesList = j, this.contentNameScopesList = x, this._stackElementBrand = void 0, this.depth = this.parent ? this.parent.depth + 1 : 1, this._enterPos = S, this._anchorPos = R;
           }
           equals(w) {
             return w !== null && Q._equals(this, w);
           }
-          static _equals(w, S) {
-            return w === S || !!this._structuralEquals(w, S) && N.equals(w.contentNameScopesList, S.contentNameScopesList);
+          static _equals(w, p) {
+            return w === p || !!this._structuralEquals(w, p) && N.equals(w.contentNameScopesList, p.contentNameScopesList);
           }
-          static _structuralEquals(w, S) {
+          static _structuralEquals(w, p) {
             for (; ; ) {
-              if (w === S || !w && !S) return !0;
-              if (!w || !S || w.depth !== S.depth || w.ruleId !== S.ruleId || w.endRule !== S.endRule) return !1;
-              w = w.parent, S = S.parent;
+              if (w === p || !w && !p) return !0;
+              if (!w || !p || w.depth !== p.depth || w.ruleId !== p.ruleId || w.endRule !== p.endRule) return !1;
+              w = w.parent, p = p.parent;
             }
           }
           clone() {
@@ -5821,8 +5821,8 @@ function Id() {
           safePop() {
             return this.parent ? this.parent : this;
           }
-          push(w, S, u, R, y, E, j) {
-            return new Q(this, w, S, u, R, y, E, j);
+          push(w, p, S, R, y, E, j) {
+            return new Q(this, w, p, S, R, y, E, j);
           }
           getEnterPos() {
             return this._enterPos;
@@ -5837,9 +5837,9 @@ function Id() {
             const w = [];
             return this._writeString(w, 0), "[" + w.join(",") + "]";
           }
-          _writeString(w, S) {
-            var u, R;
-            return this.parent && (S = this.parent._writeString(w, S)), w[S++] = `(${this.ruleId}, ${(u = this.nameScopesList) == null ? void 0 : u.toString()}, ${(R = this.contentNameScopesList) == null ? void 0 : R.toString()})`, S;
+          _writeString(w, p) {
+            var S, R;
+            return this.parent && (p = this.parent._writeString(w, p)), w[p++] = `(${this.ruleId}, ${(S = this.nameScopesList) == null ? void 0 : S.toString()}, ${(R = this.contentNameScopesList) == null ? void 0 : R.toString()})`, p;
           }
           withContentNameScopesList(w) {
             return this.contentNameScopesList === w ? this : this.parent.push(this.ruleId, this._enterPos, this._anchorPos, this.beginRuleCapturedEOL, this.endRule, this.nameScopesList, w);
@@ -5848,25 +5848,25 @@ function Id() {
             return this.endRule === w ? this : new Q(this.parent, this.ruleId, this._enterPos, this._anchorPos, this.beginRuleCapturedEOL, w, this.nameScopesList, this.contentNameScopesList);
           }
           hasSameRuleAs(w) {
-            let S = this;
-            for (; S && S._enterPos === w._enterPos; ) {
-              if (S.ruleId === w.ruleId) return !0;
-              S = S.parent;
+            let p = this;
+            for (; p && p._enterPos === w._enterPos; ) {
+              if (p.ruleId === w.ruleId) return !0;
+              p = p.parent;
             }
             return !1;
           }
           toStateStackFrame() {
-            var w, S, u;
-            return { ruleId: d.ruleIdToNumber(this.ruleId), beginRuleCapturedEOL: this.beginRuleCapturedEOL, endRule: this.endRule, nameScopesList: ((S = this.nameScopesList) == null ? void 0 : S.getExtensionIfDefined(((w = this.parent) == null ? void 0 : w.nameScopesList) ?? null)) ?? [], contentNameScopesList: ((u = this.contentNameScopesList) == null ? void 0 : u.getExtensionIfDefined(this.nameScopesList)) ?? [] };
+            var w, p, S;
+            return { ruleId: d.ruleIdToNumber(this.ruleId), beginRuleCapturedEOL: this.beginRuleCapturedEOL, endRule: this.endRule, nameScopesList: ((p = this.nameScopesList) == null ? void 0 : p.getExtensionIfDefined(((w = this.parent) == null ? void 0 : w.nameScopesList) ?? null)) ?? [], contentNameScopesList: ((S = this.contentNameScopesList) == null ? void 0 : S.getExtensionIfDefined(this.nameScopesList)) ?? [] };
           }
-          static pushFrame(w, S) {
-            const u = N.fromExtension((w == null ? void 0 : w.nameScopesList) ?? null, S.nameScopesList);
-            return new Q(w, d.ruleIdFromNumber(S.ruleId), S.enterPos ?? -1, S.anchorPos ?? -1, S.beginRuleCapturedEOL, S.endRule, u, N.fromExtension(u, S.contentNameScopesList));
+          static pushFrame(w, p) {
+            const S = N.fromExtension((w == null ? void 0 : w.nameScopesList) ?? null, p.nameScopesList);
+            return new Q(w, d.ruleIdFromNumber(p.ruleId), p.enterPos ?? -1, p.anchorPos ?? -1, p.beginRuleCapturedEOL, p.endRule, S, N.fromExtension(S, p.contentNameScopesList));
           }
         }
         B.StateStackImpl = Q, Q.NULL = new Q(null, 0, 0, 0, !1, null, null, null), B.BalancedBracketSelectors = class {
           constructor(v, w) {
-            this.allowAny = !1, this.balancedBracketScopes = v.flatMap((S) => S === "*" ? (this.allowAny = !0, []) : Z.createMatchers(S, X).map((u) => u.matcher)), this.unbalancedBracketScopes = w.flatMap((S) => Z.createMatchers(S, X).map((u) => u.matcher));
+            this.allowAny = !1, this.balancedBracketScopes = v.flatMap((p) => p === "*" ? (this.allowAny = !0, []) : Z.createMatchers(p, X).map((S) => S.matcher)), this.unbalancedBracketScopes = w.flatMap((p) => Z.createMatchers(p, X).map((S) => S.matcher));
           }
           get matchesAlways() {
             return this.allowAny && this.unbalancedBracketScopes.length === 0;
@@ -5881,15 +5881,15 @@ function Id() {
           }
         };
         class F {
-          constructor(w, S, u, R) {
-            this.balancedBracketSelectors = R, this._emitBinaryTokens = w, this._tokenTypeOverrides = u, G.DebugFlags.InDebugMode ? this._lineText = S : this._lineText = null, this._tokens = [], this._binaryTokens = [], this._lastTokenEndIndex = 0;
+          constructor(w, p, S, R) {
+            this.balancedBracketSelectors = R, this._emitBinaryTokens = w, this._tokenTypeOverrides = S, G.DebugFlags.InDebugMode ? this._lineText = p : this._lineText = null, this._tokens = [], this._binaryTokens = [], this._lastTokenEndIndex = 0;
           }
-          produce(w, S) {
-            this.produceFromScopes(w.contentNameScopesList, S);
+          produce(w, p) {
+            this.produceFromScopes(w.contentNameScopesList, p);
           }
-          produceFromScopes(w, S) {
+          produceFromScopes(w, p) {
             var R;
-            if (this._lastTokenEndIndex >= S) return;
+            if (this._lastTokenEndIndex >= p) return;
             if (this._emitBinaryTokens) {
               let y = (w == null ? void 0 : w.tokenAttributes) ?? 0, E = !1;
               if ((R = this.balancedBracketSelectors) != null && R.matchesAlways && (E = !0), this._tokenTypeOverrides.length > 0 || this.balancedBracketSelectors && !this.balancedBracketSelectors.matchesAlways && !this.balancedBracketSelectors.matchesNever) {
@@ -5897,29 +5897,29 @@ function Id() {
                 for (const x of this._tokenTypeOverrides) x.matcher(j) && (y = c.EncodedTokenAttributes.set(y, 0, c.toOptionalTokenType(x.type), null, -1, 0, 0));
                 this.balancedBracketSelectors && (E = this.balancedBracketSelectors.match(j));
               }
-              if (E && (y = c.EncodedTokenAttributes.set(y, 0, 8, E, -1, 0, 0)), this._binaryTokens.length > 0 && this._binaryTokens[this._binaryTokens.length - 1] === y) return void (this._lastTokenEndIndex = S);
+              if (E && (y = c.EncodedTokenAttributes.set(y, 0, 8, E, -1, 0, 0)), this._binaryTokens.length > 0 && this._binaryTokens[this._binaryTokens.length - 1] === y) return void (this._lastTokenEndIndex = p);
               if (G.DebugFlags.InDebugMode) {
                 const j = (w == null ? void 0 : w.getScopeNames()) ?? [];
-                console.log("  token: |" + this._lineText.substring(this._lastTokenEndIndex, S).replace(/\n$/, "\\n") + "|");
+                console.log("  token: |" + this._lineText.substring(this._lastTokenEndIndex, p).replace(/\n$/, "\\n") + "|");
                 for (let x = 0; x < j.length; x++) console.log("      * " + j[x]);
               }
-              return this._binaryTokens.push(this._lastTokenEndIndex), this._binaryTokens.push(y), void (this._lastTokenEndIndex = S);
+              return this._binaryTokens.push(this._lastTokenEndIndex), this._binaryTokens.push(y), void (this._lastTokenEndIndex = p);
             }
-            const u = (w == null ? void 0 : w.getScopeNames()) ?? [];
+            const S = (w == null ? void 0 : w.getScopeNames()) ?? [];
             if (G.DebugFlags.InDebugMode) {
-              console.log("  token: |" + this._lineText.substring(this._lastTokenEndIndex, S).replace(/\n$/, "\\n") + "|");
-              for (let y = 0; y < u.length; y++) console.log("      * " + u[y]);
+              console.log("  token: |" + this._lineText.substring(this._lastTokenEndIndex, p).replace(/\n$/, "\\n") + "|");
+              for (let y = 0; y < S.length; y++) console.log("      * " + S[y]);
             }
-            this._tokens.push({ startIndex: this._lastTokenEndIndex, endIndex: S, scopes: u }), this._lastTokenEndIndex = S;
+            this._tokens.push({ startIndex: this._lastTokenEndIndex, endIndex: p, scopes: S }), this._lastTokenEndIndex = p;
           }
-          getResult(w, S) {
-            return this._tokens.length > 0 && this._tokens[this._tokens.length - 1].startIndex === S - 1 && this._tokens.pop(), this._tokens.length === 0 && (this._lastTokenEndIndex = -1, this.produce(w, S), this._tokens[this._tokens.length - 1].startIndex = 0), this._tokens;
+          getResult(w, p) {
+            return this._tokens.length > 0 && this._tokens[this._tokens.length - 1].startIndex === p - 1 && this._tokens.pop(), this._tokens.length === 0 && (this._lastTokenEndIndex = -1, this.produce(w, p), this._tokens[this._tokens.length - 1].startIndex = 0), this._tokens;
           }
-          getBinaryResult(w, S) {
-            this._binaryTokens.length > 0 && this._binaryTokens[this._binaryTokens.length - 2] === S - 1 && (this._binaryTokens.pop(), this._binaryTokens.pop()), this._binaryTokens.length === 0 && (this._lastTokenEndIndex = -1, this.produce(w, S), this._binaryTokens[this._binaryTokens.length - 2] = 0);
-            const u = new Uint32Array(this._binaryTokens.length);
-            for (let R = 0, y = this._binaryTokens.length; R < y; R++) u[R] = this._binaryTokens[R];
-            return u;
+          getBinaryResult(w, p) {
+            this._binaryTokens.length > 0 && this._binaryTokens[this._binaryTokens.length - 2] === p - 1 && (this._binaryTokens.pop(), this._binaryTokens.pop()), this._binaryTokens.length === 0 && (this._lastTokenEndIndex = -1, this.produce(w, p), this._binaryTokens[this._binaryTokens.length - 2] = 0);
+            const S = new Uint32Array(this._binaryTokens.length);
+            for (let R = 0, y = this._binaryTokens.length; R < y; R++) S[R] = this._binaryTokens[R];
+            return S;
           }
         }
         B.LineTokens = F;
@@ -5962,15 +5962,15 @@ function Id() {
             if (N.scopeName === Q) throw new Error(`No grammar provided for <${Q}>`);
             return;
           }
-          const S = F.lookup(Q);
-          N instanceof c ? K({ baseGrammar: S, selfGrammar: w }, v) : W(N.ruleName, { baseGrammar: S, selfGrammar: w, repository: w.repository }, v);
-          const u = F.injections(N.scopeName);
-          if (u) for (const R of u) v.add(new c(R));
+          const p = F.lookup(Q);
+          N instanceof c ? Y({ baseGrammar: p, selfGrammar: w }, v) : W(N.ruleName, { baseGrammar: p, selfGrammar: w, repository: w.repository }, v);
+          const S = F.injections(N.scopeName);
+          if (S) for (const R of S) v.add(new c(R));
         }
         function W(N, Q, F) {
           Q.repository && Q.repository[N] && a([Q.repository[N]], Q, F);
         }
-        function K(N, Q) {
+        function Y(N, Q) {
           N.selfGrammar.patterns && Array.isArray(N.selfGrammar.patterns) && a(N.selfGrammar.patterns, { ...N, repository: N.selfGrammar.repository }, Q), N.selfGrammar.injections && a(Object.values(N.selfGrammar.injections), { ...N, repository: N.selfGrammar.repository }, Q);
         }
         function a(N, Q, F) {
@@ -5979,26 +5979,26 @@ function Id() {
             F.visitedRule.add(v);
             const w = v.repository ? G.mergeObjects({}, Q.repository, v.repository) : Q.repository;
             Array.isArray(v.patterns) && a(v.patterns, { ...Q, repository: w }, F);
-            const S = v.include;
-            if (!S) continue;
-            const u = p(S);
-            switch (u.kind) {
+            const p = v.include;
+            if (!p) continue;
+            const S = u(p);
+            switch (S.kind) {
               case 0:
-                K({ ...Q, selfGrammar: Q.baseGrammar }, F);
+                Y({ ...Q, selfGrammar: Q.baseGrammar }, F);
                 break;
               case 1:
-                K(Q, F);
+                Y(Q, F);
                 break;
               case 2:
-                W(u.ruleName, { ...Q, repository: w }, F);
+                W(S.ruleName, { ...Q, repository: w }, F);
                 break;
               case 3:
               case 4:
-                const R = u.scopeName === Q.selfGrammar.scopeName ? Q.selfGrammar : u.scopeName === Q.baseGrammar.scopeName ? Q.baseGrammar : void 0;
+                const R = S.scopeName === Q.selfGrammar.scopeName ? Q.selfGrammar : S.scopeName === Q.baseGrammar.scopeName ? Q.baseGrammar : void 0;
                 if (R) {
                   const y = { baseGrammar: Q.baseGrammar, selfGrammar: R, repository: w };
-                  u.kind === 4 ? W(u.ruleName, y, F) : K(y, F);
-                } else u.kind === 4 ? F.add(new Z(u.scopeName, u.ruleName)) : F.add(new c(u.scopeName));
+                  S.kind === 4 ? W(S.ruleName, y, F) : Y(y, F);
+                } else S.kind === 4 ? F.add(new Z(S.scopeName, S.ruleName)) : F.add(new c(S.scopeName));
             }
           }
         }
@@ -6044,12 +6044,12 @@ function Id() {
           }
         }
         B.TopLevelReference = M;
-        class Y {
+        class K {
           constructor(Q, F) {
             this.scopeName = Q, this.ruleName = F, this.kind = 4;
           }
         }
-        function p(N) {
+        function u(N) {
           if (N === "$base") return new z();
           if (N === "$self") return new s();
           const Q = N.indexOf("#");
@@ -6057,10 +6057,10 @@ function Id() {
           if (Q === 0) return new X(N.substring(1));
           {
             const F = N.substring(0, Q), v = N.substring(Q + 1);
-            return new Y(F, v);
+            return new K(F, v);
           }
         }
-        B.TopLevelRepositoryReference = Y, B.parseInclude = p;
+        B.TopLevelRepositoryReference = K, B.parseInclude = u;
       }, 752: function(l, B, i) {
         var G = this && this.__createBinding || (Object.create ? function(Z, b, d, W) {
           W === void 0 && (W = d), Object.defineProperty(Z, W, { enumerable: !0, get: function() {
@@ -6076,13 +6076,13 @@ function Id() {
         Object.defineProperty(B, "__esModule", { value: !0 }), B.LocalStackElement = B._tokenizeString = void 0;
         const G = i(185), c = i(810), Z = i(666), b = i(807);
         class d {
-          constructor(Y, p) {
-            this.stack = Y, this.stoppedEarly = p;
+          constructor(K, u) {
+            this.stack = K, this.stoppedEarly = u;
           }
         }
-        function W(M, Y, p, N, Q, F, v, w) {
-          const S = Y.content.length;
-          let u = !1, R = -1;
+        function W(M, K, u, N, Q, F, v, w) {
+          const p = K.content.length;
+          let S = !1, R = -1;
           if (v) {
             const j = function(x, iI, lI, nI, U, $) {
               let yI = U.beginRuleCapturedEOL ? 0 : -1;
@@ -6104,20 +6104,20 @@ function Id() {
                 CI.captureIndices && CI.captureIndices.length && ($.produce(NI.stack, CI.captureIndices[0].start), s(x, iI, lI, NI.stack, $, NI.rule.whileCaptures, CI.captureIndices), $.produce(NI.stack, CI.captureIndices[0].end), yI = CI.captureIndices[0].end, CI.captureIndices[0].end > nI && (nI = CI.captureIndices[0].end, lI = !1));
               }
               return { stack: U, linePos: nI, anchorPosition: yI, isFirstLine: lI };
-            }(M, Y, p, N, Q, F);
-            Q = j.stack, N = j.linePos, p = j.isFirstLine, R = j.anchorPosition;
+            }(M, K, u, N, Q, F);
+            Q = j.stack, N = j.linePos, u = j.isFirstLine, R = j.anchorPosition;
           }
           const y = Date.now();
-          for (; !u; ) {
+          for (; !S; ) {
             if (w !== 0 && Date.now() - y > w) return new d(Q, !0);
             E();
           }
           return new d(Q, !1);
           function E() {
-            G.DebugFlags.InDebugMode && (console.log(""), console.log(`@@scanNext ${N}: |${Y.content.substr(N).replace(/\n$/, "\\n")}|`));
+            G.DebugFlags.InDebugMode && (console.log(""), console.log(`@@scanNext ${N}: |${K.content.substr(N).replace(/\n$/, "\\n")}|`));
             const j = function(nI, U, $, yI, _, NI) {
               const MI = function(wI, SI, VI, k, D, O) {
-                const LI = D.getRule(wI), { ruleScanner: mI, findOptions: sI } = K(LI, wI, D.endRule, VI, k === O);
+                const LI = D.getRule(wI), { ruleScanner: mI, findOptions: sI } = Y(LI, wI, D.endRule, VI, k === O);
                 let f = 0;
                 G.DebugFlags.InDebugMode && (f = b.performanceNow());
                 const dI = mI.findNextMatchSync(SI, k, sI);
@@ -6134,7 +6134,7 @@ function Id() {
                 for (let cI = 0, OI = wI.length; cI < OI; cI++) {
                   const Gg = wI[cI];
                   if (!Gg.matcher(XI)) continue;
-                  const fI = SI.getRule(Gg.ruleId), { ruleScanner: og, findOptions: h } = K(fI, SI, null, k, D === LI), o = og.findNextMatchSync(VI, D, h);
+                  const fI = SI.getRule(Gg.ruleId), { ruleScanner: og, findOptions: h } = Y(fI, SI, null, k, D === LI), o = og.findNextMatchSync(VI, D, h);
                   if (!o) continue;
                   G.DebugFlags.InDebugMode && (console.log(`  matched injection: ${Gg.debugSelector}`), console.log(og.toString()));
                   const V = o.captureIndices[0].start;
@@ -6146,73 +6146,73 @@ function Id() {
               if (!MI) return CI;
               const P = MI.captureIndices[0].start, II = CI.captureIndices[0].start;
               return II < P || CI.priorityMatch && II === P ? CI : MI;
-            }(M, Y, p, N, Q, R);
-            if (!j) return G.DebugFlags.InDebugMode && console.log("  no more matches."), F.produce(Q, S), void (u = !0);
+            }(M, K, u, N, Q, R);
+            if (!j) return G.DebugFlags.InDebugMode && console.log("  no more matches."), F.produce(Q, p), void (S = !0);
             const x = j.captureIndices, iI = j.matchedRuleId, lI = !!(x && x.length > 0) && x[0].end > N;
             if (iI === Z.endRuleId) {
               const nI = Q.getRule(M);
-              G.DebugFlags.InDebugMode && console.log("  popping " + nI.debugName + " - " + nI.debugEndRegExp), F.produce(Q, x[0].start), Q = Q.withContentNameScopesList(Q.nameScopesList), s(M, Y, p, Q, F, nI.endCaptures, x), F.produce(Q, x[0].end);
+              G.DebugFlags.InDebugMode && console.log("  popping " + nI.debugName + " - " + nI.debugEndRegExp), F.produce(Q, x[0].start), Q = Q.withContentNameScopesList(Q.nameScopesList), s(M, K, u, Q, F, nI.endCaptures, x), F.produce(Q, x[0].end);
               const U = Q;
-              if (Q = Q.parent, R = U.getAnchorPos(), !lI && U.getEnterPos() === N) return G.DebugFlags.InDebugMode && console.error("[1] - Grammar is in an endless loop - Grammar pushed & popped a rule without advancing"), Q = U, F.produce(Q, S), void (u = !0);
+              if (Q = Q.parent, R = U.getAnchorPos(), !lI && U.getEnterPos() === N) return G.DebugFlags.InDebugMode && console.error("[1] - Grammar is in an endless loop - Grammar pushed & popped a rule without advancing"), Q = U, F.produce(Q, p), void (S = !0);
             } else {
               const nI = M.getRule(iI);
               F.produce(Q, x[0].start);
-              const U = Q, $ = nI.getName(Y.content, x), yI = Q.contentNameScopesList.pushAttributed($, M);
-              if (Q = Q.push(iI, N, R, x[0].end === S, null, yI, yI), nI instanceof Z.BeginEndRule) {
+              const U = Q, $ = nI.getName(K.content, x), yI = Q.contentNameScopesList.pushAttributed($, M);
+              if (Q = Q.push(iI, N, R, x[0].end === p, null, yI, yI), nI instanceof Z.BeginEndRule) {
                 const _ = nI;
-                G.DebugFlags.InDebugMode && console.log("  pushing " + _.debugName + " - " + _.debugBeginRegExp), s(M, Y, p, Q, F, _.beginCaptures, x), F.produce(Q, x[0].end), R = x[0].end;
-                const NI = _.getContentName(Y.content, x), MI = yI.pushAttributed(NI, M);
-                if (Q = Q.withContentNameScopesList(MI), _.endHasBackReferences && (Q = Q.withEndRule(_.getEndWithResolvedBackReferences(Y.content, x))), !lI && U.hasSameRuleAs(Q)) return G.DebugFlags.InDebugMode && console.error("[2] - Grammar is in an endless loop - Grammar pushed the same rule without advancing"), Q = Q.pop(), F.produce(Q, S), void (u = !0);
+                G.DebugFlags.InDebugMode && console.log("  pushing " + _.debugName + " - " + _.debugBeginRegExp), s(M, K, u, Q, F, _.beginCaptures, x), F.produce(Q, x[0].end), R = x[0].end;
+                const NI = _.getContentName(K.content, x), MI = yI.pushAttributed(NI, M);
+                if (Q = Q.withContentNameScopesList(MI), _.endHasBackReferences && (Q = Q.withEndRule(_.getEndWithResolvedBackReferences(K.content, x))), !lI && U.hasSameRuleAs(Q)) return G.DebugFlags.InDebugMode && console.error("[2] - Grammar is in an endless loop - Grammar pushed the same rule without advancing"), Q = Q.pop(), F.produce(Q, p), void (S = !0);
               } else if (nI instanceof Z.BeginWhileRule) {
                 const _ = nI;
-                G.DebugFlags.InDebugMode && console.log("  pushing " + _.debugName), s(M, Y, p, Q, F, _.beginCaptures, x), F.produce(Q, x[0].end), R = x[0].end;
-                const NI = _.getContentName(Y.content, x), MI = yI.pushAttributed(NI, M);
-                if (Q = Q.withContentNameScopesList(MI), _.whileHasBackReferences && (Q = Q.withEndRule(_.getWhileWithResolvedBackReferences(Y.content, x))), !lI && U.hasSameRuleAs(Q)) return G.DebugFlags.InDebugMode && console.error("[3] - Grammar is in an endless loop - Grammar pushed the same rule without advancing"), Q = Q.pop(), F.produce(Q, S), void (u = !0);
+                G.DebugFlags.InDebugMode && console.log("  pushing " + _.debugName), s(M, K, u, Q, F, _.beginCaptures, x), F.produce(Q, x[0].end), R = x[0].end;
+                const NI = _.getContentName(K.content, x), MI = yI.pushAttributed(NI, M);
+                if (Q = Q.withContentNameScopesList(MI), _.whileHasBackReferences && (Q = Q.withEndRule(_.getWhileWithResolvedBackReferences(K.content, x))), !lI && U.hasSameRuleAs(Q)) return G.DebugFlags.InDebugMode && console.error("[3] - Grammar is in an endless loop - Grammar pushed the same rule without advancing"), Q = Q.pop(), F.produce(Q, p), void (S = !0);
               } else {
                 const _ = nI;
-                if (G.DebugFlags.InDebugMode && console.log("  matched " + _.debugName + " - " + _.debugMatchRegExp), s(M, Y, p, Q, F, _.captures, x), F.produce(Q, x[0].end), Q = Q.pop(), !lI) return G.DebugFlags.InDebugMode && console.error("[4] - Grammar is in an endless loop - Grammar is not advancing, nor is it pushing/popping"), Q = Q.safePop(), F.produce(Q, S), void (u = !0);
+                if (G.DebugFlags.InDebugMode && console.log("  matched " + _.debugName + " - " + _.debugMatchRegExp), s(M, K, u, Q, F, _.captures, x), F.produce(Q, x[0].end), Q = Q.pop(), !lI) return G.DebugFlags.InDebugMode && console.error("[4] - Grammar is in an endless loop - Grammar is not advancing, nor is it pushing/popping"), Q = Q.safePop(), F.produce(Q, p), void (S = !0);
               }
             }
-            x[0].end > N && (N = x[0].end, p = !1);
+            x[0].end > N && (N = x[0].end, u = !1);
           }
         }
-        function K(M, Y, p, N, Q) {
-          return G.UseOnigurumaFindOptions ? { ruleScanner: M.compile(Y, p), findOptions: z(N, Q) } : { ruleScanner: M.compileAG(Y, p, N, Q), findOptions: 0 };
+        function Y(M, K, u, N, Q) {
+          return G.UseOnigurumaFindOptions ? { ruleScanner: M.compile(K, u), findOptions: z(N, Q) } : { ruleScanner: M.compileAG(K, u, N, Q), findOptions: 0 };
         }
-        function a(M, Y, p, N, Q) {
-          return G.UseOnigurumaFindOptions ? { ruleScanner: M.compileWhile(Y, p), findOptions: z(N, Q) } : { ruleScanner: M.compileWhileAG(Y, p, N, Q), findOptions: 0 };
+        function a(M, K, u, N, Q) {
+          return G.UseOnigurumaFindOptions ? { ruleScanner: M.compileWhile(K, u), findOptions: z(N, Q) } : { ruleScanner: M.compileWhileAG(K, u, N, Q), findOptions: 0 };
         }
-        function z(M, Y) {
-          let p = 0;
-          return M || (p |= 1), Y || (p |= 4), p;
+        function z(M, K) {
+          let u = 0;
+          return M || (u |= 1), K || (u |= 4), u;
         }
-        function s(M, Y, p, N, Q, F, v) {
+        function s(M, K, u, N, Q, F, v) {
           if (F.length === 0) return;
-          const w = Y.content, S = Math.min(F.length, v.length), u = [], R = v[0].end;
-          for (let y = 0; y < S; y++) {
+          const w = K.content, p = Math.min(F.length, v.length), S = [], R = v[0].end;
+          for (let y = 0; y < p; y++) {
             const E = F[y];
             if (E === null) continue;
             const j = v[y];
             if (j.length === 0) continue;
             if (j.start > R) break;
-            for (; u.length > 0 && u[u.length - 1].endPos <= j.start; ) Q.produceFromScopes(u[u.length - 1].scopes, u[u.length - 1].endPos), u.pop();
-            if (u.length > 0 ? Q.produceFromScopes(u[u.length - 1].scopes, j.start) : Q.produce(N, j.start), E.retokenizeCapturedWithRuleId) {
+            for (; S.length > 0 && S[S.length - 1].endPos <= j.start; ) Q.produceFromScopes(S[S.length - 1].scopes, S[S.length - 1].endPos), S.pop();
+            if (S.length > 0 ? Q.produceFromScopes(S[S.length - 1].scopes, j.start) : Q.produce(N, j.start), E.retokenizeCapturedWithRuleId) {
               const iI = E.getName(w, v), lI = N.contentNameScopesList.pushAttributed(iI, M), nI = E.getContentName(w, v), U = lI.pushAttributed(nI, M), $ = N.push(E.retokenizeCapturedWithRuleId, j.start, -1, !1, null, lI, U), yI = M.createOnigString(w.substring(0, j.end));
-              W(M, yI, p && j.start === 0, j.start, $, Q, !1, 0), c.disposeOnigString(yI);
+              W(M, yI, u && j.start === 0, j.start, $, Q, !1, 0), c.disposeOnigString(yI);
               continue;
             }
             const x = E.getName(w, v);
             if (x !== null) {
-              const iI = (u.length > 0 ? u[u.length - 1].scopes : N.contentNameScopesList).pushAttributed(x, M);
-              u.push(new X(iI, j.end));
+              const iI = (S.length > 0 ? S[S.length - 1].scopes : N.contentNameScopesList).pushAttributed(x, M);
+              S.push(new X(iI, j.end));
             }
           }
-          for (; u.length > 0; ) Q.produceFromScopes(u[u.length - 1].scopes, u[u.length - 1].endPos), u.pop();
+          for (; S.length > 0; ) Q.produceFromScopes(S[S.length - 1].scopes, S[S.length - 1].endPos), S.pop();
         }
         B._tokenizeString = W;
         class X {
-          constructor(Y, p) {
-            this.scopes = Y, this.endPos = p;
+          constructor(K, u) {
+            this.scopes = K, this.endPos = u;
           }
         }
         B.LocalStackElement = X;
@@ -6221,31 +6221,31 @@ function Id() {
           throw new Error("Near offset " + b.pos + ": " + d + " ~~~" + b.source.substr(b.pos, 50) + "~~~");
         }
         Object.defineProperty(B, "__esModule", { value: !0 }), B.parseJSON = void 0, B.parseJSON = function(b, d, W) {
-          let K = new G(b), a = new c(), z = 0, s = null, X = [], M = [];
-          function Y() {
+          let Y = new G(b), a = new c(), z = 0, s = null, X = [], M = [];
+          function K() {
             X.push(z), M.push(s);
           }
-          function p() {
+          function u() {
             z = X.pop(), s = M.pop();
           }
           function N(Q) {
-            i(K, Q);
+            i(Y, Q);
           }
-          for (; Z(K, a); ) {
+          for (; Z(Y, a); ) {
             if (z === 0) {
               if (s !== null && N("too many constructs in root"), a.type === 3) {
-                s = {}, W && (s.$vscodeTextmateLocation = a.toLocation(d)), Y(), z = 1;
+                s = {}, W && (s.$vscodeTextmateLocation = a.toLocation(d)), K(), z = 1;
                 continue;
               }
               if (a.type === 2) {
-                s = [], Y(), z = 4;
+                s = [], K(), z = 4;
                 continue;
               }
               N("unexpected token in root");
             }
             if (z === 2) {
               if (a.type === 5) {
-                p();
+                u();
                 continue;
               }
               if (a.type === 7) {
@@ -6256,12 +6256,12 @@ function Id() {
             }
             if (z === 1 || z === 3) {
               if (z === 1 && a.type === 5) {
-                p();
+                u();
                 continue;
               }
               if (a.type === 1) {
                 let Q = a.value;
-                if (Z(K, a) && a.type === 6 || N("expected colon"), Z(K, a) || N("expected value"), z = 2, a.type === 1) {
+                if (Z(Y, a) && a.type === 6 || N("expected colon"), Z(Y, a) || N("expected value"), z = 2, a.type === 1) {
                   s[Q] = a.value;
                   continue;
                 }
@@ -6283,12 +6283,12 @@ function Id() {
                 }
                 if (a.type === 2) {
                   let F = [];
-                  s[Q] = F, Y(), z = 4, s = F;
+                  s[Q] = F, K(), z = 4, s = F;
                   continue;
                 }
                 if (a.type === 3) {
                   let F = {};
-                  W && (F.$vscodeTextmateLocation = a.toLocation(d)), s[Q] = F, Y(), z = 1, s = F;
+                  W && (F.$vscodeTextmateLocation = a.toLocation(d)), s[Q] = F, K(), z = 1, s = F;
                   continue;
                 }
               }
@@ -6296,7 +6296,7 @@ function Id() {
             }
             if (z === 5) {
               if (a.type === 4) {
-                p();
+                u();
                 continue;
               }
               if (a.type === 7) {
@@ -6307,7 +6307,7 @@ function Id() {
             }
             if (z === 4 || z === 6) {
               if (z === 4 && a.type === 4) {
-                p();
+                u();
                 continue;
               }
               if (z = 5, a.type === 1) {
@@ -6332,12 +6332,12 @@ function Id() {
               }
               if (a.type === 2) {
                 let Q = [];
-                s.push(Q), Y(), z = 4, s = Q;
+                s.push(Q), K(), z = 4, s = Q;
                 continue;
               }
               if (a.type === 3) {
                 let Q = {};
-                W && (Q.$vscodeTextmateLocation = a.toLocation(d)), s.push(Q), Y(), z = 1, s = Q;
+                W && (Q.$vscodeTextmateLocation = a.toLocation(d)), s.push(Q), K(), z = 1, s = Q;
                 continue;
               }
               N("unexpected token in array");
@@ -6361,10 +6361,10 @@ function Id() {
         }
         function Z(b, d) {
           d.value = null, d.type = 0, d.offset = -1, d.len = -1, d.line = -1, d.char = -1;
-          let W, K = b.source, a = b.pos, z = b.len, s = b.line, X = b.char;
+          let W, Y = b.source, a = b.pos, z = b.len, s = b.line, X = b.char;
           for (; ; ) {
             if (a >= z) return !1;
-            if (W = K.charCodeAt(a), W !== 32 && W !== 9 && W !== 13) {
+            if (W = Y.charCodeAt(a), W !== 32 && W !== 9 && W !== 13) {
               if (W !== 10) break;
               a++, s++, X = 0;
             } else a++, X++;
@@ -6372,12 +6372,12 @@ function Id() {
           if (d.offset = a, d.line = s, d.char = X, W === 34) {
             for (d.type = 1, a++, X++; ; ) {
               if (a >= z) return !1;
-              if (W = K.charCodeAt(a), a++, X++, W !== 92) {
+              if (W = Y.charCodeAt(a), a++, X++, W !== 92) {
                 if (W === 34) break;
               } else a++, X++;
             }
-            d.value = K.substring(d.offset + 1, a - 1).replace(/\\u([0-9A-Fa-f]{4})/g, (M, Y) => String.fromCodePoint(parseInt(Y, 16))).replace(/\\(.)/g, (M, Y) => {
-              switch (Y) {
+            d.value = Y.substring(d.offset + 1, a - 1).replace(/\\u([0-9A-Fa-f]{4})/g, (M, K) => String.fromCodePoint(parseInt(K, 16))).replace(/\\(.)/g, (M, K) => {
+              switch (K) {
                 case '"':
                   return '"';
                 case "\\":
@@ -6407,20 +6407,20 @@ function Id() {
           else if (W === 58) d.type = 6, a++, X++;
           else if (W === 44) d.type = 7, a++, X++;
           else if (W === 110) {
-            if (d.type = 8, a++, X++, W = K.charCodeAt(a), W !== 117 || (a++, X++, W = K.charCodeAt(a), W !== 108) || (a++, X++, W = K.charCodeAt(a), W !== 108)) return !1;
+            if (d.type = 8, a++, X++, W = Y.charCodeAt(a), W !== 117 || (a++, X++, W = Y.charCodeAt(a), W !== 108) || (a++, X++, W = Y.charCodeAt(a), W !== 108)) return !1;
             a++, X++;
           } else if (W === 116) {
-            if (d.type = 9, a++, X++, W = K.charCodeAt(a), W !== 114 || (a++, X++, W = K.charCodeAt(a), W !== 117) || (a++, X++, W = K.charCodeAt(a), W !== 101)) return !1;
+            if (d.type = 9, a++, X++, W = Y.charCodeAt(a), W !== 114 || (a++, X++, W = Y.charCodeAt(a), W !== 117) || (a++, X++, W = Y.charCodeAt(a), W !== 101)) return !1;
             a++, X++;
           } else if (W === 102) {
-            if (d.type = 10, a++, X++, W = K.charCodeAt(a), W !== 97 || (a++, X++, W = K.charCodeAt(a), W !== 108) || (a++, X++, W = K.charCodeAt(a), W !== 115) || (a++, X++, W = K.charCodeAt(a), W !== 101)) return !1;
+            if (d.type = 10, a++, X++, W = Y.charCodeAt(a), W !== 97 || (a++, X++, W = Y.charCodeAt(a), W !== 108) || (a++, X++, W = Y.charCodeAt(a), W !== 115) || (a++, X++, W = Y.charCodeAt(a), W !== 101)) return !1;
             a++, X++;
           } else for (d.type = 11; ; ) {
             if (a >= z) return !1;
-            if (W = K.charCodeAt(a), !(W === 46 || W >= 48 && W <= 57 || W === 101 || W === 69 || W === 45 || W === 43)) break;
+            if (W = Y.charCodeAt(a), !(W === 46 || W >= 48 && W <= 57 || W === 101 || W === 69 || W === 45 || W === 43)) break;
             a++, X++;
           }
-          return d.len = a - d.offset, d.value === null && (d.value = K.substr(d.offset, d.len)), b.pos = a, b.line = s, b.char = X, !0;
+          return d.len = a - d.offset, d.value === null && (d.value = Y.substr(d.offset, d.len)), b.pos = a, b.line = s, b.char = X, !0;
         }
       }, 625: function(l, B, i) {
         var G = this && this.__createBinding || (Object.create ? function(z, s, X, M) {
@@ -6433,7 +6433,7 @@ function Id() {
           for (var X in z) X === "default" || Object.prototype.hasOwnProperty.call(s, X) || G(s, z, X);
         };
         Object.defineProperty(B, "__esModule", { value: !0 }), B.applyStateStackDiff = B.diffStateStacksRefEq = B.parseRawGrammar = B.INITIAL = B.Registry = void 0;
-        const Z = i(752), b = i(150), d = i(583), W = i(63), K = i(784), a = i(151);
+        const Z = i(752), b = i(150), d = i(583), W = i(63), Y = i(784), a = i(151);
         Object.defineProperty(B, "applyStateStackDiff", { enumerable: !0, get: function() {
           return a.applyStateStackDiff;
         } }), Object.defineProperty(B, "diffStateStacksRefEq", { enumerable: !0, get: function() {
@@ -6460,10 +6460,10 @@ function Id() {
           loadGrammar(z) {
             return this._loadGrammar(z, 0, null, null, null);
           }
-          async _loadGrammar(z, s, X, M, Y) {
-            const p = new K.ScopeDependencyProcessor(this._syncRegistry, z);
-            for (; p.Q.length > 0; ) await Promise.all(p.Q.map((N) => this._loadSingleGrammar(N.scopeName))), p.processQueue();
-            return this._grammarForScopeName(z, s, X, M, Y);
+          async _loadGrammar(z, s, X, M, K) {
+            const u = new Y.ScopeDependencyProcessor(this._syncRegistry, z);
+            for (; u.Q.length > 0; ) await Promise.all(u.Q.map((N) => this._loadSingleGrammar(N.scopeName))), u.processQueue();
+            return this._grammarForScopeName(z, s, X, M, K);
           }
           async _loadSingleGrammar(z) {
             return this._ensureGrammarCache.has(z) || this._ensureGrammarCache.set(z, this._doLoadSingleGrammar(z)), this._ensureGrammarCache.get(z);
@@ -6478,8 +6478,8 @@ function Id() {
           async addGrammar(z, s = [], X = 0, M = null) {
             return this._syncRegistry.addGrammar(z, s), await this._grammarForScopeName(z.scopeName, X, M);
           }
-          _grammarForScopeName(z, s = 0, X = null, M = null, Y = null) {
-            return this._syncRegistry.grammarForScopeName(z, s, X, M, Y);
+          _grammarForScopeName(z, s = 0, X = null, M = null, K = null) {
+            return this._syncRegistry.grammarForScopeName(z, s, X, M, K);
           }
         }, B.INITIAL = Z.StateStackImpl.NULL, B.parseRawGrammar = b.parseRawGrammar;
       }, 916: (l, B) => {
@@ -6511,7 +6511,7 @@ function Id() {
               }
               d = b.next();
             }
-            let z = K();
+            let z = Y();
             if (Z.push({ matcher: z, priority: a }), d !== ",") break;
             d = b.next();
           }
@@ -6526,12 +6526,12 @@ function Id() {
               d = b.next();
               const a = function() {
                 const z = [];
-                let s = K();
+                let s = Y();
                 for (; s && (z.push(s), d === "|" || d === ","); ) {
                   do
                     d = b.next();
                   while (d === "|" || d === ",");
-                  s = K();
+                  s = Y();
                 }
                 return (X) => z.some((M) => M(X));
               }();
@@ -6546,7 +6546,7 @@ function Id() {
             }
             return null;
           }
-          function K() {
+          function Y() {
             const a = [];
             let z = W();
             for (; z; ) a.push(z), z = W();
@@ -6561,18 +6561,18 @@ function Id() {
         Object.defineProperty(B, "__esModule", { value: !0 }), B.parseRawGrammar = void 0;
         const G = i(578), c = i(185), Z = i(726);
         B.parseRawGrammar = function(b, d = null) {
-          return d !== null && /\.json$/.test(d) ? (W = b, K = d, c.DebugFlags.InDebugMode ? Z.parseJSON(W, K, !0) : JSON.parse(W)) : function(a, z) {
+          return d !== null && /\.json$/.test(d) ? (W = b, Y = d, c.DebugFlags.InDebugMode ? Z.parseJSON(W, Y, !0) : JSON.parse(W)) : function(a, z) {
             return c.DebugFlags.InDebugMode ? G.parseWithLocation(a, z, "$vscodeTextmateLocation") : G.parsePLIST(a);
           }(b, d);
-          var W, K;
+          var W, Y;
         };
       }, 578: (l, B) => {
         function i(G, c, Z) {
           const b = G.length;
-          let d = 0, W = 1, K = 0;
+          let d = 0, W = 1, Y = 0;
           function a(CI) {
             if (Z === null) d += CI;
-            else for (; CI > 0; ) G.charCodeAt(d) === 10 ? (d++, W++, K = 0) : (d++, K++), CI--;
+            else for (; CI > 0; ) G.charCodeAt(d) === 10 ? (d++, W++, Y = 0) : (d++, Y++), CI--;
           }
           function z(CI) {
             Z === null ? d = CI : a(CI - d);
@@ -6591,7 +6591,7 @@ function Id() {
             let P = G.indexOf(CI, d);
             z(P !== -1 ? P + CI.length : b);
           }
-          function Y(CI) {
+          function K(CI) {
             let P = G.indexOf(CI, d);
             if (P !== -1) {
               let II = G.substring(d, P);
@@ -6603,84 +6603,84 @@ function Id() {
             }
           }
           b > 0 && G.charCodeAt(0) === 65279 && (d = 1);
-          let p = 0, N = null, Q = [], F = [], v = null;
+          let u = 0, N = null, Q = [], F = [], v = null;
           function w(CI, P) {
-            Q.push(p), F.push(N), p = CI, N = P;
+            Q.push(u), F.push(N), u = CI, N = P;
           }
-          function S() {
-            if (Q.length === 0) return u("illegal state stack");
-            p = Q.pop(), N = F.pop();
+          function p() {
+            if (Q.length === 0) return S("illegal state stack");
+            u = Q.pop(), N = F.pop();
           }
-          function u(CI) {
+          function S(CI) {
             throw new Error("Near offset " + d + ": " + CI + " ~~~" + G.substr(d, 50) + "~~~");
           }
           const R = function() {
-            if (v === null) return u("missing <key>");
+            if (v === null) return S("missing <key>");
             let CI = {};
-            Z !== null && (CI[Z] = { filename: c, line: W, char: K }), N[v] = CI, v = null, w(1, CI);
+            Z !== null && (CI[Z] = { filename: c, line: W, char: Y }), N[v] = CI, v = null, w(1, CI);
           }, y = function() {
-            if (v === null) return u("missing <key>");
+            if (v === null) return S("missing <key>");
             let CI = [];
             N[v] = CI, v = null, w(2, CI);
           }, E = function() {
             let CI = {};
-            Z !== null && (CI[Z] = { filename: c, line: W, char: K }), N.push(CI), w(1, CI);
+            Z !== null && (CI[Z] = { filename: c, line: W, char: Y }), N.push(CI), w(1, CI);
           }, j = function() {
             let CI = [];
             N.push(CI), w(2, CI);
           };
           function x() {
-            if (p !== 1) return u("unexpected </dict>");
-            S();
+            if (u !== 1) return S("unexpected </dict>");
+            p();
           }
           function iI() {
-            return p === 1 || p !== 2 ? u("unexpected </array>") : void S();
+            return u === 1 || u !== 2 ? S("unexpected </array>") : void p();
           }
           function lI(CI) {
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function nI(CI) {
-            if (isNaN(CI)) return u("cannot parse float");
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (isNaN(CI)) return S("cannot parse float");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function U(CI) {
-            if (isNaN(CI)) return u("cannot parse integer");
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (isNaN(CI)) return S("cannot parse integer");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function $(CI) {
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function yI(CI) {
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function _(CI) {
-            if (p === 1) {
-              if (v === null) return u("missing <key>");
+            if (u === 1) {
+              if (v === null) return S("missing <key>");
               N[v] = CI, v = null;
-            } else p === 2 ? N.push(CI) : N = CI;
+            } else u === 2 ? N.push(CI) : N = CI;
           }
           function NI() {
-            let CI = Y(">"), P = !1;
+            let CI = K(">"), P = !1;
             return CI.charCodeAt(CI.length - 1) === 47 && (P = !0, CI = CI.substring(0, CI.length - 1)), { name: CI.trim(), isClosed: P };
           }
           function MI(CI) {
             if (CI.isClosed) return "";
-            let P = Y("</");
+            let P = K("</");
             return M(">"), P.replace(/&#([0-9]+);/g, function(II, wI) {
               return String.fromCodePoint(parseInt(wI, 10));
             }).replace(/&#x([0-9a-f]+);/g, function(II, wI) {
@@ -6703,8 +6703,8 @@ function Id() {
           }
           for (; d < b && (s(), !(d >= b)); ) {
             const CI = G.charCodeAt(d);
-            if (a(1), CI !== 60) return u("expected <");
-            if (d >= b) return u("unexpected end of input");
+            if (a(1), CI !== 60) return S("expected <");
+            if (d >= b) return S("unexpected end of input");
             const P = G.charCodeAt(d);
             if (P === 63) {
               a(1), M("?>");
@@ -6731,18 +6731,18 @@ function Id() {
                 M(">"), iI();
                 continue;
               }
-              return u("unexpected closed tag");
+              return S("unexpected closed tag");
             }
             let II = NI();
             switch (II.name) {
               case "dict":
-                p === 1 ? R() : p === 2 ? E() : (N = {}, Z !== null && (N[Z] = { filename: c, line: W, char: K }), w(1, N)), II.isClosed && x();
+                u === 1 ? R() : u === 2 ? E() : (N = {}, Z !== null && (N[Z] = { filename: c, line: W, char: Y }), w(1, N)), II.isClosed && x();
                 continue;
               case "array":
-                p === 1 ? y() : p === 2 ? j() : (N = [], w(2, N)), II.isClosed && iI();
+                u === 1 ? y() : u === 2 ? j() : (N = [], w(2, N)), II.isClosed && iI();
                 continue;
               case "key":
-                zI = MI(II), p !== 1 ? u("unexpected <key>") : v !== null ? u("too many <key>") : v = zI;
+                zI = MI(II), u !== 1 ? S("unexpected <key>") : v !== null ? S("too many <key>") : v = zI;
                 continue;
               case "string":
                 lI(MI(II));
@@ -6766,7 +6766,7 @@ function Id() {
                 MI(II), _(!1);
                 continue;
             }
-            if (!/^plist/.test(II.name)) return u("unexpected opened tag " + II.name);
+            if (!/^plist/.test(II.name)) return S("unexpected opened tag " + II.name);
           }
           var zI;
           return N;
@@ -6809,9 +6809,9 @@ function Id() {
           }
           async grammarForScopeName(c, Z, b, d, W) {
             if (!this._grammars.has(c)) {
-              let K = this._rawGrammars.get(c);
-              if (!K) return null;
-              this._grammars.set(c, G.createGrammar(c, K, Z, b, d, W, this, await this._onigLibPromise));
+              let Y = this._rawGrammars.get(c);
+              if (!Y) return null;
+              this._grammars.set(c, G.createGrammar(c, Y, Z, b, d, W, this, await this._onigLibPromise));
             }
             return this._grammars.get(c);
           }
@@ -6841,8 +6841,8 @@ function Id() {
         }
         B.Rule = d;
         class W extends d {
-          constructor(Q, F, v, w, S) {
-            super(Q, F, v, w), this.retokenizeCapturedWithRuleId = S;
+          constructor(Q, F, v, w, p) {
+            super(Q, F, v, w), this.retokenizeCapturedWithRuleId = p;
           }
           dispose() {
           }
@@ -6857,9 +6857,9 @@ function Id() {
           }
         }
         B.CaptureRule = W;
-        class K extends d {
-          constructor(Q, F, v, w, S) {
-            super(Q, F, v, null), this._match = new M(w, this.id), this.captures = S, this._cachedCompiledPatterns = null;
+        class Y extends d {
+          constructor(Q, F, v, w, p) {
+            super(Q, F, v, null), this._match = new M(w, this.id), this.captures = p, this._cachedCompiledPatterns = null;
           }
           dispose() {
             this._cachedCompiledPatterns && (this._cachedCompiledPatterns.dispose(), this._cachedCompiledPatterns = null);
@@ -6877,13 +6877,13 @@ function Id() {
             return this._getCachedCompiledPatterns(Q).compileAG(Q, v, w);
           }
           _getCachedCompiledPatterns(Q) {
-            return this._cachedCompiledPatterns || (this._cachedCompiledPatterns = new Y(), this.collectPatterns(Q, this._cachedCompiledPatterns)), this._cachedCompiledPatterns;
+            return this._cachedCompiledPatterns || (this._cachedCompiledPatterns = new K(), this.collectPatterns(Q, this._cachedCompiledPatterns)), this._cachedCompiledPatterns;
           }
         }
-        B.MatchRule = K;
+        B.MatchRule = Y;
         class a extends d {
-          constructor(Q, F, v, w, S) {
-            super(Q, F, v, w), this.patterns = S.patterns, this.hasMissingPatterns = S.hasMissingPatterns, this._cachedCompiledPatterns = null;
+          constructor(Q, F, v, w, p) {
+            super(Q, F, v, w), this.patterns = p.patterns, this.hasMissingPatterns = p.hasMissingPatterns, this._cachedCompiledPatterns = null;
           }
           dispose() {
             this._cachedCompiledPatterns && (this._cachedCompiledPatterns.dispose(), this._cachedCompiledPatterns = null);
@@ -6898,13 +6898,13 @@ function Id() {
             return this._getCachedCompiledPatterns(Q).compileAG(Q, v, w);
           }
           _getCachedCompiledPatterns(Q) {
-            return this._cachedCompiledPatterns || (this._cachedCompiledPatterns = new Y(), this.collectPatterns(Q, this._cachedCompiledPatterns)), this._cachedCompiledPatterns;
+            return this._cachedCompiledPatterns || (this._cachedCompiledPatterns = new K(), this.collectPatterns(Q, this._cachedCompiledPatterns)), this._cachedCompiledPatterns;
           }
         }
         B.IncludeOnlyRule = a;
         class z extends d {
-          constructor(Q, F, v, w, S, u, R, y, E, j) {
-            super(Q, F, v, w), this._begin = new M(S, this.id), this.beginCaptures = u, this._end = new M(R || "￿", -1), this.endHasBackReferences = this._end.hasBackReferences, this.endCaptures = y, this.applyEndPatternLast = E || !1, this.patterns = j.patterns, this.hasMissingPatterns = j.hasMissingPatterns, this._cachedCompiledPatterns = null;
+          constructor(Q, F, v, w, p, S, R, y, E, j) {
+            super(Q, F, v, w), this._begin = new M(p, this.id), this.beginCaptures = S, this._end = new M(R || "￿", -1), this.endHasBackReferences = this._end.hasBackReferences, this.endCaptures = y, this.applyEndPatternLast = E || !1, this.patterns = j.patterns, this.hasMissingPatterns = j.hasMissingPatterns, this._cachedCompiledPatterns = null;
           }
           dispose() {
             this._cachedCompiledPatterns && (this._cachedCompiledPatterns.dispose(), this._cachedCompiledPatterns = null);
@@ -6929,7 +6929,7 @@ function Id() {
           }
           _getCachedCompiledPatterns(Q, F) {
             if (!this._cachedCompiledPatterns) {
-              this._cachedCompiledPatterns = new Y();
+              this._cachedCompiledPatterns = new K();
               for (const v of this.patterns) Q.getRule(v).collectPatterns(Q, this._cachedCompiledPatterns);
               this.applyEndPatternLast ? this._cachedCompiledPatterns.push(this._end.hasBackReferences ? this._end.clone() : this._end) : this._cachedCompiledPatterns.unshift(this._end.hasBackReferences ? this._end.clone() : this._end);
             }
@@ -6938,8 +6938,8 @@ function Id() {
         }
         B.BeginEndRule = z;
         class s extends d {
-          constructor(Q, F, v, w, S, u, R, y, E) {
-            super(Q, F, v, w), this._begin = new M(S, this.id), this.beginCaptures = u, this.whileCaptures = y, this._while = new M(R, B.whileRuleId), this.whileHasBackReferences = this._while.hasBackReferences, this.patterns = E.patterns, this.hasMissingPatterns = E.hasMissingPatterns, this._cachedCompiledPatterns = null, this._cachedCompiledWhilePatterns = null;
+          constructor(Q, F, v, w, p, S, R, y, E) {
+            super(Q, F, v, w), this._begin = new M(p, this.id), this.beginCaptures = S, this.whileCaptures = y, this._while = new M(R, B.whileRuleId), this.whileHasBackReferences = this._while.hasBackReferences, this.patterns = E.patterns, this.hasMissingPatterns = E.hasMissingPatterns, this._cachedCompiledPatterns = null, this._cachedCompiledWhilePatterns = null;
           }
           dispose() {
             this._cachedCompiledPatterns && (this._cachedCompiledPatterns.dispose(), this._cachedCompiledPatterns = null), this._cachedCompiledWhilePatterns && (this._cachedCompiledWhilePatterns.dispose(), this._cachedCompiledWhilePatterns = null);
@@ -6964,7 +6964,7 @@ function Id() {
           }
           _getCachedCompiledPatterns(Q) {
             if (!this._cachedCompiledPatterns) {
-              this._cachedCompiledPatterns = new Y();
+              this._cachedCompiledPatterns = new K();
               for (const F of this.patterns) Q.getRule(F).collectPatterns(Q, this._cachedCompiledPatterns);
             }
             return this._cachedCompiledPatterns;
@@ -6976,21 +6976,21 @@ function Id() {
             return this._getCachedCompiledWhilePatterns(Q, F).compileAG(Q, v, w);
           }
           _getCachedCompiledWhilePatterns(Q, F) {
-            return this._cachedCompiledWhilePatterns || (this._cachedCompiledWhilePatterns = new Y(), this._cachedCompiledWhilePatterns.push(this._while.hasBackReferences ? this._while.clone() : this._while)), this._while.hasBackReferences && this._cachedCompiledWhilePatterns.setSource(0, F || "￿"), this._cachedCompiledWhilePatterns;
+            return this._cachedCompiledWhilePatterns || (this._cachedCompiledWhilePatterns = new K(), this._cachedCompiledWhilePatterns.push(this._while.hasBackReferences ? this._while.clone() : this._while)), this._while.hasBackReferences && this._cachedCompiledWhilePatterns.setSource(0, F || "￿"), this._cachedCompiledWhilePatterns;
           }
         }
         B.BeginWhileRule = s;
         class X {
-          static createCaptureRule(Q, F, v, w, S) {
-            return Q.registerRule((u) => new W(F, u, v, w, S));
+          static createCaptureRule(Q, F, v, w, p) {
+            return Q.registerRule((S) => new W(F, S, v, w, p));
           }
           static getCompiledRuleId(Q, F, v) {
             return Q.id || F.registerRule((w) => {
-              if (Q.id = w, Q.match) return new K(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.match, X._compileCaptures(Q.captures, F, v));
+              if (Q.id = w, Q.match) return new Y(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.match, X._compileCaptures(Q.captures, F, v));
               if (Q.begin === void 0) {
                 Q.repository && (v = G.mergeObjects({}, v, Q.repository));
-                let S = Q.patterns;
-                return S === void 0 && Q.include && (S = [{ include: Q.include }]), new a(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.contentName, X._compilePatterns(S, F, v));
+                let p = Q.patterns;
+                return p === void 0 && Q.include && (p = [{ include: Q.include }]), new a(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.contentName, X._compilePatterns(p, F, v));
               }
               return Q.while ? new s(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.contentName, Q.begin, X._compileCaptures(Q.beginCaptures || Q.captures, F, v), Q.while, X._compileCaptures(Q.whileCaptures || Q.captures, F, v), X._compilePatterns(Q.patterns, F, v)) : new z(Q.$vscodeTextmateLocation, Q.id, Q.name, Q.contentName, Q.begin, X._compileCaptures(Q.beginCaptures || Q.captures, F, v), Q.end, X._compileCaptures(Q.endCaptures || Q.captures, F, v), Q.applyEndPatternLast, X._compilePatterns(Q.patterns, F, v));
             }), Q.id;
@@ -6998,26 +6998,26 @@ function Id() {
           static _compileCaptures(Q, F, v) {
             let w = [];
             if (Q) {
-              let S = 0;
-              for (const u in Q) {
-                if (u === "$vscodeTextmateLocation") continue;
-                const R = parseInt(u, 10);
-                R > S && (S = R);
+              let p = 0;
+              for (const S in Q) {
+                if (S === "$vscodeTextmateLocation") continue;
+                const R = parseInt(S, 10);
+                R > p && (p = R);
               }
-              for (let u = 0; u <= S; u++) w[u] = null;
-              for (const u in Q) {
-                if (u === "$vscodeTextmateLocation") continue;
-                const R = parseInt(u, 10);
+              for (let S = 0; S <= p; S++) w[S] = null;
+              for (const S in Q) {
+                if (S === "$vscodeTextmateLocation") continue;
+                const R = parseInt(S, 10);
                 let y = 0;
-                Q[u].patterns && (y = X.getCompiledRuleId(Q[u], F, v)), w[R] = X.createCaptureRule(F, Q[u].$vscodeTextmateLocation, Q[u].name, Q[u].contentName, y);
+                Q[S].patterns && (y = X.getCompiledRuleId(Q[S], F, v)), w[R] = X.createCaptureRule(F, Q[S].$vscodeTextmateLocation, Q[S].name, Q[S].contentName, y);
               }
             }
             return w;
           }
           static _compilePatterns(Q, F, v) {
             let w = [];
-            if (Q) for (let S = 0, u = Q.length; S < u; S++) {
-              const R = Q[S];
+            if (Q) for (let p = 0, S = Q.length; p < S; p++) {
+              const R = Q[p];
               let y = -1;
               if (R.include) {
                 const E = c.parseInclude(R.include);
@@ -7054,12 +7054,12 @@ function Id() {
           constructor(Q, F) {
             if (Q) {
               const v = Q.length;
-              let w = 0, S = [], u = !1;
+              let w = 0, p = [], S = !1;
               for (let R = 0; R < v; R++) if (Q.charAt(R) === "\\" && R + 1 < v) {
                 const y = Q.charAt(R + 1);
-                y === "z" ? (S.push(Q.substring(w, R)), S.push("$(?!\\n)(?<!\\n)"), w = R + 2) : y !== "A" && y !== "G" || (u = !0), R++;
+                y === "z" ? (p.push(Q.substring(w, R)), p.push("$(?!\\n)(?<!\\n)"), w = R + 2) : y !== "A" && y !== "G" || (S = !0), R++;
               }
-              this.hasAnchor = u, w === 0 ? this.source = Q : (S.push(Q.substring(w, v)), this.source = S.join(""));
+              this.hasAnchor = S, w === 0 ? this.source = Q : (p.push(Q.substring(w, v)), this.source = p.join(""));
             } else this.hasAnchor = !1, this.source = Q;
             this.hasAnchor ? this._anchorCache = this._buildAnchorCache() : this._anchorCache = null, this.ruleId = F, this.hasBackReferences = Z.test(this.source);
           }
@@ -7071,19 +7071,19 @@ function Id() {
           }
           resolveBackReferences(Q, F) {
             let v = F.map((w) => Q.substring(w.start, w.end));
-            return b.lastIndex = 0, this.source.replace(b, (w, S) => G.escapeRegExpCharacters(v[parseInt(S, 10)] || ""));
+            return b.lastIndex = 0, this.source.replace(b, (w, p) => G.escapeRegExpCharacters(v[parseInt(p, 10)] || ""));
           }
           _buildAnchorCache() {
-            let Q, F, v, w, S = [], u = [], R = [], y = [];
-            for (Q = 0, F = this.source.length; Q < F; Q++) v = this.source.charAt(Q), S[Q] = v, u[Q] = v, R[Q] = v, y[Q] = v, v === "\\" && Q + 1 < F && (w = this.source.charAt(Q + 1), w === "A" ? (S[Q + 1] = "￿", u[Q + 1] = "￿", R[Q + 1] = "A", y[Q + 1] = "A") : w === "G" ? (S[Q + 1] = "￿", u[Q + 1] = "G", R[Q + 1] = "￿", y[Q + 1] = "G") : (S[Q + 1] = w, u[Q + 1] = w, R[Q + 1] = w, y[Q + 1] = w), Q++);
-            return { A0_G0: S.join(""), A0_G1: u.join(""), A1_G0: R.join(""), A1_G1: y.join("") };
+            let Q, F, v, w, p = [], S = [], R = [], y = [];
+            for (Q = 0, F = this.source.length; Q < F; Q++) v = this.source.charAt(Q), p[Q] = v, S[Q] = v, R[Q] = v, y[Q] = v, v === "\\" && Q + 1 < F && (w = this.source.charAt(Q + 1), w === "A" ? (p[Q + 1] = "￿", S[Q + 1] = "￿", R[Q + 1] = "A", y[Q + 1] = "A") : w === "G" ? (p[Q + 1] = "￿", S[Q + 1] = "G", R[Q + 1] = "￿", y[Q + 1] = "G") : (p[Q + 1] = w, S[Q + 1] = w, R[Q + 1] = w, y[Q + 1] = w), Q++);
+            return { A0_G0: p.join(""), A0_G1: S.join(""), A1_G0: R.join(""), A1_G1: y.join("") };
           }
           resolveAnchors(Q, F) {
             return this.hasAnchor && this._anchorCache ? Q ? F ? this._anchorCache.A1_G1 : this._anchorCache.A1_G0 : F ? this._anchorCache.A0_G1 : this._anchorCache.A0_G0 : this.source;
           }
         }
         B.RegExpSource = M;
-        class Y {
+        class K {
           constructor() {
             this._items = [], this._hasAnchors = !1, this._cached = null, this._anchorCache = { A0_G0: null, A0_G1: null, A1_G0: null, A1_G1: null };
           }
@@ -7108,7 +7108,7 @@ function Id() {
           compile(Q) {
             if (!this._cached) {
               let F = this._items.map((v) => v.source);
-              this._cached = new p(Q, F, this._items.map((v) => v.ruleId));
+              this._cached = new u(Q, F, this._items.map((v) => v.ruleId));
             }
             return this._cached;
           }
@@ -7116,12 +7116,12 @@ function Id() {
             return this._hasAnchors ? F ? v ? (this._anchorCache.A1_G1 || (this._anchorCache.A1_G1 = this._resolveAnchors(Q, F, v)), this._anchorCache.A1_G1) : (this._anchorCache.A1_G0 || (this._anchorCache.A1_G0 = this._resolveAnchors(Q, F, v)), this._anchorCache.A1_G0) : v ? (this._anchorCache.A0_G1 || (this._anchorCache.A0_G1 = this._resolveAnchors(Q, F, v)), this._anchorCache.A0_G1) : (this._anchorCache.A0_G0 || (this._anchorCache.A0_G0 = this._resolveAnchors(Q, F, v)), this._anchorCache.A0_G0) : this.compile(Q);
           }
           _resolveAnchors(Q, F, v) {
-            let w = this._items.map((S) => S.resolveAnchors(F, v));
-            return new p(Q, w, this._items.map((S) => S.ruleId));
+            let w = this._items.map((p) => p.resolveAnchors(F, v));
+            return new u(Q, w, this._items.map((p) => p.ruleId));
           }
         }
-        B.RegExpSourceList = Y;
-        class p {
+        B.RegExpSourceList = K;
+        class u {
           constructor(Q, F, v) {
             this.regExps = F, this.rules = v, this.scanner = Q.createOnigScanner(F);
           }
@@ -7139,18 +7139,18 @@ function Id() {
             return w ? { ruleId: this.rules[w.index], captureIndices: w.captureIndices } : null;
           }
         }
-        B.CompiledRule = p;
+        B.CompiledRule = u;
       }, 63: (l, B, i) => {
         Object.defineProperty(B, "__esModule", { value: !0 }), B.ThemeTrieElement = B.ThemeTrieElementRule = B.ColorMap = B.fontStyleToString = B.ParsedThemeRule = B.parseTheme = B.StyleAttributes = B.ScopeStack = B.Theme = void 0;
         const G = i(807);
         class c {
-          constructor(Y, p, N) {
-            this._colorMap = Y, this._defaults = p, this._root = N, this._cachedMatchRoot = new G.CachedFn((Q) => this._root.match(Q));
+          constructor(K, u, N) {
+            this._colorMap = K, this._defaults = u, this._root = N, this._cachedMatchRoot = new G.CachedFn((Q) => this._root.match(Q));
           }
-          static createFromRawTheme(Y, p) {
-            return this.createFromParsedTheme(W(Y), p);
+          static createFromRawTheme(K, u) {
+            return this.createFromParsedTheme(W(K), u);
           }
-          static createFromParsedTheme(Y, p) {
+          static createFromParsedTheme(K, u) {
             return function(N, Q) {
               N.sort((y, E) => {
                 let j = G.strcmp(y.scope, E.scope);
@@ -7161,13 +7161,13 @@ function Id() {
                 let y = N.shift();
                 y.fontStyle !== -1 && (F = y.fontStyle), y.foreground !== null && (v = y.foreground), y.background !== null && (w = y.background);
               }
-              let S = new a(Q), u = new d(F, S.getId(v), S.getId(w)), R = new X(new s(0, null, -1, 0, 0), []);
+              let p = new a(Q), S = new d(F, p.getId(v), p.getId(w)), R = new X(new s(0, null, -1, 0, 0), []);
               for (let y = 0, E = N.length; y < E; y++) {
                 let j = N[y];
-                R.insert(0, j.scope, j.parentScopes, j.fontStyle, S.getId(j.foreground), S.getId(j.background));
+                R.insert(0, j.scope, j.parentScopes, j.fontStyle, p.getId(j.foreground), p.getId(j.background));
               }
-              return new c(S, u, R);
-            }(Y, p);
+              return new c(p, S, R);
+            }(K, u);
           }
           getColorMap() {
             return this._colorMap.getColorMap();
@@ -7175,138 +7175,138 @@ function Id() {
           getDefaults() {
             return this._defaults;
           }
-          match(Y) {
-            if (Y === null) return this._defaults;
-            const p = Y.scopeName, N = this._cachedMatchRoot.get(p).find((Q) => function(F, v) {
+          match(K) {
+            if (K === null) return this._defaults;
+            const u = K.scopeName, N = this._cachedMatchRoot.get(u).find((Q) => function(F, v) {
               if (v.length === 0) return !0;
               for (let w = 0; w < v.length; w++) {
-                let S = v[w], u = !1;
-                if (S === ">") {
+                let p = v[w], S = !1;
+                if (p === ">") {
                   if (w === v.length - 1) return !1;
-                  S = v[++w], u = !0;
+                  p = v[++w], S = !0;
                 }
-                for (; F && !b(F.scopeName, S); ) {
-                  if (u) return !1;
+                for (; F && !b(F.scopeName, p); ) {
+                  if (S) return !1;
                   F = F.parent;
                 }
                 if (!F) return !1;
                 F = F.parent;
               }
               return !0;
-            }(Y.parent, Q.parentScopes));
+            }(K.parent, Q.parentScopes));
             return N ? new d(N.fontStyle, N.foreground, N.background) : null;
           }
         }
         B.Theme = c;
         class Z {
-          constructor(Y, p) {
-            this.parent = Y, this.scopeName = p;
+          constructor(K, u) {
+            this.parent = K, this.scopeName = u;
           }
-          static push(Y, p) {
-            for (const N of p) Y = new Z(Y, N);
-            return Y;
+          static push(K, u) {
+            for (const N of u) K = new Z(K, N);
+            return K;
           }
-          static from(...Y) {
-            let p = null;
-            for (let N = 0; N < Y.length; N++) p = new Z(p, Y[N]);
-            return p;
+          static from(...K) {
+            let u = null;
+            for (let N = 0; N < K.length; N++) u = new Z(u, K[N]);
+            return u;
           }
-          push(Y) {
-            return new Z(this, Y);
+          push(K) {
+            return new Z(this, K);
           }
           getSegments() {
-            let Y = this;
-            const p = [];
-            for (; Y; ) p.push(Y.scopeName), Y = Y.parent;
-            return p.reverse(), p;
+            let K = this;
+            const u = [];
+            for (; K; ) u.push(K.scopeName), K = K.parent;
+            return u.reverse(), u;
           }
           toString() {
             return this.getSegments().join(" ");
           }
-          extends(Y) {
-            return this === Y || this.parent !== null && this.parent.extends(Y);
+          extends(K) {
+            return this === K || this.parent !== null && this.parent.extends(K);
           }
-          getExtensionIfDefined(Y) {
-            const p = [];
+          getExtensionIfDefined(K) {
+            const u = [];
             let N = this;
-            for (; N && N !== Y; ) p.push(N.scopeName), N = N.parent;
-            return N === Y ? p.reverse() : void 0;
+            for (; N && N !== K; ) u.push(N.scopeName), N = N.parent;
+            return N === K ? u.reverse() : void 0;
           }
         }
-        function b(M, Y) {
-          return Y === M || M.startsWith(Y) && M[Y.length] === ".";
+        function b(M, K) {
+          return K === M || M.startsWith(K) && M[K.length] === ".";
         }
         B.ScopeStack = Z;
         class d {
-          constructor(Y, p, N) {
-            this.fontStyle = Y, this.foregroundId = p, this.backgroundId = N;
+          constructor(K, u, N) {
+            this.fontStyle = K, this.foregroundId = u, this.backgroundId = N;
           }
         }
         function W(M) {
           if (!M) return [];
           if (!M.settings || !Array.isArray(M.settings)) return [];
-          let Y = M.settings, p = [], N = 0;
-          for (let Q = 0, F = Y.length; Q < F; Q++) {
-            let v, w = Y[Q];
+          let K = M.settings, u = [], N = 0;
+          for (let Q = 0, F = K.length; Q < F; Q++) {
+            let v, w = K[Q];
             if (!w.settings) continue;
             if (typeof w.scope == "string") {
               let y = w.scope;
               y = y.replace(/^[,]+/, ""), y = y.replace(/[,]+$/, ""), v = y.split(",");
             } else v = Array.isArray(w.scope) ? w.scope : [""];
-            let S = -1;
+            let p = -1;
             if (typeof w.settings.fontStyle == "string") {
-              S = 0;
+              p = 0;
               let y = w.settings.fontStyle.split(" ");
               for (let E = 0, j = y.length; E < j; E++) switch (y[E]) {
                 case "italic":
-                  S |= 1;
+                  p |= 1;
                   break;
                 case "bold":
-                  S |= 2;
+                  p |= 2;
                   break;
                 case "underline":
-                  S |= 4;
+                  p |= 4;
                   break;
                 case "strikethrough":
-                  S |= 8;
+                  p |= 8;
               }
             }
-            let u = null;
-            typeof w.settings.foreground == "string" && G.isValidHexColor(w.settings.foreground) && (u = w.settings.foreground);
+            let S = null;
+            typeof w.settings.foreground == "string" && G.isValidHexColor(w.settings.foreground) && (S = w.settings.foreground);
             let R = null;
             typeof w.settings.background == "string" && G.isValidHexColor(w.settings.background) && (R = w.settings.background);
             for (let y = 0, E = v.length; y < E; y++) {
               let j = v[y].trim().split(" "), x = j[j.length - 1], iI = null;
-              j.length > 1 && (iI = j.slice(0, j.length - 1), iI.reverse()), p[N++] = new K(x, iI, Q, S, u, R);
+              j.length > 1 && (iI = j.slice(0, j.length - 1), iI.reverse()), u[N++] = new Y(x, iI, Q, p, S, R);
             }
           }
-          return p;
+          return u;
         }
         B.StyleAttributes = d, B.parseTheme = W;
-        class K {
-          constructor(Y, p, N, Q, F, v) {
-            this.scope = Y, this.parentScopes = p, this.index = N, this.fontStyle = Q, this.foreground = F, this.background = v;
+        class Y {
+          constructor(K, u, N, Q, F, v) {
+            this.scope = K, this.parentScopes = u, this.index = N, this.fontStyle = Q, this.foreground = F, this.background = v;
           }
         }
-        B.ParsedThemeRule = K, B.fontStyleToString = function(M) {
+        B.ParsedThemeRule = Y, B.fontStyleToString = function(M) {
           if (M === -1) return "not set";
-          let Y = "";
-          return 1 & M && (Y += "italic "), 2 & M && (Y += "bold "), 4 & M && (Y += "underline "), 8 & M && (Y += "strikethrough "), Y === "" && (Y = "none"), Y.trim();
+          let K = "";
+          return 1 & M && (K += "italic "), 2 & M && (K += "bold "), 4 & M && (K += "underline "), 8 & M && (K += "strikethrough "), K === "" && (K = "none"), K.trim();
         };
         class a {
-          constructor(Y) {
-            if (this._lastColorId = 0, this._id2color = [], this._color2id = /* @__PURE__ */ Object.create(null), Array.isArray(Y)) {
+          constructor(K) {
+            if (this._lastColorId = 0, this._id2color = [], this._color2id = /* @__PURE__ */ Object.create(null), Array.isArray(K)) {
               this._isFrozen = !0;
-              for (let p = 0, N = Y.length; p < N; p++) this._color2id[Y[p]] = p, this._id2color[p] = Y[p];
+              for (let u = 0, N = K.length; u < N; u++) this._color2id[K[u]] = u, this._id2color[u] = K[u];
             } else this._isFrozen = !1;
           }
-          getId(Y) {
-            if (Y === null) return 0;
-            Y = Y.toUpperCase();
-            let p = this._color2id[Y];
-            if (p) return p;
-            if (this._isFrozen) throw new Error(`Missing color in color map - ${Y}`);
-            return p = ++this._lastColorId, this._color2id[Y] = p, this._id2color[p] = Y, p;
+          getId(K) {
+            if (K === null) return 0;
+            K = K.toUpperCase();
+            let u = this._color2id[K];
+            if (u) return u;
+            if (this._isFrozen) throw new Error(`Missing color in color map - ${K}`);
+            return u = ++this._lastColorId, this._color2id[K] = u, this._id2color[u] = K, u;
           }
           getColorMap() {
             return this._id2color.slice(0);
@@ -7315,57 +7315,57 @@ function Id() {
         B.ColorMap = a;
         const z = Object.freeze([]);
         class s {
-          constructor(Y, p, N, Q, F) {
-            this.scopeDepth = Y, this.parentScopes = p || z, this.fontStyle = N, this.foreground = Q, this.background = F;
+          constructor(K, u, N, Q, F) {
+            this.scopeDepth = K, this.parentScopes = u || z, this.fontStyle = N, this.foreground = Q, this.background = F;
           }
           clone() {
             return new s(this.scopeDepth, this.parentScopes, this.fontStyle, this.foreground, this.background);
           }
-          static cloneArr(Y) {
-            let p = [];
-            for (let N = 0, Q = Y.length; N < Q; N++) p[N] = Y[N].clone();
-            return p;
+          static cloneArr(K) {
+            let u = [];
+            for (let N = 0, Q = K.length; N < Q; N++) u[N] = K[N].clone();
+            return u;
           }
-          acceptOverwrite(Y, p, N, Q) {
-            this.scopeDepth > Y ? console.log("how did this happen?") : this.scopeDepth = Y, p !== -1 && (this.fontStyle = p), N !== 0 && (this.foreground = N), Q !== 0 && (this.background = Q);
+          acceptOverwrite(K, u, N, Q) {
+            this.scopeDepth > K ? console.log("how did this happen?") : this.scopeDepth = K, u !== -1 && (this.fontStyle = u), N !== 0 && (this.foreground = N), Q !== 0 && (this.background = Q);
           }
         }
         B.ThemeTrieElementRule = s;
         class X {
-          constructor(Y, p = [], N = {}) {
-            this._mainRule = Y, this._children = N, this._rulesWithParentScopes = p;
+          constructor(K, u = [], N = {}) {
+            this._mainRule = K, this._children = N, this._rulesWithParentScopes = u;
           }
-          static _cmpBySpecificity(Y, p) {
-            if (Y.scopeDepth !== p.scopeDepth) return p.scopeDepth - Y.scopeDepth;
+          static _cmpBySpecificity(K, u) {
+            if (K.scopeDepth !== u.scopeDepth) return u.scopeDepth - K.scopeDepth;
             let N = 0, Q = 0;
-            for (; Y.parentScopes[N] === ">" && N++, p.parentScopes[Q] === ">" && Q++, !(N >= Y.parentScopes.length || Q >= p.parentScopes.length); ) {
-              const F = p.parentScopes[Q].length - Y.parentScopes[N].length;
+            for (; K.parentScopes[N] === ">" && N++, u.parentScopes[Q] === ">" && Q++, !(N >= K.parentScopes.length || Q >= u.parentScopes.length); ) {
+              const F = u.parentScopes[Q].length - K.parentScopes[N].length;
               if (F !== 0) return F;
               N++, Q++;
             }
-            return p.parentScopes.length - Y.parentScopes.length;
+            return u.parentScopes.length - K.parentScopes.length;
           }
-          match(Y) {
-            if (Y !== "") {
-              let N, Q, F = Y.indexOf(".");
-              if (F === -1 ? (N = Y, Q = "") : (N = Y.substring(0, F), Q = Y.substring(F + 1)), this._children.hasOwnProperty(N)) return this._children[N].match(Q);
+          match(K) {
+            if (K !== "") {
+              let N, Q, F = K.indexOf(".");
+              if (F === -1 ? (N = K, Q = "") : (N = K.substring(0, F), Q = K.substring(F + 1)), this._children.hasOwnProperty(N)) return this._children[N].match(Q);
             }
-            const p = this._rulesWithParentScopes.concat(this._mainRule);
-            return p.sort(X._cmpBySpecificity), p;
+            const u = this._rulesWithParentScopes.concat(this._mainRule);
+            return u.sort(X._cmpBySpecificity), u;
           }
-          insert(Y, p, N, Q, F, v) {
-            if (p === "") return void this._doInsertHere(Y, N, Q, F, v);
-            let w, S, u, R = p.indexOf(".");
-            R === -1 ? (w = p, S = "") : (w = p.substring(0, R), S = p.substring(R + 1)), this._children.hasOwnProperty(w) ? u = this._children[w] : (u = new X(this._mainRule.clone(), s.cloneArr(this._rulesWithParentScopes)), this._children[w] = u), u.insert(Y + 1, S, N, Q, F, v);
+          insert(K, u, N, Q, F, v) {
+            if (u === "") return void this._doInsertHere(K, N, Q, F, v);
+            let w, p, S, R = u.indexOf(".");
+            R === -1 ? (w = u, p = "") : (w = u.substring(0, R), p = u.substring(R + 1)), this._children.hasOwnProperty(w) ? S = this._children[w] : (S = new X(this._mainRule.clone(), s.cloneArr(this._rulesWithParentScopes)), this._children[w] = S), S.insert(K + 1, p, N, Q, F, v);
           }
-          _doInsertHere(Y, p, N, Q, F) {
-            if (p !== null) {
+          _doInsertHere(K, u, N, Q, F) {
+            if (u !== null) {
               for (let v = 0, w = this._rulesWithParentScopes.length; v < w; v++) {
-                let S = this._rulesWithParentScopes[v];
-                if (G.strArrCmp(S.parentScopes, p) === 0) return void S.acceptOverwrite(Y, N, Q, F);
+                let p = this._rulesWithParentScopes[v];
+                if (G.strArrCmp(p.parentScopes, u) === 0) return void p.acceptOverwrite(K, N, Q, F);
               }
-              N === -1 && (N = this._mainRule.fontStyle), Q === 0 && (Q = this._mainRule.foreground), F === 0 && (F = this._mainRule.background), this._rulesWithParentScopes.push(new s(Y, p, N, Q, F));
-            } else this._mainRule.acceptOverwrite(Y, N, Q, F);
+              N === -1 && (N = this._mainRule.fontStyle), Q === 0 && (Q = this._mainRule.foreground), F === 0 && (F = this._mainRule.background), this._rulesWithParentScopes.push(new s(K, u, N, Q, F));
+            } else this._mainRule.acceptOverwrite(K, N, Q, F);
           }
         }
         B.ThemeTrieElement = X;
@@ -7373,7 +7373,7 @@ function Id() {
         function i(Z) {
           return Array.isArray(Z) ? function(b) {
             let d = [];
-            for (let W = 0, K = b.length; W < K; W++) d[W] = i(b[W]);
+            for (let W = 0, Y = b.length; W < Y; W++) d[W] = i(b[W]);
             return d;
           }(Z) : typeof Z == "object" ? function(b) {
             let d = {};
@@ -7400,8 +7400,8 @@ function Id() {
             return Z !== null && (G.lastIndex = 0, G.test(Z));
           }
           static replaceCaptures(Z, b, d) {
-            return Z.replace(G, (W, K, a, z) => {
-              let s = d[parseInt(K || a, 10)];
+            return Z.replace(G, (W, Y, a, z) => {
+              let s = d[parseInt(Y || a, 10)];
               if (!s) return W;
               {
                 let X = b.substring(s.start, s.end);
@@ -7423,8 +7423,8 @@ function Id() {
           if (!b) return 1;
           let d = Z.length, W = b.length;
           if (d === W) {
-            for (let K = 0; K < d; K++) {
-              let a = c(Z[K], b[K]);
+            for (let Y = 0; Y < d; Y++) {
+              let a = c(Z[Y], b[Y]);
               if (a !== 0) return a;
             }
             return 0;
@@ -7854,7 +7854,7 @@ function bi(I, g = globalThis, A = ["*"]) {
     const { id: B, type: i, path: G } = Object.assign({ path: [] }, l.data), c = (l.data.argumentList || []).map(jA);
     let Z;
     try {
-      const b = G.slice(0, -1).reduce((W, K) => W[K], I), d = G.reduce((W, K) => W[K], I);
+      const b = G.slice(0, -1).reduce((W, Y) => W[Y], I), d = G.reduce((W, Y) => W[Y], I);
       switch (i) {
         case "GET":
           Z = d;
@@ -7873,8 +7873,8 @@ function bi(I, g = globalThis, A = ["*"]) {
           break;
         case "ENDPOINT":
           {
-            const { port1: W, port2: K } = new MessageChannel();
-            bi(I, K), Z = pd(W, [W]);
+            const { port1: W, port2: Y } = new MessageChannel();
+            bi(I, Y), Z = pd(W, [W]);
           }
           break;
         case "RELEASE":
@@ -8180,12 +8180,12 @@ function Ab() {
     }
   }
   kI.RequestType6 = W;
-  class K extends l {
+  class Y extends l {
     constructor(y) {
       super(y, 7);
     }
   }
-  kI.RequestType7 = K;
+  kI.RequestType7 = Y;
   class a extends l {
     constructor(y) {
       super(y, 8);
@@ -8222,18 +8222,18 @@ function Ab() {
     }
   }
   kI.NotificationType1 = M;
-  class Y extends l {
+  class K extends l {
     constructor(y) {
       super(y, 2);
     }
   }
-  kI.NotificationType2 = Y;
-  class p extends l {
+  kI.NotificationType2 = K;
+  class u extends l {
     constructor(y) {
       super(y, 3);
     }
   }
-  kI.NotificationType3 = p;
+  kI.NotificationType3 = u;
   class N extends l {
     constructor(y) {
       super(y, 4);
@@ -8264,13 +8264,13 @@ function Ab() {
     }
   }
   kI.NotificationType8 = w;
-  class S extends l {
+  class p extends l {
     constructor(y) {
       super(y, 9);
     }
   }
-  kI.NotificationType9 = S;
-  var u;
+  kI.NotificationType9 = p;
+  var S;
   return function(R) {
     function y(x) {
       const iI = x;
@@ -8287,7 +8287,7 @@ function Ab() {
       return iI && (iI.result !== void 0 || !!iI.error) && (I.string(iI.id) || I.number(iI.id) || iI.id === null);
     }
     R.isResponse = j;
-  }(u || (kI.Message = u = {})), kI;
+  }(S || (kI.Message = S = {})), kI;
 }
 var yA = {}, HZ;
 function Cb() {
@@ -8866,20 +8866,20 @@ function vd() {
   (function(c) {
     function Z(b) {
       let d, W;
-      const K = /* @__PURE__ */ new Map();
+      const Y = /* @__PURE__ */ new Map();
       let a;
       const z = /* @__PURE__ */ new Map();
       if (b === void 0 || typeof b == "string")
         d = b ?? "utf-8";
       else {
-        if (d = b.charset ?? "utf-8", b.contentDecoder !== void 0 && (W = b.contentDecoder, K.set(W.name, W)), b.contentDecoders !== void 0)
+        if (d = b.charset ?? "utf-8", b.contentDecoder !== void 0 && (W = b.contentDecoder, Y.set(W.name, W)), b.contentDecoders !== void 0)
           for (const s of b.contentDecoders)
-            K.set(s.name, s);
+            Y.set(s.name, s);
         if (b.contentTypeDecoder !== void 0 && (a = b.contentTypeDecoder, z.set(a.name, a)), b.contentTypeDecoders !== void 0)
           for (const s of b.contentTypeDecoders)
             z.set(s.name, s);
       }
-      return a === void 0 && (a = (0, I.default)().applicationJson.decoder, z.set(a.name, a)), { charset: d, contentDecoder: W, contentDecoders: K, contentTypeDecoder: a, contentTypeDecoders: z };
+      return a === void 0 && (a = (0, I.default)().applicationJson.decoder, z.set(a.name, a)), { charset: d, contentDecoder: W, contentDecoders: Y, contentTypeDecoder: a, contentTypeDecoders: z };
     }
     c.fromOptions = Z;
   })(i || (i = {}));
@@ -8913,12 +8913,12 @@ function vd() {
 ${JSON.stringify(Object.fromEntries(d))}`));
               return;
             }
-            const K = parseInt(W);
-            if (isNaN(K)) {
+            const Y = parseInt(W);
+            if (isNaN(Y)) {
               this.fireError(new Error(`Content-Length value must be a number. Got ${W}`));
               return;
             }
-            this.nextMessageLength = K;
+            this.nextMessageLength = Y;
           }
           const b = this.buffer.tryReadBody(this.nextMessageLength);
           if (b === void 0) {
@@ -8956,8 +8956,8 @@ function Rd() {
   var i;
   (function(b) {
     function d(W) {
-      let K = W;
-      return K && g.func(K.dispose) && g.func(K.onClose) && g.func(K.onError) && g.func(K.write);
+      let Y = W;
+      return Y && g.func(Y.dispose) && g.func(Y.onClose) && g.func(Y.onError) && g.func(Y.write);
     }
     b.is = d;
   })(i || (QA.MessageWriter = i = {}));
@@ -8971,8 +8971,8 @@ function Rd() {
     get onError() {
       return this.errorEmitter.event;
     }
-    fireError(d, W, K) {
-      this.errorEmitter.fire([this.asError(d), W, K]);
+    fireError(d, W, Y) {
+      this.errorEmitter.fire([this.asError(d), W, Y]);
     }
     get onClose() {
       return this.closeEmitter.event;
@@ -8994,19 +8994,19 @@ function Rd() {
   })(c || (c = {}));
   class Z extends G {
     constructor(d, W) {
-      super(), this.writable = d, this.options = c.fromOptions(W), this.errorCount = 0, this.writeSemaphore = new A.Semaphore(1), this.writable.onError((K) => this.fireError(K)), this.writable.onClose(() => this.fireClose());
+      super(), this.writable = d, this.options = c.fromOptions(W), this.errorCount = 0, this.writeSemaphore = new A.Semaphore(1), this.writable.onError((Y) => this.fireError(Y)), this.writable.onClose(() => this.fireClose());
     }
     async write(d) {
-      return this.writeSemaphore.lock(async () => this.options.contentTypeEncoder.encode(d, this.options).then((K) => this.options.contentEncoder !== void 0 ? this.options.contentEncoder.encode(K) : K).then((K) => {
+      return this.writeSemaphore.lock(async () => this.options.contentTypeEncoder.encode(d, this.options).then((Y) => this.options.contentEncoder !== void 0 ? this.options.contentEncoder.encode(Y) : Y).then((Y) => {
         const a = [];
-        return a.push(l, K.byteLength.toString(), B), a.push(B), this.doWrite(d, a, K);
-      }, (K) => {
-        throw this.fireError(K), K;
+        return a.push(l, Y.byteLength.toString(), B), a.push(B), this.doWrite(d, a, Y);
+      }, (Y) => {
+        throw this.fireError(Y), Y;
       }));
     }
-    async doWrite(d, W, K) {
+    async doWrite(d, W, Y) {
       try {
-        return await this.writable.write(W.join(""), "ascii"), this.writable.write(K);
+        return await this.writable.write(W.join(""), "ascii"), this.writable.write(Y);
       } catch (a) {
         return this.handleError(a, d), Promise.reject(a);
       }
@@ -9042,9 +9042,9 @@ function zd() {
         return;
       let i = 0, G = 0, c = 0, Z = 0;
       I: for (; G < this._chunks.length; ) {
-        const K = this._chunks[G];
-        for (c = 0; c < K.length; ) {
-          switch (K[c]) {
+        const Y = this._chunks[G];
+        for (c = 0; c < Y.length; ) {
+          switch (Y[c]) {
             case I:
               switch (i) {
                 case 0:
@@ -9074,15 +9074,15 @@ function zd() {
           }
           c++;
         }
-        Z += K.byteLength, G++;
+        Z += Y.byteLength, G++;
       }
       if (i !== 4)
         return;
       const b = this._read(Z + c), d = /* @__PURE__ */ new Map(), W = this.toString(b, "ascii").split(A);
       if (W.length < 2)
         return d;
-      for (let K = 0; K < W.length - 2; K++) {
-        const a = W[K], z = a.indexOf(":");
+      for (let Y = 0; Y < W.length - 2; Y++) {
+        const a = W[Y], z = a.indexOf(":");
         if (z === -1)
           throw new Error(`Message header must separate key and value using ':'
 ${a}`);
@@ -9171,10 +9171,10 @@ function ed() {
     (function(y) {
       y[y.Off = 0] = "Off", y[y.Messages = 1] = "Messages", y[y.Compact = 2] = "Compact", y[y.Verbose = 3] = "Verbose";
     })(W || (I.Trace = W = {}));
-    var K;
+    var Y;
     (function(y) {
       y.Off = "off", y.Messages = "messages", y.Compact = "compact", y.Verbose = "verbose";
-    })(K || (I.TraceValues = K = {})), function(y) {
+    })(Y || (I.TraceValues = Y = {})), function(y) {
       function E(x) {
         if (!A.string(x))
           return y.Off;
@@ -9235,22 +9235,22 @@ function ed() {
       }
     }
     I.ConnectionError = M;
-    var Y;
+    var K;
     (function(y) {
       function E(j) {
         const x = j;
         return x && A.func(x.cancelUndispatched);
       }
       y.is = E;
-    })(Y || (I.ConnectionStrategy = Y = {}));
-    var p;
+    })(K || (I.ConnectionStrategy = K = {}));
+    var u;
     (function(y) {
       function E(j) {
         const x = j;
         return x && (x.kind === void 0 || x.kind === "id") && A.func(x.createCancellationTokenSource) && (x.dispose === void 0 || A.func(x.dispose));
       }
       y.is = E;
-    })(p || (I.IdCancellationReceiverStrategy = p = {}));
+    })(u || (I.IdCancellationReceiverStrategy = u = {}));
     var N;
     (function(y) {
       function E(j) {
@@ -9267,7 +9267,7 @@ function ed() {
         }
       });
       function E(j) {
-        return p.is(j) || N.is(j);
+        return u.is(j) || N.is(j);
       }
       y.is = E;
     })(Q || (I.CancellationReceiverStrategy = Q = {}));
@@ -9306,18 +9306,18 @@ function ed() {
       }
       y.is = E;
     })(w || (I.MessageStrategy = w = {}));
-    var S;
+    var p;
     (function(y) {
       function E(j) {
         const x = j;
-        return x && (v.is(x.cancellationStrategy) || Y.is(x.connectionStrategy) || w.is(x.messageStrategy));
+        return x && (v.is(x.cancellationStrategy) || K.is(x.connectionStrategy) || w.is(x.messageStrategy));
       }
       y.is = E;
-    })(S || (I.ConnectionOptions = S = {}));
-    var u;
+    })(p || (I.ConnectionOptions = p = {}));
+    var S;
     (function(y) {
       y[y.New = 1] = "New", y[y.Listening = 2] = "Listening", y[y.Closed = 3] = "Closed", y[y.Disposed = 4] = "Disposed";
-    })(u || (u = {}));
+    })(S || (S = {}));
     function R(y, E, j, x) {
       const iI = j !== void 0 ? j : I.NullLogger;
       let lI = 0, nI = 0, U = 0;
@@ -9326,7 +9326,7 @@ function ed() {
       const _ = /* @__PURE__ */ new Map();
       let NI;
       const MI = /* @__PURE__ */ new Map(), zI = /* @__PURE__ */ new Map();
-      let CI, P = new l.LinkedMap(), II = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), SI = /* @__PURE__ */ new Map(), VI = W.Off, k = a.Text, D, O = u.New;
+      let CI, P = new l.LinkedMap(), II = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), SI = /* @__PURE__ */ new Map(), VI = W.Off, k = a.Text, D, O = S.New;
       const LI = new B.Emitter(), mI = new B.Emitter(), sI = new B.Emitter(), f = new B.Emitter(), dI = new B.Emitter(), XI = x && x.cancellationStrategy ? x.cancellationStrategy : v.Message;
       function cI(m) {
         if (m === null)
@@ -9345,16 +9345,16 @@ function ed() {
       function og(m) {
       }
       function h() {
-        return O === u.Listening;
+        return O === S.Listening;
       }
       function o() {
-        return O === u.Closed;
+        return O === S.Closed;
       }
       function V() {
-        return O === u.Disposed;
+        return O === S.Disposed;
       }
       function t() {
-        (O === u.New || O === u.Listening) && (O = u.Closed, mI.fire(void 0));
+        (O === S.New || O === S.Listening) && (O = S.Closed, mI.fire(void 0));
       }
       function r(m) {
         LI.fire([m, void 0, void 0]);
@@ -9438,7 +9438,7 @@ function ed() {
         UI && (eI = UI.type, DI = UI.handler);
         const TI = Date.now();
         if (DI || yI) {
-          const RI = m.id ?? String(Date.now()), qI = p.is(XI.receiver) ? XI.receiver.createCancellationTokenSource(RI) : XI.receiver.createCancellationTokenSource(m);
+          const RI = m.id ?? String(Date.now()), qI = u.is(XI.receiver) ? XI.receiver.createCancellationTokenSource(RI) : XI.receiver.createCancellationTokenSource(m);
           m.id !== null && wI.has(m.id) && qI.cancel(), m.id !== null && SI.set(RI, qI);
           try {
             let tI;
@@ -9835,14 +9835,14 @@ ${JSON.stringify(m, null, 4)}`);
         dispose: () => {
           if (V())
             return;
-          O = u.Disposed, dI.fire(void 0);
+          O = S.Disposed, dI.fire(void 0);
           const m = new C.ResponseError(C.ErrorCodes.PendingResponseRejected, "Pending response rejected since connection got disposed");
           for (const T of II.values())
             T.reject(m);
           II = /* @__PURE__ */ new Map(), SI = /* @__PURE__ */ new Map(), wI = /* @__PURE__ */ new Set(), P = new l.LinkedMap(), A.func(E.dispose) && E.dispose(), A.func(y.dispose) && y.dispose();
         },
         listen: () => {
-          oI(), KI(), O = u.Listening, y.listen(PI);
+          oI(), KI(), O = S.Listening, y.listen(PI);
         },
         inspect: () => {
           (0, g.default)().console.log("inspect");
@@ -10974,8 +10974,8 @@ function d0() {
     function B(c, Z, b, d, W) {
       if (typeof b != "function")
         throw new TypeError("The listener must be a function");
-      var K = new l(b, d || c, W), a = A ? A + Z : Z;
-      return c._events[a] ? c._events[a].fn ? c._events[a] = [c._events[a], K] : c._events[a].push(K) : (c._events[a] = K, c._eventsCount++), c;
+      var Y = new l(b, d || c, W), a = A ? A + Z : Z;
+      return c._events[a] ? c._events[a].fn ? c._events[a] = [c._events[a], Y] : c._events[a].push(Y) : (c._events[a] = Y, c._eventsCount++), c;
     }
     function i(c, Z) {
       --c._eventsCount === 0 ? c._events = new C() : delete c._events[Z];
@@ -10993,16 +10993,16 @@ function d0() {
       var b = A ? A + Z : Z, d = this._events[b];
       if (!d) return [];
       if (d.fn) return [d.fn];
-      for (var W = 0, K = d.length, a = new Array(K); W < K; W++)
+      for (var W = 0, Y = d.length, a = new Array(Y); W < Y; W++)
         a[W] = d[W].fn;
       return a;
     }, G.prototype.listenerCount = function(Z) {
       var b = A ? A + Z : Z, d = this._events[b];
       return d ? d.fn ? 1 : d.length : 0;
-    }, G.prototype.emit = function(Z, b, d, W, K, a) {
+    }, G.prototype.emit = function(Z, b, d, W, Y, a) {
       var z = A ? A + Z : Z;
       if (!this._events[z]) return !1;
-      var s = this._events[z], X = arguments.length, M, Y;
+      var s = this._events[z], X = arguments.length, M, K;
       if (s.fn) {
         switch (s.once && this.removeListener(Z, s.fn, void 0, !0), X) {
           case 1:
@@ -11014,33 +11014,33 @@ function d0() {
           case 4:
             return s.fn.call(s.context, b, d, W), !0;
           case 5:
-            return s.fn.call(s.context, b, d, W, K), !0;
+            return s.fn.call(s.context, b, d, W, Y), !0;
           case 6:
-            return s.fn.call(s.context, b, d, W, K, a), !0;
+            return s.fn.call(s.context, b, d, W, Y, a), !0;
         }
-        for (Y = 1, M = new Array(X - 1); Y < X; Y++)
-          M[Y - 1] = arguments[Y];
+        for (K = 1, M = new Array(X - 1); K < X; K++)
+          M[K - 1] = arguments[K];
         s.fn.apply(s.context, M);
       } else {
-        var p = s.length, N;
-        for (Y = 0; Y < p; Y++)
-          switch (s[Y].once && this.removeListener(Z, s[Y].fn, void 0, !0), X) {
+        var u = s.length, N;
+        for (K = 0; K < u; K++)
+          switch (s[K].once && this.removeListener(Z, s[K].fn, void 0, !0), X) {
             case 1:
-              s[Y].fn.call(s[Y].context);
+              s[K].fn.call(s[K].context);
               break;
             case 2:
-              s[Y].fn.call(s[Y].context, b);
+              s[K].fn.call(s[K].context, b);
               break;
             case 3:
-              s[Y].fn.call(s[Y].context, b, d);
+              s[K].fn.call(s[K].context, b, d);
               break;
             case 4:
-              s[Y].fn.call(s[Y].context, b, d, W);
+              s[K].fn.call(s[K].context, b, d, W);
               break;
             default:
               if (!M) for (N = 1, M = new Array(X - 1); N < X; N++)
                 M[N - 1] = arguments[N];
-              s[Y].fn.apply(s[Y].context, M);
+              s[K].fn.apply(s[K].context, M);
           }
       }
       return !0;
@@ -11049,17 +11049,17 @@ function d0() {
     }, G.prototype.once = function(Z, b, d) {
       return B(this, Z, b, d, !0);
     }, G.prototype.removeListener = function(Z, b, d, W) {
-      var K = A ? A + Z : Z;
-      if (!this._events[K]) return this;
+      var Y = A ? A + Z : Z;
+      if (!this._events[Y]) return this;
       if (!b)
-        return i(this, K), this;
-      var a = this._events[K];
+        return i(this, Y), this;
+      var a = this._events[Y];
       if (a.fn)
-        a.fn === b && (!W || a.once) && (!d || a.context === d) && i(this, K);
+        a.fn === b && (!W || a.once) && (!d || a.context === d) && i(this, Y);
       else {
         for (var z = 0, s = [], X = a.length; z < X; z++)
           (a[z].fn !== b || W && !a[z].once || d && a[z].context !== d) && s.push(a[z]);
-        s.length ? this._events[K] = s.length === 1 ? s[0] : s : i(this, K);
+        s.length ? this._events[Y] = s.length === 1 ? s[0] : s : i(this, Y);
       }
       return this;
     }, G.prototype.removeAllListeners = function(Z) {
@@ -11180,16 +11180,16 @@ function XA(I) {
         C.set(d ? XA(d) : new Uint8Array(pA(i)), b);
         continue;
       }
-      const K = "set" + Wi(i);
-      if (K == "setInt64") {
+      const Y = "set" + Wi(i);
+      if (Y == "setInt64") {
         l.setBigInt64(b, BigInt(d), !g.bigEndian);
         continue;
       }
-      if (K == "setUint64") {
+      if (Y == "setUint64") {
         l.setBigUint64(b, BigInt(d), !g.bigEndian);
         continue;
       }
-      l[K](b, Number(d), !g.bigEndian);
+      l[Y](b, Number(d), !g.bigEndian);
     }
   return C;
 }
@@ -11199,28 +11199,28 @@ function sb(I, g) {
   for (const [i, { type: G, offset: c, length: Z }] of C)
     for (let b = 0; b < (Z || 1); b++) {
       let d = Z > 0 ? I[i] : I;
-      const W = Z > 0 ? b : i, K = c + pA(G) * b;
+      const W = Z > 0 ? b : i, Y = c + pA(G) * b;
       if (typeof I[i] == "string") {
-        I[i] = I[i].slice(0, b) + String.fromCharCode(B.getUint8(K)) + I[i].slice(b + 1);
+        I[i] = I[i].slice(0, b) + String.fromCharCode(B.getUint8(Y)) + I[i].slice(b + 1);
         continue;
       }
       if (!mb(G)) {
         if (d[W] === null || d[W] === void 0)
           continue;
-        sb(d[W], new Uint8Array(l.slice(K, K + pA(G))));
+        sb(d[W], new Uint8Array(l.slice(Y, Y + pA(G))));
         continue;
       }
       Z > 0 && (d || (d = []));
       const z = "get" + Wi(G);
       if (z == "getInt64") {
-        d[W] = B.getBigInt64(K, !A.bigEndian);
+        d[W] = B.getBigInt64(Y, !A.bigEndian);
         continue;
       }
       if (z == "getUint64") {
-        d[W] = B.getBigUint64(K, !A.bigEndian);
+        d[W] = B.getBigUint64(Y, !A.bigEndian);
         continue;
       }
-      d[W] = B[z](K, !A.bigEndian);
+      d[W] = B[z](Y, !A.bigEndian);
     }
 }
 function s0(I) {
@@ -11294,7 +11294,7 @@ var Ug = function(I, g, A, C, l, B) {
     if (X !== void 0 && typeof X != "function") throw new TypeError("Function expected");
     return X;
   }
-  for (var G = C.kind, c = G === "getter" ? "get" : G === "setter" ? "set" : "value", Z = !g && I ? C.static ? I : I.prototype : null, b = g || (Z ? Object.getOwnPropertyDescriptor(Z, C.name) : {}), d, W = !1, K = A.length - 1; K >= 0; K--) {
+  for (var G = C.kind, c = G === "getter" ? "get" : G === "setter" ? "set" : "value", Z = !g && I ? C.static ? I : I.prototype : null, b = g || (Z ? Object.getOwnPropertyDescriptor(Z, C.name) : {}), d, W = !1, Y = A.length - 1; Y >= 0; Y--) {
     var a = {};
     for (var z in C) a[z] = z === "access" ? {} : C[z];
     for (var z in C.access) a.access[z] = C.access[z];
@@ -11302,7 +11302,7 @@ var Ug = function(I, g, A, C, l, B) {
       if (W) throw new TypeError("Cannot add initializers after decoration has completed");
       B.push(i(X || null));
     };
-    var s = (0, A[K])(G === "accessor" ? { get: b.get, set: b.set } : b[c], a);
+    var s = (0, A[Y])(G === "accessor" ? { get: b.get, set: b.set } : b[c], a);
     if (G === "accessor") {
       if (s === void 0) continue;
       if (s === null || typeof s != "object") throw new TypeError("Object expected");
@@ -11320,10 +11320,10 @@ var Ug = function(I, g, A, C, l, B) {
 const IA = BigInt(0);
 let hg = (() => {
   var I, g, A, C, l, B, i, G, c, Z, b;
-  let d = [L0()], W, K = [], a, z, s = [], X = [], M, Y = [], p = [], N, Q = [], F = [], v, w = [], S = [], u, R = [], y = [], E, j = [], x = [], iI, lI = [], nI = [], U, $ = [], yI = [], _, NI = [], MI = [], zI, CI = [], P = [], II, wI = [], SI = [];
+  let d = [L0()], W, Y = [], a, z, s = [], X = [], M, K = [], u = [], N, Q = [], F = [], v, w = [], p = [], S, R = [], y = [], E, j = [], x = [], iI, lI = [], nI = [], U, $ = [], yI = [], _, NI = [], MI = [], zI, CI = [], P = [], II, wI = [], SI = [];
   var VI = a = class {
     constructor(k) {
-      if (this.data = Qg(this, s, void 0), this.size = (Qg(this, X), Qg(this, Y, void 0)), this.mode = (Qg(this, p), Qg(this, Q, void 0)), this.nlink = (Qg(this, F), Qg(this, w, void 0)), this.uid = (Qg(this, S), Qg(this, R, void 0)), this.gid = (Qg(this, y), Qg(this, j, void 0)), this.atimeMs = (Qg(this, x), Qg(this, lI, void 0)), this.birthtimeMs = (Qg(this, nI), Qg(this, $, void 0)), this.mtimeMs = (Qg(this, yI), Qg(this, NI, void 0)), this.ctimeMs = (Qg(this, MI), Qg(this, CI, void 0)), this.ino = (Qg(this, P), Qg(this, wI, void 0)), Qg(this, SI), k) {
+      if (this.data = Qg(this, s, void 0), this.size = (Qg(this, X), Qg(this, K, void 0)), this.mode = (Qg(this, u), Qg(this, Q, void 0)), this.nlink = (Qg(this, F), Qg(this, w, void 0)), this.uid = (Qg(this, p), Qg(this, R, void 0)), this.gid = (Qg(this, y), Qg(this, j, void 0)), this.atimeMs = (Qg(this, x), Qg(this, lI, void 0)), this.birthtimeMs = (Qg(this, nI), Qg(this, $, void 0)), this.mtimeMs = (Qg(this, yI), Qg(this, NI, void 0)), this.ctimeMs = (Qg(this, MI), Qg(this, CI, void 0)), this.ino = (Qg(this, P), Qg(this, wI, void 0)), Qg(this, SI), k) {
         const O = pA(VI), LI = O - pA("uint64");
         if (k.byteLength < LI)
           throw new RangeError(`Can not create an inode from a buffer less than ${LI} bytes`);
@@ -11361,15 +11361,15 @@ let hg = (() => {
   };
   return w0(a, "Inode"), (() => {
     const k = typeof Symbol == "function" && Symbol.metadata ? /* @__PURE__ */ Object.create(null) : void 0;
-    z = [(I = Og).uint64.bind(I)], M = [(g = Og).uint32.bind(g)], N = [(A = Og).uint16.bind(A)], v = [(C = Og).uint32.bind(C)], u = [(l = Og).uint32.bind(l)], E = [(B = Og).uint32.bind(B)], iI = [(i = Og).float64.bind(i)], U = [(G = Og).float64.bind(G)], _ = [(c = Og).float64.bind(c)], zI = [(Z = Og).float64.bind(Z)], II = [(b = Og).uint64.bind(b)], Ug(null, null, z, { kind: "field", name: "data", static: !1, private: !1, access: { has: (D) => "data" in D, get: (D) => D.data, set: (D, O) => {
+    z = [(I = Og).uint64.bind(I)], M = [(g = Og).uint32.bind(g)], N = [(A = Og).uint16.bind(A)], v = [(C = Og).uint32.bind(C)], S = [(l = Og).uint32.bind(l)], E = [(B = Og).uint32.bind(B)], iI = [(i = Og).float64.bind(i)], U = [(G = Og).float64.bind(G)], _ = [(c = Og).float64.bind(c)], zI = [(Z = Og).float64.bind(Z)], II = [(b = Og).uint64.bind(b)], Ug(null, null, z, { kind: "field", name: "data", static: !1, private: !1, access: { has: (D) => "data" in D, get: (D) => D.data, set: (D, O) => {
       D.data = O;
     } }, metadata: k }, s, X), Ug(null, null, M, { kind: "field", name: "size", static: !1, private: !1, access: { has: (D) => "size" in D, get: (D) => D.size, set: (D, O) => {
       D.size = O;
-    } }, metadata: k }, Y, p), Ug(null, null, N, { kind: "field", name: "mode", static: !1, private: !1, access: { has: (D) => "mode" in D, get: (D) => D.mode, set: (D, O) => {
+    } }, metadata: k }, K, u), Ug(null, null, N, { kind: "field", name: "mode", static: !1, private: !1, access: { has: (D) => "mode" in D, get: (D) => D.mode, set: (D, O) => {
       D.mode = O;
     } }, metadata: k }, Q, F), Ug(null, null, v, { kind: "field", name: "nlink", static: !1, private: !1, access: { has: (D) => "nlink" in D, get: (D) => D.nlink, set: (D, O) => {
       D.nlink = O;
-    } }, metadata: k }, w, S), Ug(null, null, u, { kind: "field", name: "uid", static: !1, private: !1, access: { has: (D) => "uid" in D, get: (D) => D.uid, set: (D, O) => {
+    } }, metadata: k }, w, p), Ug(null, null, S, { kind: "field", name: "uid", static: !1, private: !1, access: { has: (D) => "uid" in D, get: (D) => D.uid, set: (D, O) => {
       D.uid = O;
     } }, metadata: k }, R, y), Ug(null, null, E, { kind: "field", name: "gid", static: !1, private: !1, access: { has: (D) => "gid" in D, get: (D) => D.gid, set: (D, O) => {
       D.gid = O;
@@ -11383,7 +11383,7 @@ let hg = (() => {
       D.ctimeMs = O;
     } }, metadata: k }, CI, P), Ug(null, null, II, { kind: "field", name: "ino", static: !1, private: !1, access: { has: (D) => "ino" in D, get: (D) => D.ino, set: (D, O) => {
       D.ino = O;
-    } }, metadata: k }, wI, SI), Ug(null, W = { value: a }, d, { kind: "class", name: a.name, metadata: k }, null, K), VI = a = W.value, k && Object.defineProperty(a, Symbol.metadata, { enumerable: !0, configurable: !0, writable: !0, value: k }), Qg(a, K);
+    } }, metadata: k }, wI, SI), Ug(null, W = { value: a }, d, { kind: "class", name: a.name, metadata: k }, null, Y), VI = a = W.value, k && Object.defineProperty(a, Symbol.metadata, { enumerable: !0, configurable: !0, writable: !0, value: k }), Qg(a, Y);
   })(), VI = a;
 })();
 var sg = function(I, g, A) {
@@ -11478,10 +11478,10 @@ class p0 extends o0 {
         throw new ZI(bI.EBUSY, B.dir);
       const b = i.dir == B.dir, d = b ? G : await this.findInode(l, i.dir, "rename"), W = b ? c : Jg(await this.get(l, d.data, i.dir, "rename"));
       if (W[i.base]) {
-        const K = new hg(await this.get(l, W[i.base], A, "rename"));
-        if (!K.toStats().isFile())
+        const Y = new hg(await this.get(l, W[i.base], A, "rename"));
+        if (!Y.toStats().isFile())
           throw ZI.With("EPERM", A, "rename");
-        await l.remove(K.data), await l.remove(W[i.base]);
+        await l.remove(Y.data), await l.remove(W[i.base]);
       }
       W[i.base] = Z, await l.set(G.data, $g(c)), await l.set(d.data, $g(W)), await l.commit();
     } catch (l) {
@@ -11502,10 +11502,10 @@ class p0 extends o0 {
         throw new ZI(bI.EBUSY, B.dir);
       const b = i.dir === B.dir, d = b ? G : this.findInodeSync(l, i.dir, "rename"), W = b ? c : Jg(this.getSync(l, d.data, i.dir, "rename"));
       if (W[i.base]) {
-        const K = new hg(this.getSync(l, W[i.base], A, "rename"));
-        if (!K.toStats().isFile())
+        const Y = new hg(this.getSync(l, W[i.base], A, "rename"));
+        if (!Y.toStats().isFile())
           throw ZI.With("EPERM", A, "rename");
-        l.removeSync(K.data), l.removeSync(W[i.base]);
+        l.removeSync(Y.data), l.removeSync(W[i.base]);
       }
       W[i.base] = Z, l.setSync(G.data, $g(c)), l.setSync(d.data, $g(W)), l.commitSync();
     } catch (l) {
@@ -12057,42 +12057,42 @@ function z0() {
   for (var I = [], g = [], A = typeof Uint8Array < "u" ? Uint8Array : Array, C = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", l = 0, B = C.length; l < B; ++l)
     I[l] = C[l], g[C.charCodeAt(l)] = l;
   g[45] = 62, g[95] = 63;
-  function i(K) {
-    var a = K.length;
+  function i(Y) {
+    var a = Y.length;
     if (a % 4 > 0)
       throw new Error("Invalid string. Length must be a multiple of 4");
-    var z = K.indexOf("=");
+    var z = Y.indexOf("=");
     z === -1 && (z = a);
     var s = z === a ? 0 : 4 - z % 4;
     return [z, s];
   }
-  function G(K) {
-    var a = i(K), z = a[0], s = a[1];
+  function G(Y) {
+    var a = i(Y), z = a[0], s = a[1];
     return (z + s) * 3 / 4 - s;
   }
-  function c(K, a, z) {
+  function c(Y, a, z) {
     return (a + z) * 3 / 4 - z;
   }
-  function Z(K) {
-    var a, z = i(K), s = z[0], X = z[1], M = new A(c(K, s, X)), Y = 0, p = X > 0 ? s - 4 : s, N;
-    for (N = 0; N < p; N += 4)
-      a = g[K.charCodeAt(N)] << 18 | g[K.charCodeAt(N + 1)] << 12 | g[K.charCodeAt(N + 2)] << 6 | g[K.charCodeAt(N + 3)], M[Y++] = a >> 16 & 255, M[Y++] = a >> 8 & 255, M[Y++] = a & 255;
-    return X === 2 && (a = g[K.charCodeAt(N)] << 2 | g[K.charCodeAt(N + 1)] >> 4, M[Y++] = a & 255), X === 1 && (a = g[K.charCodeAt(N)] << 10 | g[K.charCodeAt(N + 1)] << 4 | g[K.charCodeAt(N + 2)] >> 2, M[Y++] = a >> 8 & 255, M[Y++] = a & 255), M;
+  function Z(Y) {
+    var a, z = i(Y), s = z[0], X = z[1], M = new A(c(Y, s, X)), K = 0, u = X > 0 ? s - 4 : s, N;
+    for (N = 0; N < u; N += 4)
+      a = g[Y.charCodeAt(N)] << 18 | g[Y.charCodeAt(N + 1)] << 12 | g[Y.charCodeAt(N + 2)] << 6 | g[Y.charCodeAt(N + 3)], M[K++] = a >> 16 & 255, M[K++] = a >> 8 & 255, M[K++] = a & 255;
+    return X === 2 && (a = g[Y.charCodeAt(N)] << 2 | g[Y.charCodeAt(N + 1)] >> 4, M[K++] = a & 255), X === 1 && (a = g[Y.charCodeAt(N)] << 10 | g[Y.charCodeAt(N + 1)] << 4 | g[Y.charCodeAt(N + 2)] >> 2, M[K++] = a >> 8 & 255, M[K++] = a & 255), M;
   }
-  function b(K) {
-    return I[K >> 18 & 63] + I[K >> 12 & 63] + I[K >> 6 & 63] + I[K & 63];
+  function b(Y) {
+    return I[Y >> 18 & 63] + I[Y >> 12 & 63] + I[Y >> 6 & 63] + I[Y & 63];
   }
-  function d(K, a, z) {
+  function d(Y, a, z) {
     for (var s, X = [], M = a; M < z; M += 3)
-      s = (K[M] << 16 & 16711680) + (K[M + 1] << 8 & 65280) + (K[M + 2] & 255), X.push(b(s));
+      s = (Y[M] << 16 & 16711680) + (Y[M + 1] << 8 & 65280) + (Y[M + 2] & 255), X.push(b(s));
     return X.join("");
   }
-  function W(K) {
-    for (var a, z = K.length, s = z % 3, X = [], M = 16383, Y = 0, p = z - s; Y < p; Y += M)
-      X.push(d(K, Y, Y + M > p ? p : Y + M));
-    return s === 1 ? (a = K[z - 1], X.push(
+  function W(Y) {
+    for (var a, z = Y.length, s = z % 3, X = [], M = 16383, K = 0, u = z - s; K < u; K += M)
+      X.push(d(Y, K, K + M > u ? u : K + M));
+    return s === 1 ? (a = Y[z - 1], X.push(
       I[a >> 2] + I[a << 4 & 63] + "=="
-    )) : s === 2 && (a = (K[z - 2] << 8) + K[z - 1], X.push(
+    )) : s === 2 && (a = (Y[z - 2] << 8) + Y[z - 1], X.push(
       I[a >> 10] + I[a >> 4 & 63] + I[a << 2 & 63] + "="
     )), X.join("");
   }
@@ -12103,8 +12103,8 @@ var aB = {};
 var cc;
 function e0() {
   return cc || (cc = 1, aB.read = function(I, g, A, C, l) {
-    var B, i, G = l * 8 - C - 1, c = (1 << G) - 1, Z = c >> 1, b = -7, d = A ? l - 1 : 0, W = A ? -1 : 1, K = I[g + d];
-    for (d += W, B = K & (1 << -b) - 1, K >>= -b, b += G; b > 0; B = B * 256 + I[g + d], d += W, b -= 8)
+    var B, i, G = l * 8 - C - 1, c = (1 << G) - 1, Z = c >> 1, b = -7, d = A ? l - 1 : 0, W = A ? -1 : 1, Y = I[g + d];
+    for (d += W, B = Y & (1 << -b) - 1, Y >>= -b, b += G; b > 0; B = B * 256 + I[g + d], d += W, b -= 8)
       ;
     for (i = B & (1 << -b) - 1, B >>= -b, b += C; b > 0; i = i * 256 + I[g + d], d += W, b -= 8)
       ;
@@ -12112,17 +12112,17 @@ function e0() {
       B = 1 - Z;
     else {
       if (B === c)
-        return i ? NaN : (K ? -1 : 1) * (1 / 0);
+        return i ? NaN : (Y ? -1 : 1) * (1 / 0);
       i = i + Math.pow(2, C), B = B - Z;
     }
-    return (K ? -1 : 1) * i * Math.pow(2, B - C);
+    return (Y ? -1 : 1) * i * Math.pow(2, B - C);
   }, aB.write = function(I, g, A, C, l, B) {
-    var i, G, c, Z = B * 8 - l - 1, b = (1 << Z) - 1, d = b >> 1, W = l === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, K = C ? 0 : B - 1, a = C ? 1 : -1, z = g < 0 || g === 0 && 1 / g < 0 ? 1 : 0;
-    for (g = Math.abs(g), isNaN(g) || g === 1 / 0 ? (G = isNaN(g) ? 1 : 0, i = b) : (i = Math.floor(Math.log(g) / Math.LN2), g * (c = Math.pow(2, -i)) < 1 && (i--, c *= 2), i + d >= 1 ? g += W / c : g += W * Math.pow(2, 1 - d), g * c >= 2 && (i++, c /= 2), i + d >= b ? (G = 0, i = b) : i + d >= 1 ? (G = (g * c - 1) * Math.pow(2, l), i = i + d) : (G = g * Math.pow(2, d - 1) * Math.pow(2, l), i = 0)); l >= 8; I[A + K] = G & 255, K += a, G /= 256, l -= 8)
+    var i, G, c, Z = B * 8 - l - 1, b = (1 << Z) - 1, d = b >> 1, W = l === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, Y = C ? 0 : B - 1, a = C ? 1 : -1, z = g < 0 || g === 0 && 1 / g < 0 ? 1 : 0;
+    for (g = Math.abs(g), isNaN(g) || g === 1 / 0 ? (G = isNaN(g) ? 1 : 0, i = b) : (i = Math.floor(Math.log(g) / Math.LN2), g * (c = Math.pow(2, -i)) < 1 && (i--, c *= 2), i + d >= 1 ? g += W / c : g += W * Math.pow(2, 1 - d), g * c >= 2 && (i++, c /= 2), i + d >= b ? (G = 0, i = b) : i + d >= 1 ? (G = (g * c - 1) * Math.pow(2, l), i = i + d) : (G = g * Math.pow(2, d - 1) * Math.pow(2, l), i = 0)); l >= 8; I[A + Y] = G & 255, Y += a, G /= 256, l -= 8)
       ;
-    for (i = i << l | G, Z += l; Z > 0; I[A + K] = i & 255, K += a, i /= 256, Z -= 8)
+    for (i = i << l | G, Z += l; Z > 0; I[A + Y] = i & 255, Y += a, i /= 256, Z -= 8)
       ;
-    I[A + K - a] |= z * 128;
+    I[A + Y - a] |= z * 128;
   }), aB;
 }
 /*!
@@ -12232,12 +12232,12 @@ function MA() {
     function W(h, o) {
       if ((typeof o != "string" || o === "") && (o = "utf8"), !G.isEncoding(o))
         throw new TypeError("Unknown encoding: " + o);
-      const V = Y(h, o) | 0;
+      const V = K(h, o) | 0;
       let t = i(V);
       const r = t.write(h, o);
       return r !== V && (t = t.slice(0, r)), t;
     }
-    function K(h) {
+    function Y(h) {
       const o = h.length < 0 ? 0 : X(h.length) | 0, V = i(o);
       for (let t = 0; t < o; t += 1)
         V[t] = h[t] & 255;
@@ -12248,7 +12248,7 @@ function MA() {
         const o = new Uint8Array(h);
         return z(o.buffer, o.byteOffset, o.byteLength);
       }
-      return K(h);
+      return Y(h);
     }
     function z(h, o, V) {
       if (o < 0 || h.byteLength < o)
@@ -12264,9 +12264,9 @@ function MA() {
         return V.length === 0 || h.copy(V, 0, 0, o), V;
       }
       if (h.length !== void 0)
-        return typeof h.length != "number" || OI(h.length) ? i(0) : K(h);
+        return typeof h.length != "number" || OI(h.length) ? i(0) : Y(h);
       if (h.type === "Buffer" && Array.isArray(h.data))
-        return K(h.data);
+        return Y(h.data);
     }
     function X(h) {
       if (h >= l)
@@ -12335,7 +12335,7 @@ function MA() {
       }
       return r;
     };
-    function Y(h, o) {
+    function K(h, o) {
       if (G.isBuffer(h))
         return h.length;
       if (ArrayBuffer.isView(h) || cI(h, ArrayBuffer))
@@ -12371,8 +12371,8 @@ function MA() {
             o = ("" + o).toLowerCase(), r = !0;
         }
     }
-    G.byteLength = Y;
-    function p(h, o, V) {
+    G.byteLength = K;
+    function u(h, o, V) {
       let t = !1;
       if ((o === void 0 || o < 0) && (o = 0), o > this.length || ((V === void 0 || V > this.length) && (V = this.length), V <= 0) || (V >>>= 0, o >>>= 0, V <= o))
         return "";
@@ -12428,7 +12428,7 @@ function MA() {
       return this;
     }, G.prototype.toString = function() {
       const o = this.length;
-      return o === 0 ? "" : arguments.length === 0 ? E(this, 0, o) : p.apply(this, arguments);
+      return o === 0 ? "" : arguments.length === 0 ? E(this, 0, o) : u.apply(this, arguments);
     }, G.prototype.toLocaleString = G.prototype.toString, G.prototype.equals = function(o) {
       if (!G.isBuffer(o)) throw new TypeError("Argument must be a Buffer");
       return this === o ? !0 : G.compare(this, o) === 0;
@@ -12527,10 +12527,10 @@ function MA() {
     function w(h, o, V, t) {
       return XI(mI(o, h.length - V), h, V, t);
     }
-    function S(h, o, V, t) {
+    function p(h, o, V, t) {
       return XI(sI(o), h, V, t);
     }
-    function u(h, o, V, t) {
+    function S(h, o, V, t) {
       return XI(dI(o), h, V, t);
     }
     function R(h, o, V, t) {
@@ -12562,9 +12562,9 @@ function MA() {
           case "ascii":
           case "latin1":
           case "binary":
-            return S(this, o, V, t);
+            return p(this, o, V, t);
           case "base64":
-            return u(this, o, V, t);
+            return S(this, o, V, t);
           case "ucs2":
           case "ucs-2":
           case "utf16le":
@@ -13946,8 +13946,8 @@ function gl() {
   } : A = function(N) {
     return Object.getOwnPropertyNames(N);
   };
-  function C(p) {
-    console && console.warn && console.warn(p);
+  function C(u) {
+    console && console.warn && console.warn(u);
   }
   var l = Number.isNaN || function(N) {
     return N !== N;
@@ -13957,19 +13957,19 @@ function gl() {
   }
   MB.exports = B, MB.exports.once = X, B.EventEmitter = B, B.prototype._events = void 0, B.prototype._eventsCount = 0, B.prototype._maxListeners = void 0;
   var i = 10;
-  function G(p) {
-    if (typeof p != "function")
-      throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof p);
+  function G(u) {
+    if (typeof u != "function")
+      throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof u);
   }
   Object.defineProperty(B, "defaultMaxListeners", {
     enumerable: !0,
     get: function() {
       return i;
     },
-    set: function(p) {
-      if (typeof p != "number" || p < 0 || l(p))
-        throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + p + ".");
-      i = p;
+    set: function(u) {
+      if (typeof u != "number" || u < 0 || l(u))
+        throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + u + ".");
+      i = u;
     }
   }), B.init = function() {
     (this._events === void 0 || this._events === Object.getPrototypeOf(this)._events) && (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
@@ -13978,8 +13978,8 @@ function gl() {
       throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + N + ".");
     return this._maxListeners = N, this;
   };
-  function c(p) {
-    return p._maxListeners === void 0 ? B.defaultMaxListeners : p._maxListeners;
+  function c(u) {
+    return u._maxListeners === void 0 ? B.defaultMaxListeners : u._maxListeners;
   }
   B.prototype.getMaxListeners = function() {
     return c(this);
@@ -13991,11 +13991,11 @@ function gl() {
     else if (!v)
       return !1;
     if (v) {
-      var S;
-      if (Q.length > 0 && (S = Q[0]), S instanceof Error)
-        throw S;
-      var u = new Error("Unhandled error." + (S ? " (" + S.message + ")" : ""));
-      throw u.context = S, u;
+      var p;
+      if (Q.length > 0 && (p = Q[0]), p instanceof Error)
+        throw p;
+      var S = new Error("Unhandled error." + (p ? " (" + p.message + ")" : ""));
+      throw S.context = p, S;
     }
     var R = w[N];
     if (R === void 0)
@@ -14007,20 +14007,20 @@ function gl() {
         g(E[F], this, Q);
     return !0;
   };
-  function Z(p, N, Q, F) {
-    var v, w, S;
-    if (G(Q), w = p._events, w === void 0 ? (w = p._events = /* @__PURE__ */ Object.create(null), p._eventsCount = 0) : (w.newListener !== void 0 && (p.emit(
+  function Z(u, N, Q, F) {
+    var v, w, p;
+    if (G(Q), w = u._events, w === void 0 ? (w = u._events = /* @__PURE__ */ Object.create(null), u._eventsCount = 0) : (w.newListener !== void 0 && (u.emit(
       "newListener",
       N,
       Q.listener ? Q.listener : Q
-    ), w = p._events), S = w[N]), S === void 0)
-      S = w[N] = Q, ++p._eventsCount;
-    else if (typeof S == "function" ? S = w[N] = F ? [Q, S] : [S, Q] : F ? S.unshift(Q) : S.push(Q), v = c(p), v > 0 && S.length > v && !S.warned) {
-      S.warned = !0;
-      var u = new Error("Possible EventEmitter memory leak detected. " + S.length + " " + String(N) + " listeners added. Use emitter.setMaxListeners() to increase limit");
-      u.name = "MaxListenersExceededWarning", u.emitter = p, u.type = N, u.count = S.length, C(u);
+    ), w = u._events), p = w[N]), p === void 0)
+      p = w[N] = Q, ++u._eventsCount;
+    else if (typeof p == "function" ? p = w[N] = F ? [Q, p] : [p, Q] : F ? p.unshift(Q) : p.push(Q), v = c(u), v > 0 && p.length > v && !p.warned) {
+      p.warned = !0;
+      var S = new Error("Possible EventEmitter memory leak detected. " + p.length + " " + String(N) + " listeners added. Use emitter.setMaxListeners() to increase limit");
+      S.name = "MaxListenersExceededWarning", S.emitter = u, S.type = N, S.count = p.length, C(S);
     }
-    return p;
+    return u;
   }
   B.prototype.addListener = function(N, Q) {
     return Z(this, N, Q, !1);
@@ -14031,8 +14031,8 @@ function gl() {
     if (!this.fired)
       return this.target.removeListener(this.type, this.wrapFn), this.fired = !0, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
   }
-  function d(p, N, Q) {
-    var F = { fired: !1, wrapFn: void 0, target: p, type: N, listener: Q }, v = b.bind(F);
+  function d(u, N, Q) {
+    var F = { fired: !1, wrapFn: void 0, target: u, type: N, listener: Q }, v = b.bind(F);
     return v.listener = Q, F.wrapFn = v, v;
   }
   B.prototype.once = function(N, Q) {
@@ -14040,7 +14040,7 @@ function gl() {
   }, B.prototype.prependOnceListener = function(N, Q) {
     return G(Q), this.prependListener(N, d(this, N, Q)), this;
   }, B.prototype.removeListener = function(N, Q) {
-    var F, v, w, S, u;
+    var F, v, w, p, S;
     if (G(Q), v = this._events, v === void 0)
       return this;
     if (F = v[N], F === void 0)
@@ -14048,14 +14048,14 @@ function gl() {
     if (F === Q || F.listener === Q)
       --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete v[N], v.removeListener && this.emit("removeListener", N, F.listener || Q));
     else if (typeof F != "function") {
-      for (w = -1, S = F.length - 1; S >= 0; S--)
-        if (F[S] === Q || F[S].listener === Q) {
-          u = F[S].listener, w = S;
+      for (w = -1, p = F.length - 1; p >= 0; p--)
+        if (F[p] === Q || F[p].listener === Q) {
+          S = F[p].listener, w = p;
           break;
         }
       if (w < 0)
         return this;
-      w === 0 ? F.shift() : z(F, w), F.length === 1 && (v[N] = F[0]), v.removeListener !== void 0 && this.emit("removeListener", N, u || Q);
+      w === 0 ? F.shift() : z(F, w), F.length === 1 && (v[N] = F[0]), v.removeListener !== void 0 && this.emit("removeListener", N, S || Q);
     }
     return this;
   }, B.prototype.off = B.prototype.removeListener, B.prototype.removeAllListeners = function(N) {
@@ -14065,9 +14065,9 @@ function gl() {
     if (F.removeListener === void 0)
       return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : F[N] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete F[N]), this;
     if (arguments.length === 0) {
-      var w = Object.keys(F), S;
+      var w = Object.keys(F), p;
       for (v = 0; v < w.length; ++v)
-        S = w[v], S !== "removeListener" && this.removeAllListeners(S);
+        p = w[v], p !== "removeListener" && this.removeAllListeners(p);
       return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
     }
     if (Q = F[N], typeof Q == "function")
@@ -14077,8 +14077,8 @@ function gl() {
         this.removeListener(N, Q[v]);
     return this;
   };
-  function W(p, N, Q) {
-    var F = p._events;
+  function W(u, N, Q) {
+    var F = u._events;
     if (F === void 0)
       return [];
     var v = F[N];
@@ -14088,13 +14088,13 @@ function gl() {
     return W(this, N, !0);
   }, B.prototype.rawListeners = function(N) {
     return W(this, N, !1);
-  }, B.listenerCount = function(p, N) {
-    return typeof p.listenerCount == "function" ? p.listenerCount(N) : K.call(p, N);
-  }, B.prototype.listenerCount = K;
-  function K(p) {
+  }, B.listenerCount = function(u, N) {
+    return typeof u.listenerCount == "function" ? u.listenerCount(N) : Y.call(u, N);
+  }, B.prototype.listenerCount = Y;
+  function Y(u) {
     var N = this._events;
     if (N !== void 0) {
-      var Q = N[p];
+      var Q = N[u];
       if (typeof Q == "function")
         return 1;
       if (Q !== void 0)
@@ -14105,44 +14105,44 @@ function gl() {
   B.prototype.eventNames = function() {
     return this._eventsCount > 0 ? A(this._events) : [];
   };
-  function a(p, N) {
+  function a(u, N) {
     for (var Q = new Array(N), F = 0; F < N; ++F)
-      Q[F] = p[F];
+      Q[F] = u[F];
     return Q;
   }
-  function z(p, N) {
-    for (; N + 1 < p.length; N++)
-      p[N] = p[N + 1];
-    p.pop();
+  function z(u, N) {
+    for (; N + 1 < u.length; N++)
+      u[N] = u[N + 1];
+    u.pop();
   }
-  function s(p) {
-    for (var N = new Array(p.length), Q = 0; Q < N.length; ++Q)
-      N[Q] = p[Q].listener || p[Q];
+  function s(u) {
+    for (var N = new Array(u.length), Q = 0; Q < N.length; ++Q)
+      N[Q] = u[Q].listener || u[Q];
     return N;
   }
-  function X(p, N) {
+  function X(u, N) {
     return new Promise(function(Q, F) {
-      function v(S) {
-        p.removeListener(N, w), F(S);
+      function v(p) {
+        u.removeListener(N, w), F(p);
       }
       function w() {
-        typeof p.removeListener == "function" && p.removeListener("error", v), Q([].slice.call(arguments));
+        typeof u.removeListener == "function" && u.removeListener("error", v), Q([].slice.call(arguments));
       }
-      Y(p, N, w, { once: !0 }), N !== "error" && M(p, v, { once: !0 });
+      K(u, N, w, { once: !0 }), N !== "error" && M(u, v, { once: !0 });
     });
   }
-  function M(p, N, Q) {
-    typeof p.on == "function" && Y(p, "error", N, Q);
+  function M(u, N, Q) {
+    typeof u.on == "function" && K(u, "error", N, Q);
   }
-  function Y(p, N, Q, F) {
-    if (typeof p.on == "function")
-      F.once ? p.once(N, Q) : p.on(N, Q);
-    else if (typeof p.addEventListener == "function")
-      p.addEventListener(N, function v(w) {
-        F.once && p.removeEventListener(N, v), Q(w);
+  function K(u, N, Q, F) {
+    if (typeof u.on == "function")
+      F.once ? u.once(N, Q) : u.on(N, Q);
+    else if (typeof u.addEventListener == "function")
+      u.addEventListener(N, function v(w) {
+        F.once && u.removeEventListener(N, v), Q(w);
       });
     else
-      throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof p);
+      throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof u);
   }
   return MB.exports;
 }
@@ -14150,58 +14150,58 @@ var Qc;
 function eg() {
   return Qc || (Qc = 1, function(I) {
     const g = MA(), { kResistStopPropagation: A, SymbolDispose: C } = Ng(), l = globalThis.AbortSignal || iB().AbortSignal, B = globalThis.AbortController || iB().AbortController, i = Object.getPrototypeOf(async function() {
-    }).constructor, G = globalThis.Blob || g.Blob, c = typeof G < "u" ? function(K) {
-      return K instanceof G;
-    } : function(K) {
+    }).constructor, G = globalThis.Blob || g.Blob, c = typeof G < "u" ? function(Y) {
+      return Y instanceof G;
+    } : function(Y) {
       return !1;
-    }, Z = (W, K) => {
+    }, Z = (W, Y) => {
       if (W !== void 0 && (W === null || typeof W != "object" || !("aborted" in W)))
-        throw new ERR_INVALID_ARG_TYPE(K, "AbortSignal", W);
-    }, b = (W, K) => {
-      if (typeof W != "function") throw new ERR_INVALID_ARG_TYPE(K, "Function", W);
+        throw new ERR_INVALID_ARG_TYPE(Y, "AbortSignal", W);
+    }, b = (W, Y) => {
+      if (typeof W != "function") throw new ERR_INVALID_ARG_TYPE(Y, "Function", W);
     };
     class d extends Error {
-      constructor(K) {
-        if (!Array.isArray(K))
-          throw new TypeError(`Expected input to be an Array, got ${typeof K}`);
+      constructor(Y) {
+        if (!Array.isArray(Y))
+          throw new TypeError(`Expected input to be an Array, got ${typeof Y}`);
         let a = "";
-        for (let z = 0; z < K.length; z++)
-          a += `    ${K[z].stack}
+        for (let z = 0; z < Y.length; z++)
+          a += `    ${Y[z].stack}
 `;
-        super(a), this.name = "AggregateError", this.errors = K;
+        super(a), this.name = "AggregateError", this.errors = Y;
       }
     }
     I.exports = {
       AggregateError: d,
       kEmptyObject: Object.freeze({}),
       once(W) {
-        let K = !1;
+        let Y = !1;
         return function(...a) {
-          K || (K = !0, W.apply(this, a));
+          Y || (Y = !0, W.apply(this, a));
         };
       },
       createDeferredPromise: function() {
-        let W, K;
+        let W, Y;
         return {
           promise: new Promise((z, s) => {
-            W = z, K = s;
+            W = z, Y = s;
           }),
           resolve: W,
-          reject: K
+          reject: Y
         };
       },
       promisify(W) {
-        return new Promise((K, a) => {
-          W((z, ...s) => z ? a(z) : K(...s));
+        return new Promise((Y, a) => {
+          W((z, ...s) => z ? a(z) : Y(...s));
         });
       },
       debuglog() {
         return function() {
         };
       },
-      format(W, ...K) {
+      format(W, ...Y) {
         return W.replace(/%([sdifj])/g, function(...[a, z]) {
-          const s = K.shift();
+          const s = Y.shift();
           return z === "f" ? s.toFixed(6) : z === "j" ? JSON.stringify(s) : z === "s" && typeof s == "object" ? `${s.constructor !== Object ? s.constructor.name : ""} {}`.trim() : s.toString();
         });
       },
@@ -14234,20 +14234,20 @@ function eg() {
         }
       },
       isBlob: c,
-      deprecate(W, K) {
+      deprecate(W, Y) {
         return W;
       },
-      addAbortListener: gl().addAbortListener || function(K, a) {
-        if (K === void 0)
-          throw new ERR_INVALID_ARG_TYPE("signal", "AbortSignal", K);
-        Z(K, "signal"), b(a, "listener");
+      addAbortListener: gl().addAbortListener || function(Y, a) {
+        if (Y === void 0)
+          throw new ERR_INVALID_ARG_TYPE("signal", "AbortSignal", Y);
+        Z(Y, "signal"), b(a, "listener");
         let z;
-        return K.aborted ? queueMicrotask(() => a()) : (K.addEventListener("abort", a, {
+        return Y.aborted ? queueMicrotask(() => a()) : (Y.addEventListener("abort", a, {
           __proto__: null,
           once: !0,
           [A]: !0
         }), z = () => {
-          K.removeEventListener("abort", a);
+          Y.removeEventListener("abort", a);
         }), {
           __proto__: null,
           [C]() {
@@ -14256,18 +14256,18 @@ function eg() {
           }
         };
       },
-      AbortSignalAny: l.any || function(K) {
-        if (K.length === 1)
-          return K[0];
+      AbortSignalAny: l.any || function(Y) {
+        if (Y.length === 1)
+          return Y[0];
         const a = new B(), z = () => a.abort();
-        return K.forEach((s) => {
+        return Y.forEach((s) => {
           Z(s, "signals"), s.addEventListener("abort", z, {
             once: !0
           });
         }), a.signal.addEventListener(
           "abort",
           () => {
-            K.forEach((s) => s.removeEventListener("abort", z));
+            Y.forEach((s) => s.removeEventListener("abort", z));
           },
           {
             once: !0
@@ -14299,8 +14299,8 @@ function tg() {
   }
   function b(s) {
     let X = "", M = s.length;
-    const Y = s[0] === "-" ? 1 : 0;
-    for (; M >= Y + 4; M -= 3)
+    const K = s[0] === "-" ? 1 : 0;
+    for (; M >= K + 4; M -= 3)
       X = `_${s.slice(M - 3, M)}${X}`;
     return `${s.slice(0, M)}${X}`;
   }
@@ -14311,15 +14311,15 @@ function tg() {
         // Default options do not count.
         `Code: ${s}; The provided arguments length (${M.length}) does not match the required ones (${X.length}).`
       ), X(...M);
-    const Y = (X.match(/%[dfijoOs]/g) || []).length;
+    const K = (X.match(/%[dfijoOs]/g) || []).length;
     return Z(
-      Y === M.length,
-      `Code: ${s}; The provided arguments length (${M.length}) does not match the required ones (${Y}).`
+      K === M.length,
+      `Code: ${s}; The provided arguments length (${M.length}) does not match the required ones (${K}).`
     ), M.length === 0 ? X : I(X, ...M);
   }
   function W(s, X, M) {
     M || (M = Error);
-    class Y extends M {
+    class K extends M {
       constructor(...N) {
         super(d(s, X, N));
       }
@@ -14327,7 +14327,7 @@ function tg() {
         return `${this.name} [${s}]: ${this.message}`;
       }
     }
-    Object.defineProperties(Y.prototype, {
+    Object.defineProperties(K.prototype, {
       name: {
         value: M.name,
         writable: !0,
@@ -14342,9 +14342,9 @@ function tg() {
         enumerable: !1,
         configurable: !0
       }
-    }), Y.prototype.code = s, Y.prototype[l] = !0, c[s] = Y;
+    }), K.prototype.code = s, K.prototype[l] = !0, c[s] = K;
   }
-  function K(s) {
+  function Y(s) {
     const X = G + s.name;
     return Object.defineProperty(s, "name", {
       value: X
@@ -14370,95 +14370,95 @@ function tg() {
     "ERR_INVALID_ARG_TYPE",
     (s, X, M) => {
       Z(typeof s == "string", "'name' must be a string"), Array.isArray(X) || (X = [X]);
-      let Y = "The ";
-      s.endsWith(" argument") ? Y += `${s} ` : Y += `"${s}" ${s.includes(".") ? "property" : "argument"} `, Y += "must be ";
-      const p = [], N = [], Q = [];
+      let K = "The ";
+      s.endsWith(" argument") ? K += `${s} ` : K += `"${s}" ${s.includes(".") ? "property" : "argument"} `, K += "must be ";
+      const u = [], N = [], Q = [];
       for (const v of X)
-        Z(typeof v == "string", "All expected entries have to be of type string"), B.includes(v) ? p.push(v.toLowerCase()) : i.test(v) ? N.push(v) : (Z(v !== "object", 'The value "object" should be written as "Object"'), Q.push(v));
+        Z(typeof v == "string", "All expected entries have to be of type string"), B.includes(v) ? u.push(v.toLowerCase()) : i.test(v) ? N.push(v) : (Z(v !== "object", 'The value "object" should be written as "Object"'), Q.push(v));
       if (N.length > 0) {
-        const v = p.indexOf("object");
-        v !== -1 && (p.splice(p, v, 1), N.push("Object"));
+        const v = u.indexOf("object");
+        v !== -1 && (u.splice(u, v, 1), N.push("Object"));
       }
-      if (p.length > 0) {
-        switch (p.length) {
+      if (u.length > 0) {
+        switch (u.length) {
           case 1:
-            Y += `of type ${p[0]}`;
+            K += `of type ${u[0]}`;
             break;
           case 2:
-            Y += `one of type ${p[0]} or ${p[1]}`;
+            K += `one of type ${u[0]} or ${u[1]}`;
             break;
           default: {
-            const v = p.pop();
-            Y += `one of type ${p.join(", ")}, or ${v}`;
+            const v = u.pop();
+            K += `one of type ${u.join(", ")}, or ${v}`;
           }
         }
-        (N.length > 0 || Q.length > 0) && (Y += " or ");
+        (N.length > 0 || Q.length > 0) && (K += " or ");
       }
       if (N.length > 0) {
         switch (N.length) {
           case 1:
-            Y += `an instance of ${N[0]}`;
+            K += `an instance of ${N[0]}`;
             break;
           case 2:
-            Y += `an instance of ${N[0]} or ${N[1]}`;
+            K += `an instance of ${N[0]} or ${N[1]}`;
             break;
           default: {
             const v = N.pop();
-            Y += `an instance of ${N.join(", ")}, or ${v}`;
+            K += `an instance of ${N.join(", ")}, or ${v}`;
           }
         }
-        Q.length > 0 && (Y += " or ");
+        Q.length > 0 && (K += " or ");
       }
       switch (Q.length) {
         case 0:
           break;
         case 1:
-          Q[0].toLowerCase() !== Q[0] && (Y += "an "), Y += `${Q[0]}`;
+          Q[0].toLowerCase() !== Q[0] && (K += "an "), K += `${Q[0]}`;
           break;
         case 2:
-          Y += `one of ${Q[0]} or ${Q[1]}`;
+          K += `one of ${Q[0]} or ${Q[1]}`;
           break;
         default: {
           const v = Q.pop();
-          Y += `one of ${Q.join(", ")}, or ${v}`;
+          K += `one of ${Q.join(", ")}, or ${v}`;
         }
       }
       if (M == null)
-        Y += `. Received ${M}`;
+        K += `. Received ${M}`;
       else if (typeof M == "function" && M.name)
-        Y += `. Received function ${M.name}`;
+        K += `. Received function ${M.name}`;
       else if (typeof M == "object") {
         var F;
         if ((F = M.constructor) !== null && F !== void 0 && F.name)
-          Y += `. Received an instance of ${M.constructor.name}`;
+          K += `. Received an instance of ${M.constructor.name}`;
         else {
           const v = g(M, {
             depth: -1
           });
-          Y += `. Received ${v}`;
+          K += `. Received ${v}`;
         }
       } else {
         let v = g(M, {
           colors: !1
         });
-        v.length > 25 && (v = `${v.slice(0, 25)}...`), Y += `. Received type ${typeof M} (${v})`;
+        v.length > 25 && (v = `${v.slice(0, 25)}...`), K += `. Received type ${typeof M} (${v})`;
       }
-      return Y;
+      return K;
     },
     TypeError
   ), W(
     "ERR_INVALID_ARG_VALUE",
     (s, X, M = "is invalid") => {
-      let Y = g(X);
-      return Y.length > 128 && (Y = Y.slice(0, 128) + "..."), `The ${s.includes(".") ? "property" : "argument"} '${s}' ${M}. Received ${Y}`;
+      let K = g(X);
+      return K.length > 128 && (K = K.slice(0, 128) + "..."), `The ${s.includes(".") ? "property" : "argument"} '${s}' ${M}. Received ${K}`;
     },
     TypeError
   ), W(
     "ERR_INVALID_RETURN_VALUE",
     (s, X, M) => {
-      var Y;
-      const p = M != null && (Y = M.constructor) !== null && Y !== void 0 && Y.name ? `instance of ${M.constructor.name}` : `type ${typeof M}`;
-      return `Expected ${s} to be returned from the "${X}" function but got ${p}.`;
+      var K;
+      const u = M != null && (K = M.constructor) !== null && K !== void 0 && K.name ? `instance of ${M.constructor.name}` : `type ${typeof M}`;
+      return `Expected ${s} to be returned from the "${X}" function but got ${u}.`;
     },
     TypeError
   ), W(
@@ -14467,7 +14467,7 @@ function tg() {
       Z(s.length > 0, "At least one arg needs to be specified");
       let X;
       const M = s.length;
-      switch (s = (Array.isArray(s) ? s : [s]).map((Y) => `"${Y}"`).join(" or "), M) {
+      switch (s = (Array.isArray(s) ? s : [s]).map((K) => `"${K}"`).join(" or "), M) {
         case 1:
           X += `The ${s[0]} argument`;
           break;
@@ -14476,8 +14476,8 @@ function tg() {
           break;
         default:
           {
-            const Y = s.pop();
-            X += `The ${s.join(", ")}, and ${Y} arguments`;
+            const K = s.pop();
+            X += `The ${s.join(", ")}, and ${K} arguments`;
           }
           break;
       }
@@ -14488,14 +14488,14 @@ function tg() {
     "ERR_OUT_OF_RANGE",
     (s, X, M) => {
       Z(X, 'Missing "range" argument');
-      let Y;
-      return Number.isInteger(M) && Math.abs(M) > 2 ** 32 ? Y = b(String(M)) : typeof M == "bigint" ? (Y = String(M), (M > 2n ** 32n || M < -(2n ** 32n)) && (Y = b(Y)), Y += "n") : Y = g(M), `The value of "${s}" is out of range. It must be ${X}. Received ${Y}`;
+      let K;
+      return Number.isInteger(M) && Math.abs(M) > 2 ** 32 ? K = b(String(M)) : typeof M == "bigint" ? (K = String(M), (M > 2n ** 32n || M < -(2n ** 32n)) && (K = b(K)), K += "n") : K = g(M), `The value of "${s}" is out of range. It must be ${X}. Received ${K}`;
     },
     RangeError
   ), W("ERR_MULTIPLE_CALLBACK", "Callback called multiple times", Error), W("ERR_METHOD_NOT_IMPLEMENTED", "The %s method is not implemented", Error), W("ERR_STREAM_ALREADY_FINISHED", "Cannot call %s after a stream was finished", Error), W("ERR_STREAM_CANNOT_PIPE", "Cannot pipe, not readable", Error), W("ERR_STREAM_DESTROYED", "Cannot call %s after a stream was destroyed", Error), W("ERR_STREAM_NULL_VALUES", "May not write null values to stream", TypeError), W("ERR_STREAM_PREMATURE_CLOSE", "Premature close", Error), W("ERR_STREAM_PUSH_AFTER_EOF", "stream.push() after EOF", Error), W("ERR_STREAM_UNSHIFT_AFTER_END_EVENT", "stream.unshift() after end event", Error), W("ERR_STREAM_WRITE_AFTER_END", "write after end", Error), W("ERR_UNKNOWN_ENCODING", "Unknown encoding: %s", TypeError), Fl = {
     AbortError: z,
-    aggregateTwoErrors: K(a),
-    hideStackFrames: K,
+    aggregateTwoErrors: Y(a),
+    hideStackFrames: Y,
     codes: c
   }, Fl;
 }
@@ -14517,22 +14517,22 @@ function WB() {
     RegExpPrototypeExec: b,
     String: d,
     StringPrototypeToUpperCase: W,
-    StringPrototypeTrim: K
+    StringPrototypeTrim: Y
   } = Ng(), {
     hideStackFrames: a,
-    codes: { ERR_SOCKET_BAD_PORT: z, ERR_INVALID_ARG_TYPE: s, ERR_INVALID_ARG_VALUE: X, ERR_OUT_OF_RANGE: M, ERR_UNKNOWN_SIGNAL: Y }
-  } = tg(), { normalizeEncoding: p } = eg(), { isAsyncFunction: N, isArrayBufferView: Q } = eg().types, F = {};
+    codes: { ERR_SOCKET_BAD_PORT: z, ERR_INVALID_ARG_TYPE: s, ERR_INVALID_ARG_VALUE: X, ERR_OUT_OF_RANGE: M, ERR_UNKNOWN_SIGNAL: K }
+  } = tg(), { normalizeEncoding: u } = eg(), { isAsyncFunction: N, isArrayBufferView: Q } = eg().types, F = {};
   function v(f) {
     return f === (f | 0);
   }
   function w(f) {
     return f === f >>> 0;
   }
-  const S = /^[0-7]+$/, u = "must be a 32-bit unsigned integer or an octal string";
+  const p = /^[0-7]+$/, S = "must be a 32-bit unsigned integer or an octal string";
   function R(f, dI, XI) {
     if (typeof f > "u" && (f = XI), typeof f == "string") {
-      if (b(S, f) === null)
-        throw new X(dI, f, u);
+      if (b(p, f) === null)
+        throw new X(dI, f, S);
       f = c(f, 8);
     }
     return j(f, dI), f;
@@ -14620,19 +14620,19 @@ function WB() {
   }
   function CI(f, dI = "signal") {
     if (x(f, dI), F[f] === void 0)
-      throw F[W(f)] !== void 0 ? new Y(f + " (signals must use all capital letters)") : new Y(f);
+      throw F[W(f)] !== void 0 ? new K(f + " (signals must use all capital letters)") : new K(f);
   }
   const P = a((f, dI = "buffer") => {
     if (!Q(f))
       throw new s(dI, ["Buffer", "TypedArray", "DataView"], f);
   });
   function II(f, dI) {
-    const XI = p(dI), cI = f.length;
+    const XI = u(dI), cI = f.length;
     if (XI === "hex" && cI % 2 !== 0)
       throw new X("encoding", dI, `is invalid for data of length ${cI}`);
   }
   function wI(f, dI = "Port", XI = !0) {
-    if (typeof f != "number" && typeof f != "string" || typeof f == "string" && K(f).length === 0 || +f !== +f >>> 0 || f > 65535 || f === 0 && !XI)
+    if (typeof f != "number" && typeof f != "string" || typeof f == "string" && Y(f).length === 0 || +f !== +f >>> 0 || f > 65535 || f === 0 && !XI)
       throw new z(dI, f, XI);
     return f | 0;
   }
@@ -14782,12 +14782,12 @@ function AC() {
     if (arguments.length > 1)
       for (var X = 1; X < arguments.length; X++)
         s[X - 1] = arguments[X];
-    G.push(new K(z, s)), G.length === 1 && !c && B(W);
+    G.push(new Y(z, s)), G.length === 1 && !c && B(W);
   };
-  function K(z, s) {
+  function Y(z, s) {
     this.fun = z, this.array = s;
   }
-  K.prototype.run = function() {
+  Y.prototype.run = function() {
     this.fun.apply(null, this.array);
   }, I.title = "browser", I.browser = !0, I.env = {}, I.argv = [], I.version = "", I.versions = {};
   function a() {
@@ -14821,17 +14821,17 @@ function wA() {
   function W(U) {
     return !!(U && typeof U.pipe == "function" && U._readableState && typeof U.on == "function" && typeof U.write == "function");
   }
-  function K(U) {
+  function Y(U) {
     return U && (U._readableState || U._writableState || typeof U.write == "function" && typeof U.on == "function" || typeof U.pipe == "function" && typeof U.on == "function");
   }
   function a(U) {
-    return !!(U && !K(U) && typeof U.pipeThrough == "function" && typeof U.getReader == "function" && typeof U.cancel == "function");
+    return !!(U && !Y(U) && typeof U.pipeThrough == "function" && typeof U.getReader == "function" && typeof U.cancel == "function");
   }
   function z(U) {
-    return !!(U && !K(U) && typeof U.getWriter == "function" && typeof U.abort == "function");
+    return !!(U && !Y(U) && typeof U.getWriter == "function" && typeof U.abort == "function");
   }
   function s(U) {
-    return !!(U && !K(U) && typeof U.readable == "object" && typeof U.writable == "object");
+    return !!(U && !Y(U) && typeof U.readable == "object" && typeof U.writable == "object");
   }
   function X(U) {
     return a(U) || z(U) || s(U);
@@ -14839,12 +14839,12 @@ function wA() {
   function M(U, $) {
     return U == null ? !1 : $ === !0 ? typeof U[I] == "function" : $ === !1 ? typeof U[g] == "function" : typeof U[I] == "function" || typeof U[g] == "function";
   }
-  function Y(U) {
-    if (!K(U)) return null;
+  function K(U) {
+    if (!Y(U)) return null;
     const $ = U._writableState, yI = U._readableState, _ = $ || yI;
     return !!(U.destroyed || U[C] || _ != null && _.destroyed);
   }
-  function p(U) {
+  function u(U) {
     if (!d(U)) return null;
     if (U.writableEnded === !0) return !0;
     const $ = U._writableState;
@@ -14868,24 +14868,24 @@ function wA() {
     return yI != null && yI.errored ? !1 : typeof (yI == null ? void 0 : yI.endEmitted) != "boolean" ? null : !!(yI.endEmitted || $ === !1 && yI.ended === !0 && yI.length === 0);
   }
   function v(U) {
-    return U && U[B] != null ? U[B] : typeof (U == null ? void 0 : U.readable) != "boolean" ? null : Y(U) ? !1 : b(U) && U.readable && !F(U);
+    return U && U[B] != null ? U[B] : typeof (U == null ? void 0 : U.readable) != "boolean" ? null : K(U) ? !1 : b(U) && U.readable && !F(U);
   }
   function w(U) {
-    return U && U[i] != null ? U[i] : typeof (U == null ? void 0 : U.writable) != "boolean" ? null : Y(U) ? !1 : d(U) && U.writable && !p(U);
+    return U && U[i] != null ? U[i] : typeof (U == null ? void 0 : U.writable) != "boolean" ? null : K(U) ? !1 : d(U) && U.writable && !u(U);
   }
-  function S(U, $) {
-    return K(U) ? Y(U) ? !0 : !(($ == null ? void 0 : $.readable) !== !1 && v(U) || ($ == null ? void 0 : $.writable) !== !1 && w(U)) : null;
+  function p(U, $) {
+    return Y(U) ? K(U) ? !0 : !(($ == null ? void 0 : $.readable) !== !1 && v(U) || ($ == null ? void 0 : $.writable) !== !1 && w(U)) : null;
   }
-  function u(U) {
+  function S(U) {
     var $, yI;
-    return K(U) ? U.writableErrored ? U.writableErrored : ($ = (yI = U._writableState) === null || yI === void 0 ? void 0 : yI.errored) !== null && $ !== void 0 ? $ : null : null;
+    return Y(U) ? U.writableErrored ? U.writableErrored : ($ = (yI = U._writableState) === null || yI === void 0 ? void 0 : yI.errored) !== null && $ !== void 0 ? $ : null : null;
   }
   function R(U) {
     var $, yI;
-    return K(U) ? U.readableErrored ? U.readableErrored : ($ = (yI = U._readableState) === null || yI === void 0 ? void 0 : yI.errored) !== null && $ !== void 0 ? $ : null : null;
+    return Y(U) ? U.readableErrored ? U.readableErrored : ($ = (yI = U._readableState) === null || yI === void 0 ? void 0 : yI.errored) !== null && $ !== void 0 ? $ : null : null;
   }
   function y(U) {
-    if (!K(U))
+    if (!Y(U))
       return null;
     if (typeof U.closed == "boolean")
       return U.closed;
@@ -14903,7 +14903,7 @@ function wA() {
     return typeof U._consuming == "boolean" && typeof U._dumped == "boolean" && (($ = U.req) === null || $ === void 0 ? void 0 : $.upgradeOrConnect) === void 0;
   }
   function iI(U) {
-    if (!K(U)) return null;
+    if (!Y(U)) return null;
     const $ = U._writableState, yI = U._readableState, _ = $ || yI;
     return !_ && j(U) || !!(_ && _.autoDestroy && _.emitClose && _.closed === !1);
   }
@@ -14916,7 +14916,7 @@ function wA() {
     return !!(U && (($ = (yI = (_ = (NI = (MI = (zI = U[l]) !== null && zI !== void 0 ? zI : U.readableErrored) !== null && MI !== void 0 ? MI : U.writableErrored) !== null && NI !== void 0 ? NI : (CI = U._readableState) === null || CI === void 0 ? void 0 : CI.errorEmitted) !== null && _ !== void 0 ? _ : (P = U._writableState) === null || P === void 0 ? void 0 : P.errorEmitted) !== null && yI !== void 0 ? yI : (II = U._readableState) === null || II === void 0 ? void 0 : II.errored) !== null && $ !== void 0 ? $ : !((wI = U._writableState) === null || wI === void 0) && wI.errored));
   }
   return Rl = {
-    isDestroyed: Y,
+    isDestroyed: K,
     kIsDestroyed: C,
     isDisturbed: lI,
     kIsDisturbed: G,
@@ -14929,21 +14929,21 @@ function wA() {
     kIsWritable: i,
     isClosed: y,
     isDuplexNodeStream: W,
-    isFinished: S,
+    isFinished: p,
     isIterable: M,
     isReadableNodeStream: b,
     isReadableStream: a,
     isReadableEnded: Q,
     isReadableFinished: F,
     isReadableErrored: R,
-    isNodeStream: K,
+    isNodeStream: Y,
     isWebStream: X,
     isWritable: w,
     isWritableNodeStream: d,
     isWritableStream: z,
-    isWritableEnded: p,
+    isWritableEnded: u,
     isWritableFinished: N,
-    isWritableErrored: u,
+    isWritableErrored: S,
     isServerRequest: x,
     isServerResponse: j,
     willEmitClose: iI,
@@ -14954,21 +14954,21 @@ var Kc;
 function FA() {
   if (Kc) return pB.exports;
   Kc = 1;
-  const I = AC(), { AbortError: g, codes: A } = tg(), { ERR_INVALID_ARG_TYPE: C, ERR_STREAM_PREMATURE_CLOSE: l } = A, { kEmptyObject: B, once: i } = eg(), { validateAbortSignal: G, validateFunction: c, validateObject: Z, validateBoolean: b } = WB(), { Promise: d, PromisePrototypeThen: W, SymbolDispose: K } = Ng(), {
+  const I = AC(), { AbortError: g, codes: A } = tg(), { ERR_INVALID_ARG_TYPE: C, ERR_STREAM_PREMATURE_CLOSE: l } = A, { kEmptyObject: B, once: i } = eg(), { validateAbortSignal: G, validateFunction: c, validateObject: Z, validateBoolean: b } = WB(), { Promise: d, PromisePrototypeThen: W, SymbolDispose: Y } = Ng(), {
     isClosed: a,
     isReadable: z,
     isReadableNodeStream: s,
     isReadableStream: X,
     isReadableFinished: M,
-    isReadableErrored: Y,
-    isWritable: p,
+    isReadableErrored: K,
+    isWritable: u,
     isWritableNodeStream: N,
     isWritableStream: Q,
     isWritableFinished: F,
     isWritableErrored: v,
     isNodeStream: w,
-    willEmitClose: S,
-    kIsClosedPromise: u
+    willEmitClose: p,
+    kIsClosedPromise: S
   } = wA();
   let R;
   function y(lI) {
@@ -14985,7 +14985,7 @@ function FA() {
     const _ = ($ = nI.readable) !== null && $ !== void 0 ? $ : s(lI), NI = (yI = nI.writable) !== null && yI !== void 0 ? yI : N(lI), MI = lI._writableState, zI = lI._readableState, CI = () => {
       lI.writable || wI();
     };
-    let P = S(lI) && s(lI) === _ && N(lI) === NI, II = F(lI, !1);
+    let P = p(lI) && s(lI) === _ && N(lI) === NI, II = F(lI, !1);
     const wI = () => {
       II = !0, lI.destroyed && (P = !1), !(P && (!lI.readable || _)) && (!_ || SI) && U.call(lI);
     };
@@ -14998,7 +14998,7 @@ function FA() {
     let D = a(lI);
     const O = () => {
       D = !0;
-      const f = v(lI) || Y(lI);
+      const f = v(lI) || K(lI);
       if (f && typeof f != "boolean")
         return U.call(lI, f);
       if (_ && !SI && s(lI, !0) && !M(lI, !1))
@@ -15008,14 +15008,14 @@ function FA() {
       U.call(lI);
     }, LI = () => {
       D = !0;
-      const f = v(lI) || Y(lI);
+      const f = v(lI) || K(lI);
       if (f && typeof f != "boolean")
         return U.call(lI, f);
       U.call(lI);
     }, mI = () => {
       lI.req.on("finish", wI);
     };
-    y(lI) ? (lI.on("complete", wI), P || lI.on("abort", O), lI.req ? mI() : lI.on("request", mI)) : NI && !MI && (lI.on("end", CI), lI.on("close", CI)), !P && typeof lI.aborted == "boolean" && lI.on("aborted", O), lI.on("end", VI), lI.on("finish", wI), nI.error !== !1 && lI.on("error", k), lI.on("close", O), D ? I.nextTick(O) : MI != null && MI.errorEmitted || zI != null && zI.errorEmitted ? P || I.nextTick(LI) : (!_ && (!P || z(lI)) && (II || p(lI) === !1) || !NI && (!P || p(lI)) && (SI || z(lI) === !1) || zI && lI.req && lI.aborted) && I.nextTick(LI);
+    y(lI) ? (lI.on("complete", wI), P || lI.on("abort", O), lI.req ? mI() : lI.on("request", mI)) : NI && !MI && (lI.on("end", CI), lI.on("close", CI)), !P && typeof lI.aborted == "boolean" && lI.on("aborted", O), lI.on("end", VI), lI.on("finish", wI), nI.error !== !1 && lI.on("error", k), lI.on("close", O), D ? I.nextTick(O) : MI != null && MI.errorEmitted || zI != null && zI.errorEmitted ? P || I.nextTick(LI) : (!_ && (!P || z(lI)) && (II || u(lI) === !1) || !NI && (!P || u(lI)) && (SI || z(lI) === !1) || zI && lI.req && lI.aborted) && I.nextTick(LI);
     const sI = () => {
       U = E, lI.removeListener("aborted", O), lI.removeListener("complete", wI), lI.removeListener("abort", O), lI.removeListener("request", mI), lI.req && lI.req.removeListener("finish", wI), lI.removeListener("end", CI), lI.removeListener("close", CI), lI.removeListener("finish", wI), lI.removeListener("end", VI), lI.removeListener("error", k), lI.removeListener("close", O);
     };
@@ -15035,7 +15035,7 @@ function FA() {
         R = R || eg().addAbortListener;
         const dI = R(nI.signal, f), XI = U;
         U = i((...cI) => {
-          dI[K](), XI.apply(lI, cI);
+          dI[Y](), XI.apply(lI, cI);
         });
       }
     }
@@ -15057,13 +15057,13 @@ function FA() {
         R = R || eg().addAbortListener;
         const NI = R(nI.signal, yI), MI = U;
         U = i((...zI) => {
-          NI[K](), MI.apply(lI, zI);
+          NI[Y](), MI.apply(lI, zI);
         });
       }
     const _ = (...NI) => {
       $ || I.nextTick(() => U.apply(lI, NI));
     };
-    return W(lI[u].promise, _, _), E;
+    return W(lI[S].promise, _, _), E;
   }
   function iI(lI, nI) {
     var U;
@@ -15085,93 +15085,93 @@ function YC() {
     codes: { ERR_MULTIPLE_CALLBACK: A },
     AbortError: C
   } = tg(), { Symbol: l } = Ng(), { kIsDestroyed: B, isDestroyed: i, isFinished: G, isServerRequest: c } = wA(), Z = l("kDestroy"), b = l("kConstruct");
-  function d(S, u, R) {
-    S && (S.stack, u && !u.errored && (u.errored = S), R && !R.errored && (R.errored = S));
+  function d(p, S, R) {
+    p && (p.stack, S && !S.errored && (S.errored = p), R && !R.errored && (R.errored = p));
   }
-  function W(S, u) {
+  function W(p, S) {
     const R = this._readableState, y = this._writableState, E = y || R;
-    return y != null && y.destroyed || R != null && R.destroyed ? (typeof u == "function" && u(), this) : (d(S, y, R), y && (y.destroyed = !0), R && (R.destroyed = !0), E.constructed ? K(this, S, u) : this.once(Z, function(j) {
-      K(this, g(j, S), u);
+    return y != null && y.destroyed || R != null && R.destroyed ? (typeof S == "function" && S(), this) : (d(p, y, R), y && (y.destroyed = !0), R && (R.destroyed = !0), E.constructed ? Y(this, p, S) : this.once(Z, function(j) {
+      Y(this, g(j, p), S);
     }), this);
   }
-  function K(S, u, R) {
+  function Y(p, S, R) {
     let y = !1;
     function E(j) {
       if (y)
         return;
       y = !0;
-      const x = S._readableState, iI = S._writableState;
-      d(j, iI, x), iI && (iI.closed = !0), x && (x.closed = !0), typeof R == "function" && R(j), j ? I.nextTick(a, S, j) : I.nextTick(z, S);
+      const x = p._readableState, iI = p._writableState;
+      d(j, iI, x), iI && (iI.closed = !0), x && (x.closed = !0), typeof R == "function" && R(j), j ? I.nextTick(a, p, j) : I.nextTick(z, p);
     }
     try {
-      S._destroy(u || null, E);
+      p._destroy(S || null, E);
     } catch (j) {
       E(j);
     }
   }
-  function a(S, u) {
-    s(S, u), z(S);
+  function a(p, S) {
+    s(p, S), z(p);
   }
-  function z(S) {
-    const u = S._readableState, R = S._writableState;
-    R && (R.closeEmitted = !0), u && (u.closeEmitted = !0), (R != null && R.emitClose || u != null && u.emitClose) && S.emit("close");
+  function z(p) {
+    const S = p._readableState, R = p._writableState;
+    R && (R.closeEmitted = !0), S && (S.closeEmitted = !0), (R != null && R.emitClose || S != null && S.emitClose) && p.emit("close");
   }
-  function s(S, u) {
-    const R = S._readableState, y = S._writableState;
-    y != null && y.errorEmitted || R != null && R.errorEmitted || (y && (y.errorEmitted = !0), R && (R.errorEmitted = !0), S.emit("error", u));
+  function s(p, S) {
+    const R = p._readableState, y = p._writableState;
+    y != null && y.errorEmitted || R != null && R.errorEmitted || (y && (y.errorEmitted = !0), R && (R.errorEmitted = !0), p.emit("error", S));
   }
   function X() {
-    const S = this._readableState, u = this._writableState;
-    S && (S.constructed = !0, S.closed = !1, S.closeEmitted = !1, S.destroyed = !1, S.errored = null, S.errorEmitted = !1, S.reading = !1, S.ended = S.readable === !1, S.endEmitted = S.readable === !1), u && (u.constructed = !0, u.destroyed = !1, u.closed = !1, u.closeEmitted = !1, u.errored = null, u.errorEmitted = !1, u.finalCalled = !1, u.prefinished = !1, u.ended = u.writable === !1, u.ending = u.writable === !1, u.finished = u.writable === !1);
+    const p = this._readableState, S = this._writableState;
+    p && (p.constructed = !0, p.closed = !1, p.closeEmitted = !1, p.destroyed = !1, p.errored = null, p.errorEmitted = !1, p.reading = !1, p.ended = p.readable === !1, p.endEmitted = p.readable === !1), S && (S.constructed = !0, S.destroyed = !1, S.closed = !1, S.closeEmitted = !1, S.errored = null, S.errorEmitted = !1, S.finalCalled = !1, S.prefinished = !1, S.ended = S.writable === !1, S.ending = S.writable === !1, S.finished = S.writable === !1);
   }
-  function M(S, u, R) {
-    const y = S._readableState, E = S._writableState;
+  function M(p, S, R) {
+    const y = p._readableState, E = p._writableState;
     if (E != null && E.destroyed || y != null && y.destroyed)
       return this;
-    y != null && y.autoDestroy || E != null && E.autoDestroy ? S.destroy(u) : u && (u.stack, E && !E.errored && (E.errored = u), y && !y.errored && (y.errored = u), R ? I.nextTick(s, S, u) : s(S, u));
+    y != null && y.autoDestroy || E != null && E.autoDestroy ? p.destroy(S) : S && (S.stack, E && !E.errored && (E.errored = S), y && !y.errored && (y.errored = S), R ? I.nextTick(s, p, S) : s(p, S));
   }
-  function Y(S, u) {
-    if (typeof S._construct != "function")
+  function K(p, S) {
+    if (typeof p._construct != "function")
       return;
-    const R = S._readableState, y = S._writableState;
-    R && (R.constructed = !1), y && (y.constructed = !1), S.once(b, u), !(S.listenerCount(b) > 1) && I.nextTick(p, S);
+    const R = p._readableState, y = p._writableState;
+    R && (R.constructed = !1), y && (y.constructed = !1), p.once(b, S), !(p.listenerCount(b) > 1) && I.nextTick(u, p);
   }
-  function p(S) {
-    let u = !1;
+  function u(p) {
+    let S = !1;
     function R(y) {
-      if (u) {
-        M(S, y ?? new A());
+      if (S) {
+        M(p, y ?? new A());
         return;
       }
-      u = !0;
-      const E = S._readableState, j = S._writableState, x = j || E;
-      E && (E.constructed = !0), j && (j.constructed = !0), x.destroyed ? S.emit(Z, y) : y ? M(S, y, !0) : I.nextTick(N, S);
+      S = !0;
+      const E = p._readableState, j = p._writableState, x = j || E;
+      E && (E.constructed = !0), j && (j.constructed = !0), x.destroyed ? p.emit(Z, y) : y ? M(p, y, !0) : I.nextTick(N, p);
     }
     try {
-      S._construct((y) => {
+      p._construct((y) => {
         I.nextTick(R, y);
       });
     } catch (y) {
       I.nextTick(R, y);
     }
   }
-  function N(S) {
-    S.emit(b);
+  function N(p) {
+    p.emit(b);
   }
-  function Q(S) {
-    return (S == null ? void 0 : S.setHeader) && typeof S.abort == "function";
+  function Q(p) {
+    return (p == null ? void 0 : p.setHeader) && typeof p.abort == "function";
   }
-  function F(S) {
-    S.emit("close");
+  function F(p) {
+    p.emit("close");
   }
-  function v(S, u) {
-    S.emit("error", u), I.nextTick(F, S);
+  function v(p, S) {
+    p.emit("error", S), I.nextTick(F, p);
   }
-  function w(S, u) {
-    !S || i(S) || (!u && !G(S) && (u = new C()), c(S) ? (S.socket = null, S.destroy(u)) : Q(S) ? S.abort() : Q(S.req) ? S.req.abort() : typeof S.destroy == "function" ? S.destroy(u) : typeof S.close == "function" ? S.close() : u ? I.nextTick(v, S, u) : I.nextTick(F, S), S.destroyed || (S[B] = !0));
+  function w(p, S) {
+    !p || i(p) || (!S && !G(p) && (S = new C()), c(p) ? (p.socket = null, p.destroy(S)) : Q(p) ? p.abort() : Q(p.req) ? p.req.abort() : typeof p.destroy == "function" ? p.destroy(S) : typeof p.close == "function" ? p.close() : S ? I.nextTick(v, p, S) : I.nextTick(F, p), p.destroyed || (p[B] = !0));
   }
   return zl = {
-    construct: Y,
+    construct: K,
     destroyer: w,
     destroy: W,
     undestroy: X,
@@ -15203,12 +15203,12 @@ function Mi() {
     function W() {
       b || (b = !0, typeof B.destroy == "function" && B.destroy());
     }
-    function K(z) {
+    function Y(z) {
       a(), A.listenerCount(this, "error") === 0 && this.emit("error", z);
     }
-    l(G, "error", K), l(B, "error", K);
+    l(G, "error", Y), l(B, "error", Y);
     function a() {
-      G.removeListener("data", c), B.removeListener("drain", Z), G.removeListener("end", d), G.removeListener("close", W), G.removeListener("error", K), B.removeListener("error", K), G.removeListener("end", a), G.removeListener("close", a), B.removeListener("close", a);
+      G.removeListener("data", c), B.removeListener("drain", Z), G.removeListener("end", d), G.removeListener("close", W), G.removeListener("error", Y), B.removeListener("error", Y), G.removeListener("end", a), G.removeListener("close", a), B.removeListener("close", a);
     }
     return G.on("end", a), G.on("close", a), B.on("close", a), B.emit("pipe", G), B;
   };
@@ -15230,14 +15230,14 @@ function Al() {
       if (typeof d != "object" || !("aborted" in d))
         throw new c(W, "AbortSignal", d);
     };
-    I.exports.addAbortSignal = function(W, K) {
-      if (b(W, "signal"), !l(K) && !B(K))
-        throw new c("stream", ["ReadableStream", "WritableStream", "Stream"], K);
-      return I.exports.addAbortSignalNoValidate(W, K);
+    I.exports.addAbortSignal = function(W, Y) {
+      if (b(W, "signal"), !l(Y) && !B(Y))
+        throw new c("stream", ["ReadableStream", "WritableStream", "Stream"], Y);
+      return I.exports.addAbortSignalNoValidate(W, Y);
     }, I.exports.addAbortSignalNoValidate = function(d, W) {
       if (typeof d != "object" || !("aborted" in d))
         return W;
-      const K = l(W) ? () => {
+      const Y = l(W) ? () => {
         W.destroy(
           new A(void 0, {
             cause: d.reason
@@ -15251,10 +15251,10 @@ function Al() {
         );
       };
       if (d.aborted)
-        K();
+        Y();
       else {
         Z = Z || eg().addAbortListener;
-        const a = Z(d, K);
+        const a = Z(d, Y);
         G(W, a[g]);
       }
       return W;
@@ -15380,11 +15380,11 @@ function Cl() {
   function c(b, d) {
     A(d, "value", 0), b ? B = d : l = d;
   }
-  function Z(b, d, W, K) {
-    const a = i(d, K, W);
+  function Z(b, d, W, Y) {
+    const a = i(d, Y, W);
     if (a != null) {
       if (!g(a) || a < 0) {
-        const z = K ? `options.${W}` : "options.highWaterMark";
+        const z = Y ? `options.${W}` : "options.highWaterMark";
         throw new C(z, a);
       }
       return I(a);
@@ -15494,7 +15494,7 @@ function Vy() {
         this.fillLast = c, M = 4;
         break;
       case "base64":
-        this.text = K, this.end = a, M = 3;
+        this.text = Y, this.end = a, M = 3;
         break;
       default:
         this.write = z, this.end = s;
@@ -15504,13 +15504,13 @@ function Vy() {
   }
   l.prototype.write = function(X) {
     if (X.length === 0) return "";
-    var M, Y;
+    var M, K;
     if (this.lastNeed) {
       if (M = this.fillLast(X), M === void 0) return "";
-      Y = this.lastNeed, this.lastNeed = 0;
+      K = this.lastNeed, this.lastNeed = 0;
     } else
-      Y = 0;
-    return Y < X.length ? M ? M + this.text(X, Y) : this.text(X, Y) : M || "";
+      K = 0;
+    return K < X.length ? M ? M + this.text(X, K) : this.text(X, K) : M || "";
   }, l.prototype.end = b, l.prototype.text = Z, l.prototype.fillLast = function(X) {
     if (this.lastNeed <= X.length)
       return X.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed), this.lastChar.toString(this.encoding, 0, this.lastTotal);
@@ -15519,13 +15519,13 @@ function Vy() {
   function B(X) {
     return X <= 127 ? 0 : X >> 5 === 6 ? 2 : X >> 4 === 14 ? 3 : X >> 3 === 30 ? 4 : X >> 6 === 2 ? -1 : -2;
   }
-  function i(X, M, Y) {
-    var p = M.length - 1;
-    if (p < Y) return 0;
-    var N = B(M[p]);
-    return N >= 0 ? (N > 0 && (X.lastNeed = N - 1), N) : --p < Y || N === -2 ? 0 : (N = B(M[p]), N >= 0 ? (N > 0 && (X.lastNeed = N - 2), N) : --p < Y || N === -2 ? 0 : (N = B(M[p]), N >= 0 ? (N > 0 && (N === 2 ? N = 0 : X.lastNeed = N - 3), N) : 0));
+  function i(X, M, K) {
+    var u = M.length - 1;
+    if (u < K) return 0;
+    var N = B(M[u]);
+    return N >= 0 ? (N > 0 && (X.lastNeed = N - 1), N) : --u < K || N === -2 ? 0 : (N = B(M[u]), N >= 0 ? (N > 0 && (X.lastNeed = N - 2), N) : --u < K || N === -2 ? 0 : (N = B(M[u]), N >= 0 ? (N > 0 && (N === 2 ? N = 0 : X.lastNeed = N - 3), N) : 0));
   }
-  function G(X, M, Y) {
+  function G(X, M, K) {
     if ((M[0] & 192) !== 128)
       return X.lastNeed = 0, "�";
     if (X.lastNeed > 1 && M.length > 1) {
@@ -15536,18 +15536,18 @@ function Vy() {
     }
   }
   function c(X) {
-    var M = this.lastTotal - this.lastNeed, Y = G(this, X);
-    if (Y !== void 0) return Y;
+    var M = this.lastTotal - this.lastNeed, K = G(this, X);
+    if (K !== void 0) return K;
     if (this.lastNeed <= X.length)
       return X.copy(this.lastChar, M, 0, this.lastNeed), this.lastChar.toString(this.encoding, 0, this.lastTotal);
     X.copy(this.lastChar, M, 0, X.length), this.lastNeed -= X.length;
   }
   function Z(X, M) {
-    var Y = i(this, X, M);
+    var K = i(this, X, M);
     if (!this.lastNeed) return X.toString("utf8", M);
-    this.lastTotal = Y;
-    var p = X.length - (Y - this.lastNeed);
-    return X.copy(this.lastChar, 0, p), X.toString("utf8", M, p);
+    this.lastTotal = K;
+    var u = X.length - (K - this.lastNeed);
+    return X.copy(this.lastChar, 0, u), X.toString("utf8", M, u);
   }
   function b(X) {
     var M = X && X.length ? this.write(X) : "";
@@ -15555,27 +15555,27 @@ function Vy() {
   }
   function d(X, M) {
     if ((X.length - M) % 2 === 0) {
-      var Y = X.toString("utf16le", M);
-      if (Y) {
-        var p = Y.charCodeAt(Y.length - 1);
-        if (p >= 55296 && p <= 56319)
-          return this.lastNeed = 2, this.lastTotal = 4, this.lastChar[0] = X[X.length - 2], this.lastChar[1] = X[X.length - 1], Y.slice(0, -1);
+      var K = X.toString("utf16le", M);
+      if (K) {
+        var u = K.charCodeAt(K.length - 1);
+        if (u >= 55296 && u <= 56319)
+          return this.lastNeed = 2, this.lastTotal = 4, this.lastChar[0] = X[X.length - 2], this.lastChar[1] = X[X.length - 1], K.slice(0, -1);
       }
-      return Y;
+      return K;
     }
     return this.lastNeed = 1, this.lastTotal = 2, this.lastChar[0] = X[X.length - 1], X.toString("utf16le", M, X.length - 1);
   }
   function W(X) {
     var M = X && X.length ? this.write(X) : "";
     if (this.lastNeed) {
-      var Y = this.lastTotal - this.lastNeed;
-      return M + this.lastChar.toString("utf16le", 0, Y);
+      var K = this.lastTotal - this.lastNeed;
+      return M + this.lastChar.toString("utf16le", 0, K);
     }
     return M;
   }
-  function K(X, M) {
-    var Y = (X.length - M) % 3;
-    return Y === 0 ? X.toString("base64", M) : (this.lastNeed = 3 - Y, this.lastTotal = 3, Y === 1 ? this.lastChar[0] = X[X.length - 1] : (this.lastChar[0] = X[X.length - 2], this.lastChar[1] = X[X.length - 1]), X.toString("base64", M, X.length - Y));
+  function Y(X, M) {
+    var K = (X.length - M) % 3;
+    return K === 0 ? X.toString("base64", M) : (this.lastNeed = 3 - K, this.lastTotal = 3, K === 1 ? this.lastChar[0] = X[X.length - 1] : (this.lastChar[0] = X[X.length - 2], this.lastChar[1] = X[X.length - 1]), X.toString("base64", M, X.length - K));
   }
   function a(X) {
     var M = X && X.length ? this.write(X) : "";
@@ -15611,33 +15611,33 @@ function Jb() {
       W = !1, d = Z[C]();
     else
       throw new B("iterable", ["Iterable"], Z);
-    const K = new c({
+    const Y = new c({
       objectMode: !0,
       highWaterMark: 1,
       // TODO(ronag): What options should be allowed?
       ...b
     });
     let a = !1;
-    K._read = function() {
+    Y._read = function() {
       a || (a = !0, s());
-    }, K._destroy = function(X, M) {
+    }, Y._destroy = function(X, M) {
       g(
         z(X),
         () => I.nextTick(M, X),
         // nextTick is here in case cb throws
-        (Y) => I.nextTick(M, Y || X)
+        (K) => I.nextTick(M, K || X)
       );
     };
     async function z(X) {
-      const M = X != null, Y = typeof d.throw == "function";
-      if (M && Y) {
-        const { value: p, done: N } = await d.throw(X);
-        if (await p, N)
+      const M = X != null, K = typeof d.throw == "function";
+      if (M && K) {
+        const { value: u, done: N } = await d.throw(X);
+        if (await u, N)
           return;
       }
       if (typeof d.return == "function") {
-        const { value: p } = await d.return();
-        await p;
+        const { value: u } = await d.return();
+        await u;
       }
     }
     async function s() {
@@ -15645,22 +15645,22 @@ function Jb() {
         try {
           const { value: X, done: M } = W ? await d.next() : d.next();
           if (M)
-            K.push(null);
+            Y.push(null);
           else {
-            const Y = X && typeof X.then == "function" ? await X : X;
-            if (Y === null)
+            const K = X && typeof X.then == "function" ? await X : X;
+            if (K === null)
               throw a = !1, new i();
-            if (K.push(Y))
+            if (Y.push(K))
               continue;
             a = !1;
           }
         } catch (X) {
-          K.destroy(X);
+          Y.destroy(X);
         }
         break;
       }
     }
-    return K;
+    return Y;
   }
   return El = G, El;
 }
@@ -15683,16 +15683,16 @@ function Bl() {
     Symbol: W
   } = Ng();
   kl = cI, cI.ReadableState = XI;
-  const { EventEmitter: K } = gl(), { Stream: a, prependListener: z } = Mi(), { Buffer: s } = MA(), { addAbortSignal: X } = Al(), M = FA();
-  let Y = eg().debuglog("stream", (e) => {
-    Y = e;
+  const { EventEmitter: Y } = gl(), { Stream: a, prependListener: z } = Mi(), { Buffer: s } = MA(), { addAbortSignal: X } = Al(), M = FA();
+  let K = eg().debuglog("stream", (e) => {
+    K = e;
   });
-  const p = Wy(), N = YC(), { getHighWaterMark: Q, getDefaultHighWaterMark: F } = Cl(), {
+  const u = Wy(), N = YC(), { getHighWaterMark: Q, getDefaultHighWaterMark: F } = Cl(), {
     aggregateTwoErrors: v,
     codes: {
       ERR_INVALID_ARG_TYPE: w,
-      ERR_METHOD_NOT_IMPLEMENTED: S,
-      ERR_OUT_OF_RANGE: u,
+      ERR_METHOD_NOT_IMPLEMENTED: p,
+      ERR_OUT_OF_RANGE: S,
       ERR_STREAM_PUSH_AFTER_EOF: R,
       ERR_STREAM_UNSHIFT_AFTER_END_EVENT: y
     },
@@ -15750,7 +15750,7 @@ function Bl() {
     dataEmitted: dI(f)
   });
   function XI(e, J, oI) {
-    typeof oI != "boolean" && (oI = J instanceof aA()), this.state = VI | k | MI | zI, e && e.objectMode && (this.state |= $), oI && e && e.readableObjectMode && (this.state |= $), this.highWaterMark = e ? Q(this, e, "readableHighWaterMark", oI) : F(!1), this.buffer = new p(), this.length = 0, this.pipes = [], this.flowing = null, this[x] = null, e && e.emitClose === !1 && (this.state &= ~VI), e && e.autoDestroy === !1 && (this.state &= ~k), this.errored = null, this.defaultEncoding = e && e.defaultEncoding || "utf8", this.awaitDrainWriters = null, this.decoder = null, this.encoding = null, e && e.encoding && (this.decoder = new iI(e.encoding), this.encoding = e.encoding);
+    typeof oI != "boolean" && (oI = J instanceof aA()), this.state = VI | k | MI | zI, e && e.objectMode && (this.state |= $), oI && e && e.readableObjectMode && (this.state |= $), this.highWaterMark = e ? Q(this, e, "readableHighWaterMark", oI) : F(!1), this.buffer = new u(), this.length = 0, this.pipes = [], this.flowing = null, this[x] = null, e && e.emitClose === !1 && (this.state &= ~VI), e && e.autoDestroy === !1 && (this.state &= ~k), this.errored = null, this.defaultEncoding = e && e.defaultEncoding || "utf8", this.awaitDrainWriters = null, this.decoder = null, this.encoding = null, e && e.encoding && (this.decoder = new iI(e.encoding), this.encoding = e.encoding);
   }
   function cI(e) {
     if (!(this instanceof cI)) return new cI(e);
@@ -15761,7 +15761,7 @@ function Bl() {
   }
   cI.prototype.destroy = N.destroy, cI.prototype._undestroy = N.undestroy, cI.prototype._destroy = function(e, J) {
     J(e);
-  }, cI.prototype[K.captureRejectionSymbol] = function(e) {
+  }, cI.prototype[Y.captureRejectionSymbol] = function(e) {
     this.destroy(e);
   }, cI.prototype[b] = function() {
     let e;
@@ -15772,7 +15772,7 @@ function Bl() {
     return OI(this, e, J, !0);
   };
   function OI(e, J, oI, KI) {
-    Y("readableAddChunk", J);
+    K("readableAddChunk", J);
     const uI = e._readableState;
     let xI;
     if (uI.state & $ || (typeof J == "string" ? (oI = oI || uI.defaultEncoding, uI.encoding !== oI && (KI && uI.encoding ? J = s.from(J, oI).toString(uI.encoding) : (J = s.from(J, oI), oI = ""))) : J instanceof s ? oI = "" : a._isUint8Array(J) ? (J = a._uint8ArrayToBuffer(J), oI = "") : J != null && (xI = new w("chunk", ["string", "Buffer", "Uint8Array"], J))), xI)
@@ -15814,24 +15814,24 @@ function Bl() {
   const fI = 1073741824;
   function og(e) {
     if (e > fI)
-      throw new u("size", "<= 1GiB", e);
+      throw new S("size", "<= 1GiB", e);
     return e--, e |= e >>> 1, e |= e >>> 2, e |= e >>> 4, e |= e >>> 8, e |= e >>> 16, e++, e;
   }
   function h(e, J) {
     return e <= 0 || J.length === 0 && J.ended ? 0 : J.state & $ ? 1 : C(e) ? J.flowing && J.length ? J.buffer.first().length : J.length : e <= J.length ? e : J.ended ? J.length : 0;
   }
   cI.prototype.read = function(e) {
-    Y("read", e), e === void 0 ? e = NaN : A(e) || (e = l(e, 10));
+    K("read", e), e === void 0 ? e = NaN : A(e) || (e = l(e, 10));
     const J = this._readableState, oI = e;
     if (e > J.highWaterMark && (J.highWaterMark = og(e)), e !== 0 && (J.state &= ~P), e === 0 && J.needReadable && ((J.highWaterMark !== 0 ? J.length >= J.highWaterMark : J.length > 0) || J.ended))
-      return Y("read: emitReadable", J.length, J.ended), J.length === 0 && J.ended ? aI(this) : V(this), null;
+      return K("read: emitReadable", J.length, J.ended), J.length === 0 && J.ended ? aI(this) : V(this), null;
     if (e = h(e, J), e === 0 && J.ended)
       return J.length === 0 && aI(this), null;
     let KI = (J.state & CI) !== 0;
-    if (Y("need readable", KI), (J.length === 0 || J.length - e < J.highWaterMark) && (KI = !0, Y("length less than watermark", KI)), J.ended || J.reading || J.destroyed || J.errored || !J.constructed)
-      KI = !1, Y("reading, ended or constructing", KI);
+    if (K("need readable", KI), (J.length === 0 || J.length - e < J.highWaterMark) && (KI = !0, K("length less than watermark", KI)), J.ended || J.reading || J.destroyed || J.errored || !J.constructed)
+      KI = !1, K("reading, ended or constructing", KI);
     else if (KI) {
-      Y("do read"), J.state |= NI | zI, J.length === 0 && (J.state |= CI);
+      K("do read"), J.state |= NI | zI, J.length === 0 && (J.state |= CI);
       try {
         this._read(J.highWaterMark);
       } catch (xI) {
@@ -15843,7 +15843,7 @@ function Bl() {
     return e > 0 ? uI = AI(e, J) : uI = null, uI === null ? (J.needReadable = J.length <= J.highWaterMark, e = 0) : (J.length -= e, J.multiAwaitDrain ? J.awaitDrainWriters.clear() : J.awaitDrainWriters = null), J.length === 0 && (J.ended || (J.needReadable = !0), oI !== e && J.ended && aI(this)), uI !== null && !J.errorEmitted && !J.closeEmitted && (J.dataEmitted = !0, this.emit("data", uI)), uI;
   };
   function o(e, J) {
-    if (Y("onEofChunk"), !J.ended) {
+    if (K("onEofChunk"), !J.ended) {
       if (J.decoder) {
         const oI = J.decoder.end();
         oI && oI.length && (J.buffer.push(oI), J.length += J.objectMode ? 1 : oI.length);
@@ -15853,11 +15853,11 @@ function Bl() {
   }
   function V(e) {
     const J = e._readableState;
-    Y("emitReadable", J.needReadable, J.emittedReadable), J.needReadable = !1, J.emittedReadable || (Y("emitReadable", J.flowing), J.emittedReadable = !0, I.nextTick(t, e));
+    K("emitReadable", J.needReadable, J.emittedReadable), J.needReadable = !1, J.emittedReadable || (K("emitReadable", J.flowing), J.emittedReadable = !0, I.nextTick(t, e));
   }
   function t(e) {
     const J = e._readableState;
-    Y("emitReadable_", J.destroyed, J.length, J.ended), !J.destroyed && !J.errored && (J.length || J.ended) && (e.emit("readable"), J.emittedReadable = !1), J.needReadable = !J.flowing && !J.ended && J.length <= J.highWaterMark, _I(e);
+    K("emitReadable_", J.destroyed, J.length, J.ended), !J.destroyed && !J.errored && (J.length || J.ended) && (e.emit("readable"), J.emittedReadable = !1), J.needReadable = !J.flowing && !J.ended && J.length <= J.highWaterMark, _I(e);
   }
   function r(e, J) {
     !J.readingMore && J.constructed && (J.readingMore = !0, I.nextTick(GI, e, J));
@@ -15865,39 +15865,39 @@ function Bl() {
   function GI(e, J) {
     for (; !J.reading && !J.ended && (J.length < J.highWaterMark || J.flowing && J.length === 0); ) {
       const oI = J.length;
-      if (Y("maybeReadMore read 0"), e.read(0), oI === J.length)
+      if (K("maybeReadMore read 0"), e.read(0), oI === J.length)
         break;
     }
     J.readingMore = !1;
   }
   cI.prototype._read = function(e) {
-    throw new S("_read()");
+    throw new p("_read()");
   }, cI.prototype.pipe = function(e, J) {
     const oI = this, KI = this._readableState;
-    KI.pipes.length === 1 && (KI.multiAwaitDrain || (KI.multiAwaitDrain = !0, KI.awaitDrainWriters = new Z(KI.awaitDrainWriters ? [KI.awaitDrainWriters] : []))), KI.pipes.push(e), Y("pipe count=%d opts=%j", KI.pipes.length, J);
+    KI.pipes.length === 1 && (KI.multiAwaitDrain || (KI.multiAwaitDrain = !0, KI.awaitDrainWriters = new Z(KI.awaitDrainWriters ? [KI.awaitDrainWriters] : []))), KI.pipes.push(e), K("pipe count=%d opts=%j", KI.pipes.length, J);
     const xI = (!J || J.end !== !1) && e !== I.stdout && e !== I.stderr ? H : eI;
     KI.endEmitted ? I.nextTick(xI) : oI.once("end", xI), e.on("unpipe", rI);
     function rI(DI, TI) {
-      Y("onunpipe"), DI === oI && TI && TI.hasUnpiped === !1 && (TI.hasUnpiped = !0, JI());
+      K("onunpipe"), DI === oI && TI && TI.hasUnpiped === !1 && (TI.hasUnpiped = !0, JI());
     }
     function H() {
-      Y("onend"), e.end();
+      K("onend"), e.end();
     }
     let Ag, lg = !1;
     function JI() {
-      Y("cleanup"), e.removeListener("close", QI), e.removeListener("finish", UI), Ag && e.removeListener("drain", Ag), e.removeListener("error", gI), e.removeListener("unpipe", rI), oI.removeListener("end", H), oI.removeListener("end", eI), oI.removeListener("data", T), lg = !0, Ag && KI.awaitDrainWriters && (!e._writableState || e._writableState.needDrain) && Ag();
+      K("cleanup"), e.removeListener("close", QI), e.removeListener("finish", UI), Ag && e.removeListener("drain", Ag), e.removeListener("error", gI), e.removeListener("unpipe", rI), oI.removeListener("end", H), oI.removeListener("end", eI), oI.removeListener("data", T), lg = !0, Ag && KI.awaitDrainWriters && (!e._writableState || e._writableState.needDrain) && Ag();
     }
     function m() {
-      lg || (KI.pipes.length === 1 && KI.pipes[0] === e ? (Y("false write response, pause", 0), KI.awaitDrainWriters = e, KI.multiAwaitDrain = !1) : KI.pipes.length > 1 && KI.pipes.includes(e) && (Y("false write response, pause", KI.awaitDrainWriters.size), KI.awaitDrainWriters.add(e)), oI.pause()), Ag || (Ag = WI(oI, e), e.on("drain", Ag));
+      lg || (KI.pipes.length === 1 && KI.pipes[0] === e ? (K("false write response, pause", 0), KI.awaitDrainWriters = e, KI.multiAwaitDrain = !1) : KI.pipes.length > 1 && KI.pipes.includes(e) && (K("false write response, pause", KI.awaitDrainWriters.size), KI.awaitDrainWriters.add(e)), oI.pause()), Ag || (Ag = WI(oI, e), e.on("drain", Ag));
     }
     oI.on("data", T);
     function T(DI) {
-      Y("ondata");
+      K("ondata");
       const TI = e.write(DI);
-      Y("dest.write", TI), TI === !1 && m();
+      K("dest.write", TI), TI === !1 && m();
     }
     function gI(DI) {
-      if (Y("onerror", DI), eI(), e.removeListener("error", gI), e.listenerCount("error") === 0) {
+      if (K("onerror", DI), eI(), e.removeListener("error", gI), e.listenerCount("error") === 0) {
         const TI = e._writableState || e._readableState;
         TI && !TI.errorEmitted ? U(e, DI) : e.emit("error", DI);
       }
@@ -15908,18 +15908,18 @@ function Bl() {
     }
     e.once("close", QI);
     function UI() {
-      Y("onfinish"), e.removeListener("close", QI), eI();
+      K("onfinish"), e.removeListener("close", QI), eI();
     }
     e.once("finish", UI);
     function eI() {
-      Y("unpipe"), oI.unpipe(e);
+      K("unpipe"), oI.unpipe(e);
     }
-    return e.emit("pipe", oI), e.writableNeedDrain === !0 ? m() : KI.flowing || (Y("pipe resume"), oI.resume()), e;
+    return e.emit("pipe", oI), e.writableNeedDrain === !0 ? m() : KI.flowing || (K("pipe resume"), oI.resume()), e;
   };
   function WI(e, J) {
     return function() {
       const KI = e._readableState;
-      KI.awaitDrainWriters === J ? (Y("pipeOnDrain", 1), KI.awaitDrainWriters = null) : KI.multiAwaitDrain && (Y("pipeOnDrain", KI.awaitDrainWriters.size), KI.awaitDrainWriters.delete(J)), (!KI.awaitDrainWriters || KI.awaitDrainWriters.size === 0) && e.listenerCount("data") && e.resume();
+      KI.awaitDrainWriters === J ? (K("pipeOnDrain", 1), KI.awaitDrainWriters = null) : KI.multiAwaitDrain && (K("pipeOnDrain", KI.awaitDrainWriters.size), KI.awaitDrainWriters.delete(J)), (!KI.awaitDrainWriters || KI.awaitDrainWriters.size === 0) && e.listenerCount("data") && e.resume();
     };
   }
   cI.prototype.unpipe = function(e) {
@@ -15940,7 +15940,7 @@ function Bl() {
     return KI === -1 ? this : (J.pipes.splice(KI, 1), J.pipes.length === 0 && this.pause(), e.emit("unpipe", this, oI), this);
   }, cI.prototype.on = function(e, J) {
     const oI = a.prototype.on.call(this, e, J), KI = this._readableState;
-    return e === "data" ? (KI.readableListening = this.listenerCount("readable") > 0, KI.flowing !== !1 && this.resume()) : e === "readable" && !KI.endEmitted && !KI.readableListening && (KI.readableListening = KI.needReadable = !0, KI.flowing = !1, KI.emittedReadable = !1, Y("on readable", KI.length, KI.reading), KI.length ? V(this) : KI.reading || I.nextTick(Bg, this)), oI;
+    return e === "data" ? (KI.readableListening = this.listenerCount("readable") > 0, KI.flowing !== !1 && this.resume()) : e === "readable" && !KI.endEmitted && !KI.readableListening && (KI.readableListening = KI.needReadable = !0, KI.flowing = !1, KI.emittedReadable = !1, K("on readable", KI.length, KI.reading), KI.length ? V(this) : KI.reading || I.nextTick(Bg, this)), oI;
   }, cI.prototype.addListener = cI.prototype.on, cI.prototype.removeListener = function(e, J) {
     const oI = a.prototype.removeListener.call(this, e, J);
     return e === "readable" && I.nextTick(jI, this), oI;
@@ -15953,24 +15953,24 @@ function Bl() {
     J.readableListening = e.listenerCount("readable") > 0, J.resumeScheduled && J[x] === !1 ? J.flowing = !0 : e.listenerCount("data") > 0 ? e.resume() : J.readableListening || (J.flowing = null);
   }
   function Bg(e) {
-    Y("readable nexttick read 0"), e.read(0);
+    K("readable nexttick read 0"), e.read(0);
   }
   cI.prototype.resume = function() {
     const e = this._readableState;
-    return e.flowing || (Y("resume"), e.flowing = !e.readableListening, PI(this, e)), e[x] = !1, this;
+    return e.flowing || (K("resume"), e.flowing = !e.readableListening, PI(this, e)), e[x] = !1, this;
   };
   function PI(e, J) {
     J.resumeScheduled || (J.resumeScheduled = !0, I.nextTick(Cg, e, J));
   }
   function Cg(e, J) {
-    Y("resume", J.reading), J.reading || e.read(0), J.resumeScheduled = !1, e.emit("resume"), _I(e), J.flowing && !J.reading && e.read(0);
+    K("resume", J.reading), J.reading || e.read(0), J.resumeScheduled = !1, e.emit("resume"), _I(e), J.flowing && !J.reading && e.read(0);
   }
   cI.prototype.pause = function() {
-    return Y("call pause flowing=%j", this._readableState.flowing), this._readableState.flowing !== !1 && (Y("pause"), this._readableState.flowing = !1, this.emit("pause")), this._readableState[x] = !0, this;
+    return K("call pause flowing=%j", this._readableState.flowing), this._readableState.flowing !== !1 && (K("pause"), this._readableState.flowing = !1, this.emit("pause")), this._readableState[x] = !0, this;
   };
   function _I(e) {
     const J = e._readableState;
-    for (Y("flow", J.flowing); J.flowing && e.read() !== null; ) ;
+    for (K("flow", J.flowing); J.flowing && e.read() !== null; ) ;
   }
   cI.prototype.wrap = function(e) {
     let J = !1;
@@ -16166,10 +16166,10 @@ function Bl() {
   }
   function aI(e) {
     const J = e._readableState;
-    Y("endReadable", J.endEmitted), J.endEmitted || (J.ended = !0, I.nextTick(YI, J, e));
+    K("endReadable", J.endEmitted), J.endEmitted || (J.ended = !0, I.nextTick(YI, J, e));
   }
   function YI(e, J) {
-    if (Y("endReadableNT", e.endEmitted, e.length), !e.errored && !e.closeEmitted && !e.endEmitted && e.length === 0) {
+    if (K("endReadableNT", e.endEmitted, e.length), !e.errored && !e.closeEmitted && !e.endEmitted && e.length === 0) {
       if (e.endEmitted = !0, J.emit("end"), J.writable && J.allowHalfOpen === !1)
         I.nextTick(pI, J);
       else if (e.autoDestroy) {
@@ -16221,19 +16221,19 @@ function wi() {
     SymbolHasInstance: Z
   } = Ng();
   Ul = j, j.WritableState = y;
-  const { EventEmitter: b } = gl(), d = Mi().Stream, { Buffer: W } = MA(), K = YC(), { addAbortSignal: a } = Al(), { getHighWaterMark: z, getDefaultHighWaterMark: s } = Cl(), {
+  const { EventEmitter: b } = gl(), d = Mi().Stream, { Buffer: W } = MA(), Y = YC(), { addAbortSignal: a } = Al(), { getHighWaterMark: z, getDefaultHighWaterMark: s } = Cl(), {
     ERR_INVALID_ARG_TYPE: X,
     ERR_METHOD_NOT_IMPLEMENTED: M,
-    ERR_MULTIPLE_CALLBACK: Y,
-    ERR_STREAM_CANNOT_PIPE: p,
+    ERR_MULTIPLE_CALLBACK: K,
+    ERR_STREAM_CANNOT_PIPE: u,
     ERR_STREAM_DESTROYED: N,
     ERR_STREAM_ALREADY_FINISHED: Q,
     ERR_STREAM_NULL_VALUES: F,
     ERR_STREAM_WRITE_AFTER_END: v,
     ERR_UNKNOWN_ENCODING: w
-  } = tg().codes, { errorOrDestroy: S } = K;
+  } = tg().codes, { errorOrDestroy: p } = Y;
   i(j.prototype, d.prototype), i(j, d);
-  function u() {
+  function S() {
   }
   const R = c("kOnFinished");
   function y(k, D, O) {
@@ -16255,7 +16255,7 @@ function wi() {
   function j(k) {
     const D = this instanceof aA();
     if (!D && !C(j, this)) return new j(k);
-    this._writableState = new y(k, this, D), k && (typeof k.write == "function" && (this._write = k.write), typeof k.writev == "function" && (this._writev = k.writev), typeof k.destroy == "function" && (this._destroy = k.destroy), typeof k.final == "function" && (this._final = k.final), typeof k.construct == "function" && (this._construct = k.construct), k.signal && a(k.signal, this)), d.call(this, k), K.construct(this, () => {
+    this._writableState = new y(k, this, D), k && (typeof k.write == "function" && (this._write = k.write), typeof k.writev == "function" && (this._writev = k.writev), typeof k.destroy == "function" && (this._destroy = k.destroy), typeof k.final == "function" && (this._final = k.final), typeof k.construct == "function" && (this._construct = k.construct), k.signal && a(k.signal, this)), d.call(this, k), Y.construct(this, () => {
       const O = this._writableState;
       O.writing || NI(this, O), P(this, O);
     });
@@ -16266,7 +16266,7 @@ function wi() {
       return C(this, k) ? !0 : this !== j ? !1 : k && k._writableState instanceof y;
     }
   }), j.prototype.pipe = function() {
-    S(this, new p());
+    p(this, new u());
   };
   function x(k, D, O, LI) {
     const mI = k._writableState;
@@ -16275,7 +16275,7 @@ function wi() {
     else {
       if (!O) O = mI.defaultEncoding;
       else if (O !== "buffer" && !W.isEncoding(O)) throw new w(O);
-      typeof LI != "function" && (LI = u);
+      typeof LI != "function" && (LI = S);
     }
     if (D === null)
       throw new F();
@@ -16289,7 +16289,7 @@ function wi() {
       else
         throw new X("chunk", ["string", "Buffer", "Uint8Array"], D);
     let sI;
-    return mI.ending ? sI = new v() : mI.destroyed && (sI = new N("write")), sI ? (I.nextTick(LI, sI), S(k, sI, !0), sI) : (mI.pendingcb++, iI(k, mI, D, O, LI));
+    return mI.ending ? sI = new v() : mI.destroyed && (sI = new N("write")), sI ? (I.nextTick(LI, sI), p(k, sI, !0), sI) : (mI.pendingcb++, iI(k, mI, D, O, LI));
   }
   j.prototype.write = function(k, D, O) {
     return x(this, k, D, O) === !0;
@@ -16310,18 +16310,18 @@ function wi() {
       chunk: O,
       encoding: LI,
       callback: mI
-    }), D.allBuffers && LI !== "buffer" && (D.allBuffers = !1), D.allNoop && mI !== u && (D.allNoop = !1)) : (D.writelen = sI, D.writecb = mI, D.writing = !0, D.sync = !0, k._write(O, LI, D.onwrite), D.sync = !1), f && !D.errored && !D.destroyed;
+    }), D.allBuffers && LI !== "buffer" && (D.allBuffers = !1), D.allNoop && mI !== S && (D.allNoop = !1)) : (D.writelen = sI, D.writecb = mI, D.writing = !0, D.sync = !0, k._write(O, LI, D.onwrite), D.sync = !1), f && !D.errored && !D.destroyed;
   }
   function lI(k, D, O, LI, mI, sI, f) {
     D.writelen = LI, D.writecb = f, D.writing = !0, D.sync = !0, D.destroyed ? D.onwrite(new N("write")) : O ? k._writev(mI, D.onwrite) : k._write(mI, sI, D.onwrite), D.sync = !1;
   }
   function nI(k, D, O, LI) {
-    --D.pendingcb, LI(O), _(D), S(k, O);
+    --D.pendingcb, LI(O), _(D), p(k, O);
   }
   function U(k, D) {
     const O = k._writableState, LI = O.sync, mI = O.writecb;
     if (typeof mI != "function") {
-      S(k, new Y());
+      p(k, new K());
       return;
     }
     O.writing = !1, O.writecb = null, O.length -= O.writelen, O.writelen = 0, D ? (D.stack, O.errored || (O.errored = D), k._readableState && !k._readableState.errored && (k._readableState.errored = D), LI ? I.nextTick(nI, k, O, D, mI) : nI(k, O, D, mI)) : (O.buffered.length > O.bufferedIndex && NI(k, O), LI ? O.afterWriteTickInfo !== null && O.afterWriteTickInfo.cb === mI ? O.afterWriteTickInfo.count++ : (O.afterWriteTickInfo = {
@@ -16367,7 +16367,7 @@ function wi() {
     let f = LI;
     if (D.bufferProcessing = !0, sI > 1 && k._writev) {
       D.pendingcb -= sI - 1;
-      const dI = D.allNoop ? u : (cI) => {
+      const dI = D.allNoop ? S : (cI) => {
         for (let OI = f; OI < O.length; ++OI)
           O[OI].callback(cI);
       }, XI = D.allNoop && f === 0 ? O : g(O, f);
@@ -16413,14 +16413,14 @@ function wi() {
     let O = !1;
     function LI(mI) {
       if (O) {
-        S(k, mI ?? Y());
+        p(k, mI ?? K());
         return;
       }
       if (O = !0, D.pendingcb--, mI) {
         const sI = D[R].splice(0);
         for (let f = 0; f < sI.length; f++)
           sI[f](mI);
-        S(k, mI, D.sync);
+        p(k, mI, D.sync);
       } else MI(D) && (D.prefinished = !0, k.emit("prefinish"), D.pendingcb++, I.nextTick(II, k, D));
     }
     D.sync = !0, D.pendingcb++;
@@ -16545,11 +16545,11 @@ function wi() {
       }
     }
   });
-  const wI = K.destroy;
+  const wI = Y.destroy;
   j.prototype.destroy = function(k, D) {
     const O = this._writableState;
     return !O.destroyed && (O.bufferedIndex < O.buffered.length || O[R].length) && I.nextTick(_, O), wI.call(this, k, D), this;
-  }, j.prototype._undestroy = K.undestroy, j.prototype._destroy = function(k, D) {
+  }, j.prototype._undestroy = Y.undestroy, j.prototype._destroy = function(k, D) {
     D(k);
   }, j.prototype[b.captureRejectionSymbol] = function(k) {
     this.destroy(k);
@@ -16580,8 +16580,8 @@ function Xy() {
     isWritableStream: b
   } = wA(), d = FA(), {
     AbortError: W,
-    codes: { ERR_INVALID_ARG_TYPE: K, ERR_INVALID_RETURN_VALUE: a }
-  } = tg(), { destroyer: z } = YC(), s = aA(), X = Bl(), M = wi(), { createDeferredPromise: Y } = eg(), p = Jb(), N = globalThis.Blob || g.Blob, Q = typeof N < "u" ? function(y) {
+    codes: { ERR_INVALID_ARG_TYPE: Y, ERR_INVALID_RETURN_VALUE: a }
+  } = tg(), { destroyer: z } = YC(), s = aA(), X = Bl(), M = wi(), { createDeferredPromise: K } = eg(), u = Jb(), N = globalThis.Blob || g.Blob, Q = typeof N < "u" ? function(y) {
     return y instanceof N;
   } : function(y) {
     return !1;
@@ -16595,30 +16595,30 @@ function Xy() {
     if (c(y))
       return y;
     if (i(y))
-      return u({
+      return S({
         readable: y
       });
     if (G(y))
-      return u({
+      return S({
         writable: y
       });
     if (B(y))
-      return u({
+      return S({
         writable: !1,
         readable: !1
       });
     if (Z(y))
-      return u({
+      return S({
         readable: X.fromWeb(y)
       });
     if (b(y))
-      return u({
+      return S({
         writable: M.fromWeb(y)
       });
     if (typeof y == "function") {
-      const { value: x, write: iI, final: lI, destroy: nI } = S(y);
+      const { value: x, write: iI, final: lI, destroy: nI } = p(y);
       if (l(x))
-        return p(w, x, {
+        return u(w, x, {
           // TODO (ronag): highWaterMark?
           objectMode: !0,
           write: iI,
@@ -16661,7 +16661,7 @@ function Xy() {
     if (Q(y))
       return R(y.arrayBuffer());
     if (l(y))
-      return p(w, y, {
+      return u(w, y, {
         // TODO (ronag): highWaterMark?
         objectMode: !0,
         writable: !1
@@ -16670,7 +16670,7 @@ function Xy() {
       return w.fromWeb(y);
     if (typeof (y == null ? void 0 : y.writable) == "object" || typeof (y == null ? void 0 : y.readable) == "object") {
       const x = y != null && y.readable ? i(y == null ? void 0 : y.readable) ? y == null ? void 0 : y.readable : R(y.readable) : void 0, iI = y != null && y.writable ? G(y == null ? void 0 : y.writable) ? y == null ? void 0 : y.writable : R(y.writable) : void 0;
-      return u({
+      return S({
         readable: x,
         writable: iI
       });
@@ -16694,7 +16694,7 @@ function Xy() {
         }
       });
     }
-    throw new K(
+    throw new Y(
       E,
       [
         "Blob",
@@ -16710,8 +16710,8 @@ function Xy() {
       y
     );
   };
-  function S(R) {
-    let { promise: y, resolve: E } = Y();
+  function p(R) {
+    let { promise: y, resolve: E } = K();
     const j = new F(), x = j.signal;
     return {
       value: R(
@@ -16725,7 +16725,7 @@ function Xy() {
               throw new W(void 0, {
                 cause: x.reason
               });
-            ({ promise: y, resolve: E } = Y()), yield nI;
+            ({ promise: y, resolve: E } = K()), yield nI;
           }
         }(),
         {
@@ -16752,7 +16752,7 @@ function Xy() {
       }
     };
   }
-  function u(R) {
+  function S(R) {
     const y = R.readable && typeof R.readable.read != "function" ? X.wrap(R.readable) : R.readable, E = R.writable;
     let j = !!A(y), x = !!C(E), iI, lI, nI, U, $;
     function yI(_) {
@@ -16929,13 +16929,13 @@ function Db() {
   return i.prototype._final = G, i.prototype._transform = function(Z, b, d) {
     throw new A("_transform()");
   }, i.prototype._write = function(Z, b, d) {
-    const W = this._readableState, K = this._writableState, a = W.length;
+    const W = this._readableState, Y = this._writableState, a = W.length;
     this._transform(Z, b, (z, s) => {
       if (z) {
         d(z);
         return;
       }
-      s != null && this.push(s), K.ended || // Backwards compat.
+      s != null && this.push(s), Y.ended || // Backwards compat.
       a === W.length || // Backwards compat.
       W.length < W.highWaterMark ? d() : this[B] = d;
     });
@@ -16972,21 +16972,21 @@ function pi() {
       ERR_INVALID_ARG_TYPE: b,
       ERR_INVALID_RETURN_VALUE: d,
       ERR_MISSING_ARGS: W,
-      ERR_STREAM_DESTROYED: K,
+      ERR_STREAM_DESTROYED: Y,
       ERR_STREAM_PREMATURE_CLOSE: a
     },
     AbortError: z
   } = tg(), { validateFunction: s, validateAbortSignal: X } = WB(), {
     isIterable: M,
-    isReadable: Y,
-    isReadableNodeStream: p,
+    isReadable: K,
+    isReadableNodeStream: u,
     isNodeStream: N,
     isTransformStream: Q,
     isWebStream: F,
     isReadableStream: v,
     isReadableFinished: w
-  } = wA(), S = globalThis.AbortController || iB().AbortController;
-  let u, R, y;
+  } = wA(), p = globalThis.AbortController || iB().AbortController;
+  let S, R, y;
   function E(_, NI, MI) {
     let zI = !1;
     _.on("close", () => {
@@ -17004,7 +17004,7 @@ function pi() {
     );
     return {
       destroy: (P) => {
-        zI || (zI = !0, G.destroyer(_, P || new K("pipe")));
+        zI || (zI = !0, G.destroyer(_, P || new Y("pipe")));
       },
       cleanup: CI
     };
@@ -17015,7 +17015,7 @@ function pi() {
   function x(_) {
     if (M(_))
       return _;
-    if (p(_))
+    if (u(_))
       return iI(_);
     throw new b("val", ["Readable", "Iterable", "AsyncIterable"], _);
   }
@@ -17075,7 +17075,7 @@ function pi() {
   function $(_, NI, MI) {
     if (_.length === 1 && g(_[0]) && (_ = _[0]), _.length < 2)
       throw new W("streams");
-    const zI = new S(), CI = zI.signal, P = MI == null ? void 0 : MI.signal, II = [];
+    const zI = new p(), CI = zI.signal, P = MI == null ? void 0 : MI.signal, II = [];
     X(P, "options.signal");
     function wI() {
       mI(new z());
@@ -17106,9 +17106,9 @@ function pi() {
         };
         if (fI) {
           const { destroy: o, cleanup: V } = E(cI, OI, Gg);
-          D.push(o), Y(cI) && og && II.push(V);
+          D.push(o), K(cI) && og && II.push(V);
         }
-        cI.on("error", h), Y(cI) && og && II.push(() => {
+        cI.on("error", h), K(cI) && og && II.push(() => {
           cI.removeListener("error", h);
         });
       }
@@ -17118,7 +17118,7 @@ function pi() {
             signal: CI
           }), !M(sI))
             throw new d("Iterable, AsyncIterable or Stream", "source", sI);
-        } else M(cI) || p(cI) || Q(cI) ? sI = cI : sI = c.from(cI);
+        } else M(cI) || u(cI) || Q(cI) ? sI = cI : sI = c.from(cI);
       else if (typeof cI == "function") {
         if (Q(sI)) {
           var f;
@@ -17132,8 +17132,8 @@ function pi() {
             throw new d("AsyncIterable", `transform[${XI - 1}]`, sI);
         } else {
           var dI;
-          u || (u = Hb());
-          const h = new u({
+          S || (S = Hb());
+          const h = new S({
             objectMode: !0
           }), o = (dI = sI) === null || dI === void 0 ? void 0 : dI.then;
           if (typeof o == "function")
@@ -17162,12 +17162,12 @@ function pi() {
           D.push(V), og && II.push(t);
         }
       } else if (N(cI)) {
-        if (p(sI)) {
+        if (u(sI)) {
           O += 2;
           const h = yI(sI, cI, LI, {
             end: fI
           });
-          Y(cI) && og && II.push(h);
+          K(cI) && og && II.push(h);
         } else if (Q(sI) || v(sI)) {
           const h = sI.readable || sI;
           O++, lI(h, cI, LI, {
@@ -17185,7 +17185,7 @@ function pi() {
           );
         sI = cI;
       } else if (F(cI)) {
-        if (p(sI))
+        if (u(sI))
           O++, nI(x(sI), cI, LI, {
             end: fI
           });
@@ -17261,7 +17261,7 @@ function tb() {
   } = wA(), {
     AbortError: b,
     codes: { ERR_INVALID_ARG_VALUE: d, ERR_MISSING_ARGS: W }
-  } = tg(), K = FA();
+  } = tg(), Y = FA();
   return Ol = function(...z) {
     if (z.length === 0)
       throw new W("streams");
@@ -17269,28 +17269,28 @@ function tb() {
       return g.from(z[0]);
     const s = [...z];
     if (typeof z[0] == "function" && (z[0] = g.from(z[0])), typeof z[z.length - 1] == "function") {
-      const u = z.length - 1;
-      z[u] = g.from(z[u]);
+      const S = z.length - 1;
+      z[S] = g.from(z[S]);
     }
-    for (let u = 0; u < z.length; ++u)
-      if (!(!C(z[u]) && !i(z[u]))) {
-        if (u < z.length - 1 && !(l(z[u]) || Z(z[u]) || G(z[u])))
-          throw new d(`streams[${u}]`, s[u], "must be readable");
-        if (u > 0 && !(B(z[u]) || c(z[u]) || G(z[u])))
-          throw new d(`streams[${u}]`, s[u], "must be writable");
+    for (let S = 0; S < z.length; ++S)
+      if (!(!C(z[S]) && !i(z[S]))) {
+        if (S < z.length - 1 && !(l(z[S]) || Z(z[S]) || G(z[S])))
+          throw new d(`streams[${S}]`, s[S], "must be readable");
+        if (S > 0 && !(B(z[S]) || c(z[S]) || G(z[S])))
+          throw new d(`streams[${S}]`, s[S], "must be writable");
       }
-    let X, M, Y, p, N;
-    function Q(u) {
-      const R = p;
-      p = null, R ? R(u) : u ? N.destroy(u) : !S && !w && N.destroy();
+    let X, M, K, u, N;
+    function Q(S) {
+      const R = u;
+      u = null, R ? R(S) : S ? N.destroy(S) : !p && !w && N.destroy();
     }
-    const F = z[0], v = I(z, Q), w = !!(B(F) || c(F) || G(F)), S = !!(l(v) || Z(v) || G(v));
+    const F = z[0], v = I(z, Q), w = !!(B(F) || c(F) || G(F)), p = !!(l(v) || Z(v) || G(v));
     if (N = new g({
       // TODO (ronag): highWaterMark?
       writableObjectMode: !!(F != null && F.writableObjectMode),
       readableObjectMode: !!(v != null && v.readableObjectMode),
       writable: w,
-      readable: S
+      readable: p
     }), w) {
       if (C(F))
         N._write = function(R, y, E) {
@@ -17321,31 +17321,31 @@ function tb() {
           }
         };
       }
-      const u = G(v) ? v.readable : v;
-      K(u, () => {
+      const S = G(v) ? v.readable : v;
+      Y(S, () => {
         if (M) {
           const R = M;
           M = null, R();
         }
       });
     }
-    if (S) {
+    if (p) {
       if (C(v))
         v.on("readable", function() {
-          if (Y) {
-            const u = Y;
-            Y = null, u();
+          if (K) {
+            const S = K;
+            K = null, S();
           }
         }), v.on("end", function() {
           N.push(null);
         }), N._read = function() {
           for (; ; ) {
-            const u = v.read();
-            if (u === null) {
-              Y = N._read;
+            const S = v.read();
+            if (S === null) {
+              K = N._read;
               return;
             }
-            if (!N.push(u))
+            if (!N.push(S))
               return;
           }
         };
@@ -17367,8 +17367,8 @@ function tb() {
         };
       }
     }
-    return N._destroy = function(u, R) {
-      !u && p !== null && (u = new b()), Y = null, X = null, M = null, p === null ? R(u) : (p = R, C(v) && A(v, u));
+    return N._destroy = function(S, R) {
+      !S && u !== null && (S = new b()), K = null, X = null, M = null, u === null ? R(S) : (u = R, C(v) && A(v, S));
     }, N;
   }, Ol;
 }
@@ -17379,32 +17379,32 @@ function Ny() {
   const I = globalThis.AbortController || iB().AbortController, {
     codes: { ERR_INVALID_ARG_VALUE: g, ERR_INVALID_ARG_TYPE: A, ERR_MISSING_ARGS: C, ERR_OUT_OF_RANGE: l },
     AbortError: B
-  } = tg(), { validateAbortSignal: i, validateInteger: G, validateObject: c } = WB(), Z = Ng().Symbol("kWeak"), b = Ng().Symbol("kResistStopPropagation"), { finished: d } = FA(), W = tb(), { addAbortSignalNoValidate: K } = Al(), { isWritable: a, isNodeStream: z } = wA(), { deprecate: s } = eg(), {
+  } = tg(), { validateAbortSignal: i, validateInteger: G, validateObject: c } = WB(), Z = Ng().Symbol("kWeak"), b = Ng().Symbol("kResistStopPropagation"), { finished: d } = FA(), W = tb(), { addAbortSignalNoValidate: Y } = Al(), { isWritable: a, isNodeStream: z } = wA(), { deprecate: s } = eg(), {
     ArrayPrototypePush: X,
     Boolean: M,
-    MathFloor: Y,
-    Number: p,
+    MathFloor: K,
+    Number: u,
     NumberIsNaN: N,
     Promise: Q,
     PromiseReject: F,
     PromiseResolve: v,
     PromisePrototypeThen: w,
-    Symbol: S
-  } = Ng(), u = S("kEmpty"), R = S("kEof");
+    Symbol: p
+  } = Ng(), S = p("kEmpty"), R = p("kEof");
   function y(P, II) {
     if (II != null && c(II, "options"), (II == null ? void 0 : II.signal) != null && i(II.signal, "options.signal"), z(P) && !a(P))
       throw new g("stream", P, "must be writable");
     const wI = W(this, P);
-    return II != null && II.signal && K(II.signal, wI), wI;
+    return II != null && II.signal && Y(II.signal, wI), wI;
   }
   function E(P, II) {
     if (typeof P != "function")
       throw new A("fn", ["Function", "AsyncFunction"], P);
     II != null && c(II, "options"), (II == null ? void 0 : II.signal) != null && i(II.signal, "options.signal");
     let wI = 1;
-    (II == null ? void 0 : II.concurrency) != null && (wI = Y(II.concurrency));
+    (II == null ? void 0 : II.concurrency) != null && (wI = K(II.concurrency));
     let SI = wI - 1;
-    return (II == null ? void 0 : II.highWaterMark) != null && (SI = Y(II.highWaterMark)), G(wI, "options.concurrency", 1), G(SI, "options.highWaterMark", 0), SI += wI, (async function* () {
+    return (II == null ? void 0 : II.highWaterMark) != null && (SI = K(II.highWaterMark)), G(wI, "options.concurrency", 1), G(SI, "options.highWaterMark", 0), SI += wI, (async function* () {
       const k = eg().AbortSignalAny(
         [II == null ? void 0 : II.signal].filter(M)
       ), D = this, O = [], LI = {
@@ -17428,7 +17428,7 @@ function Ny() {
             if (k.aborted)
               throw new B();
             try {
-              if (fI = P(fI, LI), fI === u)
+              if (fI = P(fI, LI), fI === S)
                 continue;
               fI = v(fI);
             } catch (og) {
@@ -17455,7 +17455,7 @@ function Ny() {
               return;
             if (k.aborted)
               throw new B();
-            fI !== u && (yield fI), O.shift(), OI();
+            fI !== S && (yield fI), O.shift(), OI();
           }
           await new Q((fI) => {
             mI = fI;
@@ -17501,7 +17501,7 @@ function Ny() {
     if (typeof P != "function")
       throw new A("fn", ["Function", "AsyncFunction"], P);
     async function wI(SI, VI) {
-      return await P(SI, VI), u;
+      return await P(SI, VI), S;
     }
     for await (const SI of E.call(this, wI, II)) ;
   }
@@ -17509,7 +17509,7 @@ function Ny() {
     if (typeof P != "function")
       throw new A("fn", ["Function", "AsyncFunction"], P);
     async function wI(SI, VI) {
-      return await P(SI, VI) ? SI : u;
+      return await P(SI, VI) ? SI : S;
     }
     return E.call(this, wI, II);
   }
@@ -17578,7 +17578,7 @@ function Ny() {
     }).call(this);
   }
   function MI(P) {
-    if (P = p(P), N(P))
+    if (P = u(P), N(P))
       return 0;
     if (P < 0)
       throw new l("number", ">= 0", P);
@@ -17637,8 +17637,8 @@ function Eb() {
   function G(...c) {
     return new g((Z, b) => {
       let d, W;
-      const K = c[c.length - 1];
-      if (K && typeof K == "object" && !C(K) && !A(K) && !l(K)) {
+      const Y = c[c.length - 1];
+      if (Y && typeof Y == "object" && !C(Y) && !A(Y) && !l(Y)) {
         const a = I(c);
         d = a.signal, W = a.end;
       }
@@ -17667,45 +17667,45 @@ function kb() {
     promisify: { custom: l }
   } = eg(), { streamReturningOperators: B, promiseReturningOperators: i } = Ny(), {
     codes: { ERR_ILLEGAL_CONSTRUCTOR: G }
-  } = tg(), c = tb(), { setDefaultHighWaterMark: Z, getDefaultHighWaterMark: b } = Cl(), { pipeline: d } = pi(), { destroyer: W } = YC(), K = FA(), a = Eb(), z = wA(), s = pl.exports = Mi().Stream;
+  } = tg(), c = tb(), { setDefaultHighWaterMark: Z, getDefaultHighWaterMark: b } = Cl(), { pipeline: d } = pi(), { destroyer: W } = YC(), Y = FA(), a = Eb(), z = wA(), s = pl.exports = Mi().Stream;
   s.isDestroyed = z.isDestroyed, s.isDisturbed = z.isDisturbed, s.isErrored = z.isErrored, s.isReadable = z.isReadable, s.isWritable = z.isWritable, s.Readable = Bl();
   for (const M of A(B)) {
-    let p = function(...N) {
+    let u = function(...N) {
       if (new.target)
         throw G();
-      return s.Readable.from(C(Y, this, N));
+      return s.Readable.from(C(K, this, N));
     };
-    const Y = B[M];
-    g(p, "name", {
+    const K = B[M];
+    g(u, "name", {
       __proto__: null,
-      value: Y.name
-    }), g(p, "length", {
+      value: K.name
+    }), g(u, "length", {
       __proto__: null,
-      value: Y.length
+      value: K.length
     }), g(s.Readable.prototype, M, {
       __proto__: null,
-      value: p,
+      value: u,
       enumerable: !1,
       configurable: !0,
       writable: !0
     });
   }
   for (const M of A(i)) {
-    let p = function(...N) {
+    let u = function(...N) {
       if (new.target)
         throw G();
-      return C(Y, this, N);
+      return C(K, this, N);
     };
-    const Y = i[M];
-    g(p, "name", {
+    const K = i[M];
+    g(u, "name", {
       __proto__: null,
-      value: Y.name
-    }), g(p, "length", {
+      value: K.name
+    }), g(u, "length", {
       __proto__: null,
-      value: Y.length
+      value: K.length
     }), g(s.Readable.prototype, M, {
       __proto__: null,
-      value: p,
+      value: u,
       enumerable: !1,
       configurable: !0,
       writable: !0
@@ -17713,7 +17713,7 @@ function kb() {
   }
   s.Writable = wi(), s.Duplex = aA(), s.Transform = Db(), s.PassThrough = Hb(), s.pipeline = d;
   const { addAbortSignal: X } = Al();
-  return s.addAbortSignal = X, s.finished = K, s.destroy = W, s.compose = c, s.setDefaultHighWaterMark = Z, s.getDefaultHighWaterMark = b, g(s, "promises", {
+  return s.addAbortSignal = X, s.finished = Y, s.destroy = W, s.compose = c, s.setDefaultHighWaterMark = Z, s.getDefaultHighWaterMark = b, g(s, "promises", {
     __proto__: null,
     configurable: !0,
     enumerable: !0,
@@ -17726,16 +17726,16 @@ function kb() {
     get() {
       return a.pipeline;
     }
-  }), g(K, l, {
+  }), g(Y, l, {
     __proto__: null,
     enumerable: !0,
     get() {
       return a.finished;
     }
-  }), s.Stream = s, s._isUint8Array = function(Y) {
-    return Y instanceof Uint8Array;
-  }, s._uint8ArrayToBuffer = function(Y) {
-    return I.from(Y.buffer, Y.byteOffset, Y.byteLength);
+  }), s.Stream = s, s._isUint8Array = function(K) {
+    return K instanceof Uint8Array;
+  }, s._uint8ArrayToBuffer = function(K) {
+    return I.from(K.buffer, K.byteOffset, K.byteLength);
   }, pl.exports;
 }
 var tc;
@@ -18625,11 +18625,11 @@ function Jy(I, g, A, C, l, B = $I) {
     }
     i = Lg.Buffer.from(g), G = 0, c = i.length;
     const W = B;
-    d.write(i, G, c, Z).then(({ bytesWritten: K }) => W(void 0, K, i.toString(b))).catch(W);
+    d.write(i, G, c, Z).then(({ bytesWritten: Y }) => W(void 0, Y, i.toString(b))).catch(W);
   } else {
     i = Lg.Buffer.from(g.buffer), G = A, c = C, Z = typeof l == "number" ? l : null;
     const W = typeof l == "function" ? l : B;
-    d.write(i, G, c, Z).then(({ bytesWritten: K }) => W(void 0, K, i)).catch(W);
+    d.write(i, G, c, Z).then(({ bytesWritten: Y }) => W(void 0, Y, i)).catch(W);
   }
 }
 function Dy(I, g, A, C, l, B = $I) {
@@ -19568,21 +19568,21 @@ async function Zo(I) {
     testInputs: C = [],
     debugMain: l = !1,
     enableValueTracing: B = !1,
-    isMain: isMain = !0,
-    exportedFunctions: exportedFunctions = [],
-  } = I, i = C.length > 0, G = ZL();
-  let c;
-  if (i) {
-    const Y = await iL({ mbtFiles: C }), p = lL.replace(
+    isMain: i = !0,
+    exportedFunctions: G = []
+  } = I, c = C.length > 0, Z = ZL();
+  let b;
+  if (c) {
+    const N = await iL({ mbtFiles: C }), Q = lL.replace(
       `let tests = {  } // WILL BE REPLACED
   let no_args_tests = {  } // WILL BE REPLACED
   let with_args_tests = {  } // WILL BE REPLACED`,
-      Y
+      N
     ).replace("{PACKAGE}", "moonpad/lib").replace("{BEGIN_MOONTEST}", Go).replace("{END_MOONTEST}", io);
-    C.push(["driver.mbt", p]), c = await Uc({
+    C.push(["driver.mbt", Q]), b = await Uc({
       mbtFiles: [...A, ...C],
       miFiles: [],
-      stdMiFiles: G,
+      stdMiFiles: Z,
       target: "js",
       pkg: "moonpad/lib",
       pkgSources: ["moonpad/lib:moonpad:/"],
@@ -19592,64 +19592,64 @@ async function Zo(I) {
       noOpt: !1
     });
   } else
-    c = await Uc({
+    b = await Uc({
       mbtFiles: A,
       miFiles: [],
-      stdMiFiles: G,
+      stdMiFiles: Z,
       target: "js",
       pkg: "moonpad/lib",
       pkgSources: ["moonpad/lib:moonpad:/"],
-      isMain: isMain,
+      isMain: i,
       enableValueTracing: B,
       errorFormat: "json",
       noOpt: l
     });
-  const { core: Z, mi: b, diagnostics: d } = c;
-  if (Z === void 0 || b === void 0)
+  const { core: d, mi: W, diagnostics: Y } = b;
+  if (d === void 0 || W === void 0)
     return {
       kind: "error",
-      diagnostics: d.map((Y) => JSON.parse(Y))
+      diagnostics: Y.map((N) => JSON.parse(N))
     };
-  const a = [await g.readFile("moonbit-core:/lib/core/target/js/release/bundle/core.core"), Z], z = {};
+  const s = [await g.readFile("moonbit-core:/lib/core/target/js/release/bundle/core.core"), d], X = {};
   if (l) {
-    for (const Y in n)
-      Y.endsWith(".mbt") && (z[`moonbit-core:${Y}`] = new TextDecoder().decode(
-        n[Y]
+    for (const N in n)
+      N.endsWith(".mbt") && (X[`moonbit-core:${N}`] = new TextDecoder().decode(
+        n[N]
       ));
-    for (const [Y, p] of [...A, ...C])
-      z[`moonpad:/${Y}`] = p;
+    for (const [N, Q] of [...A, ...C])
+      X[`moonpad:/${N}`] = Q;
   }
-  const { result: s, sourceMap: X } = await GL({
-    coreFiles: a,
-    exportedFunctions: exportedFunctions,
-    main: i ? "moonpad/lib_blackbox_test" : "moonpad/lib",
+  const { result: M, sourceMap: K } = await GL({
+    coreFiles: s,
+    exportedFunctions: G,
+    main: c ? "moonpad/lib_blackbox_test" : "moonpad/lib",
     outputFormat: "wasm",
     pkgSources: [
       "moonbitlang/core:moonbit-core:/lib/core",
       "moonpad/lib:moonpad:/"
     ],
-    sources: z,
+    sources: X,
     target: "js",
-    testMode: i,
+    testMode: c,
     sourceMap: l,
     debug: l,
     noOpt: l,
     sourceMapUrl: "%%moon-internal-to-be-replaced.map%%",
     stopOnMain: l
   });
-  let M = s;
-  if (X !== void 0) {
-    const Y = await cL(
-      new TextEncoder().encode(X),
+  let u = M;
+  if (K !== void 0) {
+    const N = await cL(
+      new TextEncoder().encode(K),
       "application/json"
     );
-    M = new TextEncoder().encode(
-      new TextDecoder("utf8").decode(s).replace("%%moon-internal-to-be-replaced.map%%", Y)
+    u = new TextEncoder().encode(
+      new TextDecoder("utf8").decode(M).replace("%%moon-internal-to-be-replaced.map%%", N)
     );
   }
   return {
     kind: "success",
-    js: M
+    js: u
   };
 }
 function bL() {
@@ -20035,8 +20035,8 @@ function sL(I) {
           createOnigScanner: Ql.createOnigScanner,
           createOnigString: Ql.createOnigString
         }),
-        loadGrammar: async (Y) => {
-          if (Y === "source.moonbit")
+        loadGrammar: async (K) => {
+          if (K === "source.moonbit")
             return Vl.parseRawGrammar(
               yL,
               "moonbit.tmLanguage.json"
@@ -20047,10 +20047,10 @@ function sL(I) {
         getInitialState() {
           return Vl.INITIAL;
         },
-        tokenize(Y, p) {
+        tokenize(K, u) {
           const N = M.tokenizeLine(
-            Y,
-            p
+            K,
+            u
           ), { tokens: Q, ruleStack: F } = N;
           return {
             tokens: Q.map((v) => ({
@@ -20639,11 +20639,11 @@ function sL(I) {
     ]
   }), vI.languages.onLanguage("moonbit", async () => {
     await CL(C), (await Pg).onNotification(HI.PublishDiagnosticsNotification.type, (X) => {
-      const { uri: M, diagnostics: Y } = X, p = vI.editor.getModel(vI.Uri.parse(M));
-      p && vI.editor.setModelMarkers(
-        p,
+      const { uri: M, diagnostics: K } = X, u = vI.editor.getModel(vI.Uri.parse(M));
+      u && vI.editor.setModelMarkers(
+        u,
         "moonbit",
-        Y.map(Cd.to)
+        K.map(Cd.to)
       );
     });
   }), vI.editor.onDidCreateModel(async (s) => {
@@ -20674,12 +20674,12 @@ function sL(I) {
   const c = {
     triggerCharacters: [".", "@", ":", ">", "~"],
     async provideCompletionItems(s, X, M) {
-      const Y = await Pg, p = s.getWordUntilPosition(X), N = new vI.Range(
+      const K = await Pg, u = s.getWordUntilPosition(X), N = new vI.Range(
         X.lineNumber,
-        p.startColumn,
+        u.startColumn,
         X.lineNumber,
-        p.endColumn
-      ), Q = await Y.sendRequest(HI.CompletionRequest.type, {
+        u.endColumn
+      ), Q = await K.sendRequest(HI.CompletionRequest.type, {
         position: HA.from(X),
         textDocument: { uri: s.uri.toString() },
         context: ld.from(M)
@@ -20692,7 +20692,7 @@ function sL(I) {
     c
   );
   const Z = {
-    async provideHover(s, X, M, Y) {
+    async provideHover(s, X, M, K) {
       const N = await (await Pg).sendRequest(HI.HoverRequest.type, {
         position: HA.from(X),
         textDocument: { uri: s.uri.toString() }
@@ -20706,11 +20706,11 @@ function sL(I) {
   );
   const b = {
     async provideDocumentFormattingEdits(s, X, M) {
-      const p = await (await Pg).sendRequest(HI.DocumentFormattingRequest.type, {
+      const u = await (await Pg).sendRequest(HI.DocumentFormattingRequest.type, {
         textDocument: { uri: s.uri.toString() },
         options: od.from(X)
       });
-      return p === null ? null : p.map(fc.to);
+      return u === null ? null : u.map(fc.to);
     }
   };
   vI.languages.registerDocumentFormattingEditProvider(
@@ -20719,11 +20719,11 @@ function sL(I) {
   );
   const d = {
     signatureHelpTriggerCharacters: ["(", ","],
-    async provideSignatureHelp(s, X, M, Y) {
+    async provideSignatureHelp(s, X, M, K) {
       const N = await (await Pg).sendRequest(HI.SignatureHelpRequest.type, {
         position: HA.from(X),
         textDocument: { uri: s.uri.toString() },
-        context: Wd.from(Y)
+        context: Wd.from(K)
       });
       return N === null ? null : {
         value: rc.to(N),
@@ -20738,27 +20738,27 @@ function sL(I) {
   );
   const W = {
     async provideDefinition(s, X, M) {
-      const p = await (await Pg).sendRequest(HI.DefinitionRequest.type, {
+      const u = await (await Pg).sendRequest(HI.DefinitionRequest.type, {
         position: HA.from(X),
         textDocument: { uri: s.uri.toString() }
       });
-      return p === null ? null : Array.isArray(p) && HI.LocationLink.is(p[0]) ? (console.error("LocationLink not supported yet"), null) : Qd.to(p);
+      return u === null ? null : Array.isArray(u) && HI.LocationLink.is(u[0]) ? (console.error("LocationLink not supported yet"), null) : Qd.to(u);
     }
   };
   vI.languages.registerDefinitionProvider(
     { language: "moonbit" },
     W
   );
-  const K = {
+  const Y = {
     async resolveRenameLocation(s, X, M) {
-      const Y = await Pg, p = s.getWordAtPosition(X);
-      if (p === null) return null;
+      const K = await Pg, u = s.getWordAtPosition(X);
+      if (u === null) return null;
       const N = new vI.Range(
         X.lineNumber,
-        p.startColumn,
+        u.startColumn,
         X.lineNumber,
-        p.endColumn
-      ), Q = p.word, F = await Y.sendRequest(HI.PrepareRenameRequest.type, {
+        u.endColumn
+      ), Q = u.word, F = await K.sendRequest(HI.PrepareRenameRequest.type, {
         textDocument: { uri: s.uri.toString() },
         position: HA.from(X)
       });
@@ -20768,7 +20768,7 @@ function sL(I) {
         Q
       );
     },
-    async provideRenameEdits(s, X, M, Y) {
+    async provideRenameEdits(s, X, M, K) {
       const N = await (await Pg).sendRequest(HI.RenameRequest.type, {
         textDocument: { uri: s.uri.toString() },
         position: HA.from(X),
@@ -20779,10 +20779,10 @@ function sL(I) {
   };
   vI.languages.registerRenameProvider(
     { language: "moonbit" },
-    K
+    Y
   );
   const a = {
-    async provideReferences(s, X, M, Y) {
+    async provideReferences(s, X, M, K) {
       const N = await (await Pg).sendRequest(HI.ReferencesRequest.type, {
         position: HA.from(X),
         textDocument: { uri: s.uri.toString() },
@@ -20797,18 +20797,18 @@ function sL(I) {
   );
   const z = {
     async provideCodeLenses(s, X) {
-      const Y = await (await Pg).sendRequest(HI.CodeLensRequest.type, {
+      const K = await (await Pg).sendRequest(HI.CodeLensRequest.type, {
         textDocument: { uri: s.uri.toString() }
       });
-      if (Y === null) return null;
-      const p = Y.filter((N) => {
+      if (K === null) return null;
+      const u = K.filter((N) => {
         var Q;
         return !((Q = N.command) != null && Q.command.startsWith("moonbit-ai"));
       }).filter(B).map(Nd.to);
       return {
         dispose() {
         },
-        lenses: p
+        lenses: u
       };
     }
   };
@@ -20840,8 +20840,8 @@ function WL() {
           Z
         );
         I.set(C.id, W);
-        let K = C.onDidChangeContent(() => {
-          I.set(C.id, C.deltaDecorations(W, [])), K.dispose();
+        let Y = C.onDidChangeContent(() => {
+          I.set(C.id, C.deltaDecorations(W, [])), Y.dispose();
         });
         return b;
       }

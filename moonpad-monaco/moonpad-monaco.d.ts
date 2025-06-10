@@ -7,6 +7,8 @@ declare type CompileParams = {
     testInputs?: Input[];
     debugMain?: boolean;
     enableValueTracing?: boolean;
+    isMain?: boolean;
+    exportedFunctions?: string[];
 };
 
 declare type CompileResult = {
