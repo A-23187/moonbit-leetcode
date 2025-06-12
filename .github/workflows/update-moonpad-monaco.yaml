@@ -1,0 +1,18 @@
+name: update-moonpad-monaco
+run-name: Update dependency @moonbit/moonpad-monaco by @${{ github.actor }}
+on:
+  schedule:
+    - cron: '10 0 * * *'
+jobs:
+  main:
+    name: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      - name: Update @moonbit/moonpad-monaco
+        run: bash scripts/update_moonpad_monaco.sh
