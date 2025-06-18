@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 echo "check if @moonbit/moonpad-monaco is outdated"
+npm --version
 npm config get registry
 npm outdated --json @moonbit/moonpad-monaco
-which jq
-jq --version
+npm outdated --json '@moonbit/moonpad-monaco'
+npm outdated --json
+npm view @moonbit/moonpad-monaco version
+npm view '@moonbit/moonpad-monaco' version
+cat package.json | jq -r '.dependencies.["@moonbit/moonpad-monaco"]' | tr -d '^'
 npm outdated --json @moonbit/moonpad-monaco | jq '.["@moonbit/moonpad-monaco"] | (.current != .latest)'
 outdated=$(npm outdated --json @moonbit/moonpad-monaco | jq '.["@moonbit/moonpad-monaco"] | (.current != .latest)')
 if [ "$outdated" != "true" ]; then
