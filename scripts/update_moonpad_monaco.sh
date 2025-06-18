@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 echo "check if @moonbit/moonpad-monaco is outdated"
+npm config get registry
+npm outdated --json @moonbit/moonpad-monaco
+which jq
+jq --version
+npm outdated --json @moonbit/moonpad-monaco | jq '.["@moonbit/moonpad-monaco"] | (.current != .latest)'
 outdated=$(npm outdated --json @moonbit/moonpad-monaco | jq '.["@moonbit/moonpad-monaco"] | (.current != .latest)')
 if [ "$outdated" != "true" ]; then
     echo "@moonbit/moonpad-monaco is up to date"
