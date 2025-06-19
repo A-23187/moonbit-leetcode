@@ -2,8 +2,8 @@ name: update-moonpad-monaco
 run-name: Update dependency @moonbit/moonpad-monaco by @${{ github.actor }}
 on:
   schedule:
-    - cron: '* * * * *' # for test
-    # - cron: '10 0 * * *'
+    # - cron: '* * * * *' # for test
+    - cron: '10 0 * * *'
 jobs:
   main:
     name: main
