@@ -11,8 +11,6 @@ fi
 echo "update @moonbit/moonpad-monaco to latest version"
 npm i @moonbit/moonpad-monaco@latest
 cp node_modules/@moonbit/moonpad-monaco/dist/{lsp-server.js,moonc-worker.js,moonpad-monaco.d.ts,moonpad-monaco.js,onig.wasm} moonpad-monaco/
-git config --local user.email A23187
-git config --local user.name a23187.1979421048@gmail.com
 git add moonpad-monaco/{lsp-server.js,moonc-worker.js,moonpad-monaco.d.ts,moonpad-monaco.js,onig.wasm} package.json package-lock.json
 git commit -m 'update moonpad-monaco to latest version'
 echo "patch moonpad-monaco.js"
