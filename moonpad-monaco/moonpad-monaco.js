@@ -1,7 +1,7 @@
 var od = Object.defineProperty;
 var yd = (g, I, A) => I in g ? od(g, I, { enumerable: !0, configurable: !0, writable: !0, value: A }) : g[I] = A;
 var UI = (g, I, A) => yd(g, typeof I != "symbol" ? I + "" : I, A);
-const vg = globalThis.monaco;
+import * as vg from "monaco-editor-core";
 const $l = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   get BigIntStatsFs() {
@@ -19366,7 +19366,7 @@ function JL(g = "wasm-gc") {
     const A = I.split("/").at(-1);
     return [
       `/lib/core/${I}:${I}`,
-      Q[`/lib/core/target/${g}/release/bundle/${I}/${A}.mi`]
+      Q[`/lib/core/_build/${g}/release/bundle/${I}/${A}.mi`]
     ];
   });
 }
@@ -20039,7 +20039,7 @@ async function cd(g) {
       diagnostics: N.map((K) => JSON.parse(K))
     };
   const w = vB.parse(
-    "moonbit-core:/lib/core/target/js/release/bundle/core.core"
+    "moonbit-core:/lib/core/_build/js/release/bundle/core.core"
   ), F = [await I.readFile(w), y], m = {};
   if (B) {
     for (const K in Q)
@@ -20448,8 +20448,8 @@ const fL = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
 }
 `;
 function OL(g) {
-  g.mkdirSync("/target"), g.mkdirSync("/src/lib", { recursive: !0 }), g.writeFileSync(
-    "/target/packages.json",
+  g.mkdirSync("/_build"), g.mkdirSync("/src/lib", { recursive: !0 }), g.writeFileSync(
+    "/_build/packages.json",
     `{
   "source_dir": "/",
   "name": "username/hello",
@@ -20495,7 +20495,7 @@ function OL(g) {
       "deps": [],
       "wbtest-deps": [],
       "test-deps": [],
-      "artifact": "/target/wasm-gc/release/check/lib/lib.mi"
+      "artifact": "/_build/wasm-gc/release/check/lib/lib.mi"
     }
   ],
   "deps": [],
