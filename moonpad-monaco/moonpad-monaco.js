@@ -1,7 +1,7 @@
 var od = Object.defineProperty;
 var yd = (g, I, A) => I in g ? od(g, I, { enumerable: !0, configurable: !0, writable: !0, value: A }) : g[I] = A;
 var UI = (g, I, A) => yd(g, typeof I != "symbol" ? I + "" : I, A);
-const vg = globalThis.monaco;
+import * as vg from "monaco-editor-core";
 const $l = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   get BigIntStatsFs() {
