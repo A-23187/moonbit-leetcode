@@ -48,7 +48,10 @@ declare namespace moon {
         compile,
         init_2 as init,
         run,
-        test
+        runTrace,
+        test,
+        TraceResult,
+        TraceRunOutput
     }
 }
 
@@ -58,6 +61,8 @@ declare type Position = {
 };
 
 declare function run(js: Uint8Array): ReadableStream<string>;
+
+declare function runTrace(js: Uint8Array): ReadableStream<TraceRunOutput>;
 
 declare function test(js: Uint8Array): ReadableStream<TestOutput>;
 
@@ -76,5 +81,23 @@ declare type TestResult = {
 };
 
 export declare function traceCommandFactory(): (uri: string) => Promise<string | undefined>;
+
+declare type TraceResult = {
+    name: string;
+    value: string;
+    line: number;
+    start_column: number;
+    end_column: number;
+    filepath?: string;
+    hit: number;
+};
+
+declare type TraceRunOutput = {
+    kind: "trace-delta";
+    entries: TraceResult[];
+} | {
+    kind: "stdout-batch";
+    lines: string[];
+};
 
 export { }
